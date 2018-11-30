@@ -1,0 +1,72 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.94",
+	"appid": "wx764c1dee6ee8cebe",
+	"projectname": "test",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 5,
+			"list": [
+				{
+					"id": -1,
+					"name": "订车页面",
+					"pathName": "pages/costom/costom",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "订车提交成功页面",
+					"pathName": "pages/costom/wait4Verifying/wait4Verifying",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "预定人员成功提交页面",
+					"pathName": "pages/costom/success/success",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "评价页面",
+					"pathName": "pages/costom/rate/rate",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "管理员界面",
+					"pathName": "pages/admin/admin",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "测试界面",
+					"pathName": "pages/test/test"
+				}
+			]
+		}
+	}
+}

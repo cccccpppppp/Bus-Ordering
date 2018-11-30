@@ -1,0 +1,5 @@
+<view class="button-sp-area">
+  <button class="weui-btn btn" type="primary" plain="true" bindtap='toCostom'>按钮</button>
+  <button class="weui-btn btn" type="default" plain="true">按钮</button>
+  <button class="weui-btn btn" type="default" plain="true">按钮</button>
+</view>
