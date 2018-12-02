@@ -1,21 +1,3 @@
-.page__bd {
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 40px;
-    text-align: center;
-}
-.icon-box{
-    margin-bottom: 25px;
-    align-items: center;
-}
-.icon-box__ctn{
-    flex-shrink: 100;
-}
-.icon-box__title{
-    font-size: 20px;
-}
-.icon-box__desc{
-    margin-top: 6px;
-    font-size: 15px;
-    color: #888888;
+page{
+    background-color: #FFFFFF;
 }

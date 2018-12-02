@@ -1,13 +1,6 @@
 //app.js
 App({
   onLaunch: function() {
-    var that = this;
-    wx.login({
-      success(res) {
-        that.globalData.userInfo = res.code;
-        console.log(that.globalData.userInfo);
-      }
-    })
     // 展示本地存储能力
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
@@ -42,6 +35,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    url: "test.com"
-  }
+    host: "http://192.168.31.18:3118/"
+  },
 })

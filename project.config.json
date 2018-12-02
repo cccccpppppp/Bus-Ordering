@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
@@ -45,7 +45,7 @@
 				},
 				{
 					"id": 2,
-					"name": "预定人员成功提交页面",
+					"name": "预定人员审核成功页面",
 					"pathName": "pages/costom/success/success",
 					"query": ""
 				},
@@ -64,7 +64,14 @@
 				{
 					"id": -1,
 					"name": "测试界面",
-					"pathName": "pages/test/test"
+					"pathName": "pages/test/test",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "司机页面",
+					"pathName": "pages/driver/driver",
+					"query": ""
 				}
 			]
 		}
