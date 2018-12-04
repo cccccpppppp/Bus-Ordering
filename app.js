@@ -35,6 +35,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    host: "http://192.168.31.18:3118/"
+    host: "http://47.107.172.101/"
   },
 })
