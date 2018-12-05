@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 10,
 			"list": [
 				{
 					"id": -1,
@@ -72,6 +72,29 @@
 					"name": "司机页面",
 					"pathName": "pages/driver/driver",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "地图",
+					"pathName": "pages/map/map",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "订单",
+					"pathName": "pages/Order/Order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "详细订单",
+					"pathName": "pages/deOrder/deOrder",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "司机订单",
+					"pathName": "pages/driver_order/driver_order"
 				}
 			]
 		}

@@ -12,7 +12,12 @@
 
     "pages/driver/driver",
 
-    "pages/test/test"
+    "pages/test/test",
+
+    "pages/map/map",
+    "pages/Order/Order",
+    "pages/deOrder/deOrder",
+    "pages/driver_order/driver_order"
   ],
   "window":{
     "backgroundTextStyle":"light",

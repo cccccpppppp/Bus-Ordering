@@ -1,0 +1,17 @@
+
+.page__bd {
+    padding-bottom: 40px;
+}
+.page__bd_spacing {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.weui-form-preview{
+    margin-bottom: 25px;
+}
+
+.no-data{
+    padding:40rpx 0;
+    color: #999;
+    text-align: center;
+}

@@ -1,0 +1,18 @@
+<view class="container"> 
+
+  <map id='map' class="map" latitude="{{latitude}}" longitude="{{longitude}}" scale="18" bindregionchange="bindregionchange" polyline="{{polyline}}" markers="{{markers}}" controls="{{controls}}" bindmarkertap="bindmarkertap" bindcontroltap="controltap" show-location>
+
+    <cover-view class="address">
+      <cover-image style="width: 80rpx;height: 80rpx;" src="/img/address.png"></cover-image>
+
+      <cover-view class="address-desc">
+        <cover-view class="blur">{{recommend}}</cover-view>
+        <cover-view class="detailed">{{address}}</cover-view>
+
+
+      </cover-view>
+      <cover-view class="address-btn" bindtap="toIndex">确定</cover-view>
+    </cover-view>
+
+  </map>
+</view>

@@ -1,0 +1,108 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+
+        <!--所有订单选项卡-->
+
+
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+
+          <view wx:if="{{hasalldata}}">
+
+            <view class="page__bd" wx:for="{{allorder}}" wx:key="id">
+              <view class="weui-form-preview">
+                <view class="weui-form-preview__hd">
+                  <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">目的地</view>
+                    <view class="weui-form-preview__value_in-hd">{{item.destination_place}}</view>
+                  </view>
+                </view>
+                <view class="weui-form-preview__bd">
+                  <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">申请人</view>
+                    <view class="weui-form-preview__value">{{item.destination_place}}</view>
+                  </view>
+                  <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">发车时间</view>
+                    <view class="weui-form-preview__value">{{item.gotime}}</view>
+                  </view>
+                </view>
+                <view class="weui-form-preview__ft">
+                  <navigator url="../deOrder/deOrder?id={{item.id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">详细信息</navigator>
+                </view>
+
+                <!-- <view class="weui-loadmore">
+                  <view class="weui-loading"></view>
+                  <view class="weui-loadmore__tips">正在加载</view>
+                </view> -->
+              </view>
+            </view>
+          </view>
+
+          <view wx:else>
+            <view class="no-data">还没有已接受的订单哦~</view>
+          </view>
+
+        </view>
+
+
+
+        <!--未接受订单选项卡-->
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          <view wx:if="{{hasrefuse}}">
+            <view class="page__bd" wx:for="{{refuse}}" wx:key="id">
+              <view class="weui-form-preview">
+                <view class="weui-form-preview__hd">
+                  <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">目的地</view>
+                    <view class="weui-form-preview__value_in-hd">{{item.destination_place}}</view>
+                  </view>
+                </view>
+                <view class="weui-form-preview__bd">
+                  <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">申请人</view>
+                    <view class="weui-form-preview__value">{{item.destination_place}}</view>
+                  </view>
+                  <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">发车时间</view>
+                    <view class="weui-form-preview__value">{{item.gotime}}</view>
+                  </view>
+                </view>
+                <view class="weui-form-preview__ft">
+                  <navigator url="../driver/driver?id={{item.id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">去接单</navigator>
+                </view>
+              </view>
+            </view>
+
+            <!--页面加载效果
+            <view class="weui-loadmore">
+              <view class="weui-loading"></view>
+              <view class="weui-loadmore__tips">正在加载</view>
+            </view>
+            -->
+
+            <!--暂无数据效果
+            <view class="weui-loadmore weui-loadmore_line">
+              <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+            </view>
+            -->
+
+          </view>
+          <view wx:else>
+            <view class="no-data">还没有未接受的订单哦~</view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+</view>
