@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 7,
 			"list": [
 				{
 					"id": -1,
@@ -72,6 +72,11 @@
 					"name": "司机页面",
 					"pathName": "pages/driver/driver",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "申请授权页面",
+					"pathName": "pages/permission/permission"
 				}
 			]
 		}

@@ -12,6 +12,9 @@
 
     "pages/driver/driver",
 
+    "pages/permission/permission",
+    "pages/permission/wait4Verifying",
+
     "pages/test/test"
   ],
   "window":{

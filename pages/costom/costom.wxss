@@ -4,5 +4,5 @@
   margin-right: 20px;
   margin-top: 20px;
   background-color: #FFFFFF;
-  box-shadow: 5px 5px 5px #888888;
+  box-shadow: 2px 2px 2px #888888;
 }

@@ -1,35 +1,68 @@
-// pages/costom/costom.js
+const app = getApp();
+var host = app.globalData.host;
 var now = new Date();
 var getDate = function(now) {
-  var year = now.getUTCFullYear().toString();
-  var month = (now.getUTCMonth() + 1).toString();
-  var day = now.getDay().toString();
+  var year = now.getUTCFullYear();
+  var month = now.getUTCMonth() + 1;
+  var day = now.getDate();
   return year + '-' + month + '-' + day;
 }
 
 var getTime = function() {
-  var time = now.getHours().toString() + ':' + now.getMinutes().toString();
+  var time = now.getHours() + ':' + now.getMinutes();
   return time;
 }
-
 Page({
-  
-  /**
-   * 页面的初始数据
-   */
   data: {
     date: getDate(now),
     time: getTime(now)
-    
+
   },
-  bindDateChange: function (e) {
+  bindDateChange: function(e) {
     this.setData({
       date: e.detail.value
     })
   },
-  bindTimeChange: function (e) {
+  bindTimeChange: function(e) {
     this.setData({
       time: e.detail.value
+    })
+  },
+  submitCar: function(e) {
+    var that = this;
+    var value = e.detail.value;
+    var phone = value.phone;
+    var name = value.name;
+    var go_time = value.date + ' ' + value.time;
+    var start_place = value.start_place;
+    var destination_place = value.destination_place;
+    var people_number = value.people_number;
+    wx.request({
+      url: host + 'miniprogram/Predetermine/applyCar',
+      data: {
+        sessionid: wx.getStorageSync("sessionid"),
+        name: name,
+        phone: phone,
+        people_number: people_number,
+        start_place: start_place,
+        destination_place: destination_place,
+        go_time: go_time
+      },
+      method: 'POST',
+      success: res => {
+        if(res.data.msg === "ok"){
+          wx.redirectTo({
+            url: 'wait4Verifying/wait4Verifying',
+          })
+        }
+        else {
+          wx.showToast({
+            title: '提交失败:' + res.data.msg,
+            icon: 'none'
+          })
+        }
+        
+      }
     })
   }
 })
