@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 11,
 			"list": [
 				{
 					"id": -1,
@@ -94,6 +94,12 @@
 				{
 					"id": -1,
 					"name": "司机订单",
+					"pathName": "pages/driver_order/driver_order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "司机界面（新）",
 					"pathName": "pages/driver_order/driver_order"
 				}
 			]
