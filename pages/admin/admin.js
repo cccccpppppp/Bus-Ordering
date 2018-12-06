@@ -159,5 +159,14 @@ Page({
         activeIndex: e.currentTarget.id,
       });
     }
-  }
+  },
+
+  //拒绝申请
+  to_deorder(e) {
+    var id = e.currentTarget.id;
+    wx.navigateTo({
+      url: '/pages/deOrder/deOrder' + "?id=" + id
+    })
+  },
 });
+

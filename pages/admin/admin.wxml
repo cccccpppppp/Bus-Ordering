@@ -13,7 +13,8 @@
 
         <!--未审核申请-->
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-            <view class="weui-form-preview" wx:for="{{uncheck}}" wx:key="id">
+          <view class="weui-form-preview" wx:for="{{uncheck}}" wx:key="id">
+            <view id='{{item.id}}' bindtap='to_deorder'>
               <view class="weui-form-preview__hd">
                 <view class="weui-form-preview__label">姓名</view>
                 <view class="weui-form-preview__value_in-hd">{{item.apply.name}}</view>
@@ -32,16 +33,17 @@
                   <view class="weui-form-preview__value">{{item.reason}}</view>
                 </view>
               </view>
-              <view class="weui-form-preview__ft">
-                <view id='{{item.id}}' class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" bindtap='refuse'>拒绝</view>
-                <view id='{{item.id}}' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='agree'>同意</view>
-              </view>
+            </view>
+            <view class="weui-form-preview__ft">
+              <view id='{{item.id}}' class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" bindtap='refuse'>拒绝</view>
+              <view id='{{item.id}}' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='agree'>同意</view>
+            </view>
           </view>
         </view>
 
         <!--已审核选项卡-->
         <view hidden="{{activeIndex != 1}}">
-          <view class="icard" wx:for = "{{ischeck}}" wx:key = "id">
+          <view class="icard" wx:for="{{ischeck}}" wx:key="id">
             <i-card title="{{item.apply.name}}" extra="{{item.status}}">
               <view slot="content">出发地：{{item.start_place}}</view>
               <view slot="content">目的地：{{item.destination_place}}</view>
