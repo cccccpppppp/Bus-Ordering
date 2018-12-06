@@ -12,12 +12,10 @@
 
     "pages/driver/driver",
 
-    "pages/test/test",
+    "pages/permission/permission",
+    "pages/permission/wait4Verifying",
 
-    "pages/map/map",
-    "pages/Order/Order",
-    "pages/deOrder/deOrder",
-    "pages/driver_order/driver_order"
+    "pages/test/test"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -30,3 +28,4 @@
     "downloadFile": 10000
   }
 }
+
