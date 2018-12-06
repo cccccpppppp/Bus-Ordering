@@ -4,7 +4,7 @@ var host = app.globalData.host;
 
 Page({
   data: {
-    id: "31",//订单的id
+    id: "",//订单的id
 
     //当前用户的身份 &所有身份为flase为司机
     isapply:false,//是否是申请人

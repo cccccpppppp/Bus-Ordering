@@ -10,65 +10,46 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
+
+        <!--未审核申请-->
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-          <view class="weui-form-preview">
-            <view class="weui-form-preview__hd">
-              <view class="weui-form-preview__label">姓名</view>
-              <view class="weui-form-preview__value_in-hd">某某</view>
-            </view>
-            <view class="weui-form-preview__bd">
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">出发地</view>
-                <view class="weui-form-preview__value">桂电北海</view>
+            <view class="weui-form-preview" wx:for="{{uncheck}}" wx:key="id">
+              <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__label">姓名</view>
+                <view class="weui-form-preview__value_in-hd">{{item.apply.name}}</view>
               </view>
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">目的地</view>
-                <view class="weui-form-preview__value">北海站</view>
+              <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">出发地</view>
+                  <view class="weui-form-preview__value">{{item.start_place}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">目的地</view>
+                  <view class="weui-form-preview__value">{{item.destination_place}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">理由</view>
+                  <view class="weui-form-preview__value">{{item.reason}}</view>
+                </view>
               </view>
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">理由</view>
-                <view class="weui-form-preview__value">肥嘎</view>
+              <view class="weui-form-preview__ft">
+                <view id='{{item.id}}' class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" bindtap='refuse'>拒绝</view>
+                <view id='{{item.id}}' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='agree'>同意</view>
               </view>
-            </view>
-            <view class="weui-form-preview__ft">
-              <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">拒绝</navigator>
-              <navigator class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">同意</navigator>
-            </view>
-          </view>
-          <view class="weui-form-preview">
-            <view class="weui-form-preview__hd">
-              <view class="weui-form-preview__label">姓名</view>
-              <view class="weui-form-preview__value_in-hd">某某</view>
-            </view>
-            <view class="weui-form-preview__bd">
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">出发地</view>
-                <view class="weui-form-preview__value">桂电北海</view>
-              </view>
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">目的地</view>
-                <view class="weui-form-preview__value">北海站</view>
-              </view>
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">理由</view>
-                <view class="weui-form-preview__value">哈哈哈哈哈</view>
-              </view>
-            </view>
-            <view class="weui-form-preview__ft">
-              <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">拒绝</navigator>
-              <navigator class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">同意</navigator>
-            </view>
           </view>
         </view>
+
+        <!--已审核选项卡-->
         <view hidden="{{activeIndex != 1}}">
-        <view class="icard">
-          <i-card title="某某" extra="已完成">
-            <view slot="content">出发地：桂电</view>
-            <view slot="content">目的地：火车站</view>
-            <view slot="footer">2018/11/30</view>
-          </i-card>
+          <view class="icard" wx:for = "{{ischeck}}" wx:key = "id">
+            <i-card title="{{item.apply.name}}" extra="{{item.status}}">
+              <view slot="content">出发地：{{item.start_place}}</view>
+              <view slot="content">目的地：{{item.destination_place}}</view>
+              <view slot="footer">{{item.go_time}}</view>
+            </i-card>
+          </view>
         </view>
-        </view>
+
       </view>
     </view>
   </view>

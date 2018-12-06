@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 11,
+			"current": 12,
 			"list": [
 				{
 					"id": -1,
@@ -100,7 +100,13 @@
 				{
 					"id": -1,
 					"name": "司机界面（新）",
-					"pathName": "pages/driver_order/driver_order"
+					"pathName": "pages/driver_order/driver_order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "管理员提交拒绝理由",
+					"pathName": "pages/admin/refuse/refuse"
 				}
 			]
 		}
