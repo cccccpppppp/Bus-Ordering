@@ -18,6 +18,31 @@ Page({
     time: getTime(now)
 
   },
+  onLoad: function() {
+    wx.request({
+      url: host + 'miniprogram/Predetermine/applyCarLately',
+      data: {
+        sessionid: wx.getStorageSync("sessionid")
+      },
+      method: 'GET',
+      success: function(res) {
+        var data = res.data.data;
+        var msg = res.data.msg;
+        var dic = {
+          '已提交': './wait4Verifying/wait4Verifying',
+          '审核通过': './success/success',
+          '审核未通过': './faild/faild',
+          '完成': ''
+        }
+        console.log(msg);
+        wx.redirectTo({
+          url: '',
+        })
+      },
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
   bindDateChange: function(e) {
     this.setData({
       date: e.detail.value

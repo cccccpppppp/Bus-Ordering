@@ -7,7 +7,7 @@ Page({
   data: {
 
   },
-  onLoad: function () {
+  onLoad: function() {
     var that = this;
     //获取code并请求获得sessionid存入本地
     wx.login({
@@ -26,7 +26,7 @@ Page({
           fail() {
             console.log('login()异常')
           }
-          
+
         })
       }
     })
@@ -39,7 +39,7 @@ Page({
       data: {
         sessionid: wx.getStorageSync("sessionid")
       },
-      success (res) {
+      success(res) {
         wx.hideLoading();
         var dic = {
           '预订人员': '../costom/costom',
@@ -52,28 +52,10 @@ Page({
 
         //如果不是首次登录则根据类型跳转到相应页面
         if (type !== '首次登录') {
-          wx.showLoading({
-            title: '加载中',
+          wx.redirectTo({
+            url: dic[type]
           })
-          wx.request({
-            url: host + 'miniprogram/Common/getUserType',
-            data: {
-              sessionid: wx.getStorageSync("sessionid")
-            },
-            success (res) {
-              wx.hideLoading();
-              wx.redirectTo({
-                url: dic[type]
-              })
-            },
-            fail () {
-              wx.showToast({
-                title: '网络错误',
-                icon: 'none'
-              })
-            }
 
-          })
         } else {
           wx.showToast({
             title: '首次登录',
@@ -81,7 +63,7 @@ Page({
           })
         }
       }
-      
+
     })
   },
 
@@ -105,15 +87,14 @@ Page({
               wx.redirectTo({
                 url: '../costom/costom',
               })
-            }
-            else {
+            } else {
               wx.showToast({
                 title: res.msg,
                 icon: 'none'
               })
             }
           },
-          fail () {
+          fail() {
             wx.showToast({
               title: '网络异常',
               icon: 'none'
