@@ -43,7 +43,7 @@
 
         <!--已审核选项卡-->
         <view hidden="{{activeIndex != 1}}">
-          <view class="icard" wx:for="{{ischeck}}" wx:key="id">
+          <view class="icard" wx:for="{{ischeck}}" wx:key="id" id='{{item.id}}' bindtap='to_deorder'>
             <i-card title="{{item.apply.name}}" extra="{{item.status}}">
               <view slot="content">出发地：{{item.start_place}}</view>
               <view slot="content">目的地：{{item.destination_place}}</view>

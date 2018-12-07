@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 12,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
@@ -69,12 +69,6 @@
 				},
 				{
 					"id": -1,
-					"name": "司机页面",
-					"pathName": "pages/driver/driver",
-					"query": ""
-				},
-				{
-					"id": -1,
 					"name": "地图",
 					"pathName": "pages/map/map",
 					"query": ""
@@ -92,13 +86,7 @@
 					"query": ""
 				},
 				{
-					"id": -1,
-					"name": "司机订单",
-					"pathName": "pages/driver_order/driver_order",
-					"query": ""
-				},
-				{
-					"id": -1,
+					"id": 11,
 					"name": "司机界面（新）",
 					"pathName": "pages/driver_order/driver_order",
 					"query": ""
@@ -106,7 +94,8 @@
 				{
 					"id": -1,
 					"name": "管理员提交拒绝理由",
-					"pathName": "pages/admin/refuse/refuse"
+					"pathName": "pages/admin/refuse/refuse",
+					"query": ""
 				}
 			]
 		}

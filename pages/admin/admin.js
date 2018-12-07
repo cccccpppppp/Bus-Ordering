@@ -161,7 +161,7 @@ Page({
     }
   },
 
-  //拒绝申请
+  //单个订单信息
   to_deorder(e) {
     var id = e.currentTarget.id;
     wx.navigateTo({
