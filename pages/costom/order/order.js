@@ -1,4 +1,4 @@
-// pages/costom/faild/faild.js
+// pages/costom/order/order.js
 Page({
 
   /**

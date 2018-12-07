@@ -14,11 +14,14 @@ var getTime = function() {
 }
 Page({
   data: {
+    counter: 0,
     date: getDate(now),
     time: getTime(now)
 
   },
+
   onLoad: function() {
+    wx.showLoading();
     wx.request({
       url: host + 'miniprogram/Predetermine/applyCarLately',
       data: {
@@ -26,20 +29,27 @@ Page({
       },
       method: 'GET',
       success: function(res) {
+        wx.hideLoading();
         var data = res.data.data;
         var msg = res.data.msg;
-        var dic = {
-          '已提交': './wait4Verifying/wait4Verifying',
-          '审核通过': './success/success',
-          '审核未通过': './faild/faild',
-          '完成': ''
+        if (data === null){
+          wx.showToast({
+            title: msg,
+            icon: 'none'
+          })
+        } else if(data.status !== '完成') {
+          wx.redirectTo({
+            url: './wait4Verifying/wait4Verifying?status=' + data.status + '&id=' + data.id,
+          })
         }
-        console.log(msg);
-        wx.redirectTo({
-          url: '',
+      },
+      fail: function(res) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '网络异常',
+          icon: 'none'
         })
       },
-      fail: function(res) {},
       complete: function(res) {},
     })
   },
@@ -53,6 +63,17 @@ Page({
       time: e.detail.value
     })
   },
+
+  //文本域计数器
+  bindText: function (e) {
+    var t_text = e.detail.value.length;
+    // console.log(t_text)
+    this.setData({
+      counter: t_text
+    })
+  },
+
+  //提交预定表单
   submitCar: function(e) {
     var that = this;
     var value = e.detail.value;
@@ -62,6 +83,7 @@ Page({
     var start_place = value.start_place;
     var destination_place = value.destination_place;
     var people_number = value.people_number;
+    var reason = value.reason;
     wx.request({
       url: host + 'miniprogram/Predetermine/applyCar',
       data: {
@@ -71,18 +93,20 @@ Page({
         people_number: people_number,
         start_place: start_place,
         destination_place: destination_place,
-        go_time: go_time
+        go_time: go_time,
+        reason: reason
       },
       method: 'POST',
       success: res => {
-        if(res.data.msg === "ok"){
+        var msg = res.data.msg;
+        if(msg === "ok" || (msg.indexOf('提交成功') !== -1)){
           wx.redirectTo({
             url: 'wait4Verifying/wait4Verifying',
           })
         }
         else {
           wx.showToast({
-            title: '提交失败:' + res.data.msg,
+            title: res.data.msg,
             icon: 'none'
           })
         }

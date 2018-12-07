@@ -41,7 +41,7 @@
           <view class="weui-label">时间</view>
         </view>
         <view class="weui-cell__bd">
-          <picker mode="time" value="{{time}}" name="time" start="09:01" end="21:01" bindchange="bindTimeChange">
+          <picker mode="time" value="{{time}}" name="time" start="{{time}}" bindchange="bindTimeChange">
             <view class="weui-input">{{time}}</view>
           </picker>
         </view>
@@ -71,6 +71,15 @@
         </view>
       </view>
     </view>
+    <view class="weui-cells__title">申请理由</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea class="weui-textarea" placeholder="请输入申请理由" style="height: 5em" bindinput="bindText" maxlength='200' name='reason' />
+            <view class="weui-textarea-counter">{{counter}}/200</view>
+          </view>
+        </view>
+      </view>
     <view class="weui-btn-area">
       <button class="weui-btn" type="primary" form-type='submit'>申请用车</button>
     </view>
