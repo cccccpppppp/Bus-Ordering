@@ -9,10 +9,10 @@ Page({
     //当前用户的身份 &所有身份为flase为司机
     isapply:false,//是否是申请人
     ifadmin:false,//是否管理员
-
+    ifload : true,
     iffail: true,//该申请是否退回
 
-    resdata:[]
+    resdata:[],
   },
 
   /**
@@ -20,8 +20,8 @@ Page({
    */
   onLoad: function (options) {
     //获取跳转接受的id
-    var id = options.id;
-    //var id =32;
+    //var id = options.id;
+    var id =45;
     console.log(id)
 
     var that = this;
@@ -69,7 +69,9 @@ Page({
                         iffail: false
                       })
                     }
-
+                    that.setData({
+                      ifload :false,
+                    })
                   }
                 })//获取订单详细信息
               )
@@ -95,7 +97,6 @@ Page({
                       resdata: res.data.data
                     })
 
-
                     //审核是否通过
                     if (res.data.data.status == "审核未通过") {
                       that.setData({
@@ -107,7 +108,9 @@ Page({
                         iffail: false
                       })
                     }
-
+                    that.setData({
+                      ifload: false,
+                    })
                   }
                 })//获取订单详细信息
 
@@ -129,9 +132,13 @@ Page({
                 method: "POST",
                 success(res) {
                   that.setData({
-                    resdata: res.data.data
+                    resdata: res.data.data,
                   })
 
+                  that.setData({
+                    ifload: false,
+                  })
+                  
                   // //审核是否通过
                   // if (res.data.data.status == "审核未通过") {
                   //   that.setData({

@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 8,
 			"list": [
 				{
 					"id": -1,
@@ -80,10 +80,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 8,
 					"name": "详细订单",
 					"pathName": "pages/deOrder/deOrder",
-					"query": ""
+					"query": "?id=53"
 				},
 				{
 					"id": 11,
