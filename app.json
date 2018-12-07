@@ -4,8 +4,8 @@
 
     "pages/costom/costom",
     "pages/costom/wait4Verifying/wait4Verifying",
-    "pages/costom/success/success",
-    "pages/costom/faild/faild",
+    "pages/Order/Order",
+    "pages/costom/order/order",
     "pages/costom/rate/rate",
 
     "pages/admin/admin",
@@ -20,7 +20,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "公务用车订车系统",
     "navigationBarTextStyle":"black"
   },
   "networkTimeout": {

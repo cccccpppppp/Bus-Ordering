@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 8,
 			"list": [
 				{
 					"id": -1,
@@ -76,7 +76,14 @@
 				{
 					"id": -1,
 					"name": "申请授权页面",
-					"pathName": "pages/permission/permission"
+					"pathName": "pages/permission/permission",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "订单页面",
+					"pathName": "pages/Order/Order",
+					"query": ""
 				}
 			]
 		}
