@@ -8,6 +8,9 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
+
+    hasis:true,
+    hasun:true,
     uncheck:[],
     ischeck:[],
   },
@@ -42,6 +45,21 @@ Page({
         that.setData({
           uncheck: res.data.data,
         })
+        console.log(res.data.data.length)
+        if(res.data.data.length == 0)
+        {
+          that.setData({
+            hasun : false
+          })
+        }
+        else
+        {
+          that.setData(
+            {
+              hasun : true
+            }
+          )
+        }
       }
     })
 
@@ -60,6 +78,17 @@ Page({
         that.setData({
           ischeck: res.data.data,
         })
+        if(res.data.data.length == 0)
+        {
+          that.setData({
+            hasis : false
+          })
+        }
+        else{
+          that.setData({
+            hasis: true
+          })
+        }
       }
     })
 

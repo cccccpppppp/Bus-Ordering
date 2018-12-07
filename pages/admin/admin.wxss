@@ -16,3 +16,10 @@ page, .page, .page__bd {
 .icard {
   margin-top: 10px;
 }
+
+
+.no-data{
+    padding:40rpx 0;
+    color: #999;
+    text-align: center;
+}
