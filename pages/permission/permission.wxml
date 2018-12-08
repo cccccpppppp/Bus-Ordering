@@ -15,7 +15,7 @@
           <view class="weui-label">手机号码</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" name='phone' placeholder="请输入您的手机号码" maxlength='8' />
+          <input class="weui-input" name='phone' type='number' placeholder="请输入您的手机号码" maxlength='15' />
         </view>
       </view>
     </view>

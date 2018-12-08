@@ -1,15 +1,18 @@
 <view class="page">
   <view class="weui-msg">
     <view class="weui-msg__icon-area">
-      <icon type="waiting" size="93"></icon>
+      <icon type="{{msg[msgIndex][0]}}" size="93"></icon>
     </view>
     <view class="weui-msg__text-area">
-      <view class="weui-msg__title">提交成功</view>
-      <view class="weui-msg__desc">等待管理员审核……</view>
+      <view class="weui-msg__title">{{msg[msgIndex][1]}}</view>
+      <view class="weui-msg__desc">{{msg[msgIndex][2]}}</view>
+      <view class="weui-msg__desc">下拉刷新</view>
     </view>
     <view class="weui-msg__opr-area">
       <view class="weui-btn-area">
-        <button class="weui-btn" type="default">联系管理员</button>
+        <button class="weui-btn" type="default" bindtap="navOrder">查看我提交的预定信息</button>
+        <button wx:if="{{msgIndex === '审核未通过'}}" class="weui-btn" type="default" bindtap='toIndex'>返回预定页面</button>
+        <button wx:if="{{msgIndex === '完成'}}" class="weui-btn" type="default" bindtap='toRate'>评价本次行程</button>
       </view>
     </view>
   </view>

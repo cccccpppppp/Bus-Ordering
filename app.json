@@ -3,14 +3,13 @@
     "pages/index/index",
     "pages/costom/costom",
     "pages/costom/wait4Verifying/wait4Verifying",
-    "pages/costom/success/success",
-    "pages/costom/faild/faild",
+    "pages/Order/Order",
+    "pages/costom/order/order",
     "pages/costom/rate/rate",
     "pages/admin/admin",
     "pages/driver/driver",
     "pages/test/test",
     "pages/map/map",
-    "pages/Order/Order",
     "pages/deOrder/deOrder",
     "pages/driver_order/driver_order",
     "pages/admin/refuse/refuse",
@@ -20,8 +19,8 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTitleText": "公务用车订车系统",
+    "navigationBarTextStyle":"black"
   },
   "networkTimeout": {
     "request": 10000,

@@ -1,0 +1,13 @@
+<view class="icard">
+    <i-card title="{{myOrder.apply.name}}" extra="{{myOrder.status}}">
+        <view slot="content">出发时间：{{myOrder.go_time}}</view>
+        <view slot="content">出发地：{{myOrder.start_place}}</view>
+        <view slot="content">目的地：{{myOrder.destination_place}}</view>
+        <view slot="content">乘车人数：{{myOrder.destination_place}}</view>
+        <view slot="content">申请理由：{{myOrder.people_number}}</view>
+        <view wx:if="{{myOrder.driver}}" slot="content">接单司机：{{myOrder.driver.name}}</view>
+        <view wx:if="{{myOrder.check}}" slot="content">审核人员：{{myOrder.check.name}}</view>
+        <view wx:if="{{myOrder.fail_cause}}" slot="content">拒绝原因：{{myOrder.fail_cause}}</view>
+        <view slot="footer">提交时间: {{myOrder.create_time}}</view>
+    </i-card>
+</view>

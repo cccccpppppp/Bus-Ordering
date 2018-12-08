@@ -7,7 +7,6 @@ Page({
     //选项卡信息
     tabs: ["所有申请", "未通过申请"],
     activeIndex: 0,
-    
     //两个选项卡是否有数据的判断，false为没有，ture为有
     hasalldata : true,
     hasrefuse: true,
@@ -18,7 +17,6 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    
     //选项卡函数
     wx.getSystemInfo({
       success: function (res) {
@@ -28,7 +26,6 @@ Page({
         });
       }
     });
-
       //获取用户类型
       wx.request({
         url: host + 'miniprogram/Common/getUserType',
@@ -162,9 +159,6 @@ Page({
           }
         }
       })
-
-
-
   },//onload函数
 
   //下拉到底部刷新
