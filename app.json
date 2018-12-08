@@ -15,7 +15,7 @@
     "pages/driver_order/driver_order",
     "pages/admin/refuse/refuse",
     "pages/permission/permission",
-    "pages/permission/wait4Verifying",
+    "pages/permission/wait4Verifying"
   ],
   "window": {
     "backgroundTextStyle": "light",
