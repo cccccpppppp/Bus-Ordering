@@ -9,6 +9,7 @@ Page({
     activeIndex: 0,
     
     //两个选项卡是否有数据的判断，false为没有，ture为有
+    ifload :true,
     hasalldata : true,
     hasrefuse: true,
     allorder:[
@@ -95,6 +96,9 @@ Page({
                     hasrefuse: true,
                   })
                 }
+                that.setData({
+                  ifload: false,
+                })
               }
 
             })//查询未通过请求
@@ -129,6 +133,9 @@ Page({
                     hasalldata: true,
                   })
                 }
+                that.setData({
+                  ifload: false,
+                })
               }
             })//查询全部请求
 
@@ -156,6 +163,9 @@ Page({
                     hasrefuse: true,
                   })
                 }
+                that.setData({
+                  ifload: false,
+                })
               },
             })//查询未通过请求
 
