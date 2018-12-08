@@ -27,7 +27,7 @@
 
             <view wx:if="{{hasalldata}}">
 
-              <view class="page__bd" wx:for="{{allorder}}" wx:key="id">
+              <view  wx:for="{{allorder}}" wx:key="id">
                 <view class="weui-form-preview">
                   <view class="weui-form-preview__hd">
                     <view class="weui-form-preview__item">
@@ -81,7 +81,7 @@
           <view wx:else>
 
             <view wx:if="{{hasrefuse}}">
-              <view class="page__bd" wx:for="{{refuse}}" wx:key="id">
+              <view wx:for="{{refuse}}" wx:key="id">
                 <view class="weui-form-preview">
                   <view class="weui-form-preview__hd">
                     <view class="weui-form-preview__item">

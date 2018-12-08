@@ -62,7 +62,7 @@
 
         <!--全部审核选项卡-->
         <view hidden="{{activeIndex != 1}}">
-        <view wx:if="{{ifload}}">
+          <view wx:if="{{ifload}}">
             <view class="weui-loadmore">
               <view class="weui-loading"></view>
               <view class="weui-loadmore__tips">正在加载</view>
@@ -70,22 +70,22 @@
           </view>
 
           <view wx:else>
-          <view wx:if="{{hasis}}">
-            <view class="icard" wx:for="{{ischeck}}" wx:key="id" id='{{item.id}}' bindtap='to_deorder'>
-              <i-card title="{{item.apply.name}}" extra="{{item.status}}">
-                <view slot="content">出发地：{{item.start_place}}</view>
-                <view slot="content">目的地：{{item.destination_place}}</view>
-                <view slot="footer">{{item.go_time}}</view>
-              </i-card>
+            <view wx:if="{{hasis}}">
+              <view class="icard" wx:for="{{ischeck}}" wx:key="id" id='{{item.id}}' bindtap='to_deorder'>
+                <i-card title="{{item.apply.name}}" extra="{{item.status}}">
+                  <view slot="content">出发地：{{item.start_place}}</view>
+                  <view slot="content">目的地：{{item.destination_place}}</view>
+                  <view slot="footer">{{item.go_time}}</view>
+                </i-card>
+              </view>
             </view>
+
+            <view wx:else>
+              <view class="no-data">还没有申请哦~</view>
+            </view>
+
+
           </view>
-
-          <view wx:else>
-            <view class="no-data">还没有申请哦~</view>
-          </view>
-
-
-        </view>
         </view>
 
 

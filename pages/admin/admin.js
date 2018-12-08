@@ -70,7 +70,7 @@ Page({
         sessionid: wx.getStorageSync("sessionid"),
         page: 1,
         pageCount: 10,
-        status: 1//查询全部审核订单
+        status: 10//查询全部审核订单
       },
       method: "POST",
       success(res) {
@@ -102,70 +102,238 @@ Page({
   agree(e){
     var that = this;
     var id = e.target.id;
-    wx.request({
-      url: host + 'miniprogram/Admin/check',
-      data:{
-        sessionid: wx.getStorageSync("sessionid"),
-        id : id,
-        opinion: 1,
-      },
-      success(res)
-      {
-        if(res.data.msg == "ok")
-        {
-          //提示成功
-          wx.showToast({
-            title: '已同意',
-            icon: 'success',
-            duration: 3000
-          });
-
-          //未审核订单
+    var is_can_comment;
+    console.log("12")
+    wx.showModal({
+      title: '提示',
+      content: '是否允许该申请人评论司机',
+      confirmText: "允许",
+      cancelText: "不允许",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          is_can_comment = 1;
           wx.request({
-            url: host + 'miniprogram/Admin/applyCarHistory',
+            url: host + 'miniprogram/Admin/check',
             data: {
               sessionid: wx.getStorageSync("sessionid"),
-              page: 1,
-              pageCount: 10,
-              status: 0//查询未审核订单
+              is_can_comment: is_can_comment,
+              id: id,
+              opinion: 1,
             },
-            method: "POST",
             success(res) {
-              console.log(res)
-              that.setData({
-                uncheck: res.data.data,
-              })
+              if (res.data.msg == "ok") {
+                //提示成功
+                wx.showToast({
+                  title: '已同意',
+                  icon: 'success',
+                  duration: 3000
+                });
+
+                //未审核订单
+                wx.request({
+                  url: host + 'miniprogram/Admin/applyCarHistory',
+                  data: {
+                    sessionid: wx.getStorageSync("sessionid"),
+                    page: 1,
+                    pageCount: 10,
+                    status: 0//查询未审核订单
+                  },
+                  method: "POST",
+                  success(res) {
+                    console.log(res)
+                    that.setData({
+                      uncheck: res.data.data,
+                    })
+                  }
+                })
+
+                //全部审核订单
+                wx.request({
+                  url: host + 'miniprogram/Admin/applyCarHistory',
+                  data: {
+                    sessionid: wx.getStorageSync("sessionid"),
+                    page: 1,
+                    pageCount: 10,
+                    status: 1//查询全部审核订单
+                  },
+                  method: "POST",
+                  success(res) {
+                    console.log(res)
+                    that.setData({
+                      ischeck: res.data.data,
+                    })
+                  }
+                })
+              }
+              else if (res.data.msg == "提交成功但是通知司机失败！") {
+                //提示提交成功但是通知司机失败！
+                wx.showToast({
+                  title: '提交成功但是通知司机失败！',
+                  icon: 'none',
+                  duration: 3000
+                });
+
+                //未审核订单
+                wx.request({
+                  url: host + 'miniprogram/Admin/applyCarHistory',
+                  data: {
+                    sessionid: wx.getStorageSync("sessionid"),
+                    page: 1,
+                    pageCount: 10,
+                    status: 0//查询未审核订单
+                  },
+                  method: "POST",
+                  success(res) {
+                    console.log(res)
+                    that.setData({
+                      uncheck: res.data.data,
+                    })
+                  }
+                })
+
+                //全部审核订单
+                wx.request({
+                  url: host + 'miniprogram/Admin/applyCarHistory',
+                  data: {
+                    sessionid: wx.getStorageSync("sessionid"),
+                    page: 1,
+                    pageCount: 10,
+                    status: 1//查询全部审核订单
+                  },
+                  method: "POST",
+                  success(res) {
+                    console.log(res)
+                    that.setData({
+                      ischeck: res.data.data,
+                    })
+                  }
+                })
+              }
+              else {
+                //提示失败原因
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'none',
+                  duration: 3000
+                });
+              }
             }
           })
 
-          //全部审核订单
+        } else {
+          is_can_comment = 0;
           wx.request({
-            url: host + 'miniprogram/Admin/applyCarHistory',
+            url: host + 'miniprogram/Admin/check',
             data: {
               sessionid: wx.getStorageSync("sessionid"),
-              page: 1,
-              pageCount: 10,
-              status: 1//查询全部审核订单
+              is_can_comment :is_can_comment,
+              id: id,
+              opinion: 1,
             },
-            method: "POST",
             success(res) {
-              console.log(res)
-              that.setData({
-                ischeck: res.data.data,
-              })
+              if (res.data.msg == "ok") {
+                //提示成功
+                wx.showToast({
+                  title: '已同意',
+                  icon: 'success',
+                  duration: 3000
+                });
+
+                //未审核订单
+                wx.request({
+                  url: host + 'miniprogram/Admin/applyCarHistory',
+                  data: {
+                    sessionid: wx.getStorageSync("sessionid"),
+                    page: 1,
+                    pageCount: 10,
+                    status: 0//查询未审核订单
+                  },
+                  method: "POST",
+                  success(res) {
+                    console.log(res)
+                    that.setData({
+                      uncheck: res.data.data,
+                    })
+                  }
+                })
+
+                //全部审核订单
+                wx.request({
+                  url: host + 'miniprogram/Admin/applyCarHistory',
+                  data: {
+                    sessionid: wx.getStorageSync("sessionid"),
+                    page: 1,
+                    pageCount: 10,
+                    status: 1//查询全部审核订单
+                  },
+                  method: "POST",
+                  success(res) {
+                    console.log(res)
+                    that.setData({
+                      ischeck: res.data.data,
+                    })
+                  }
+                })
+              }
+              else if (res.data.msg == "提交成功但是通知司机失败！") {
+                //提示提交成功但是通知司机失败！
+                wx.showToast({
+                  title: '提交成功但是通知司机失败！',
+                  icon: 'none',
+                  duration: 3000
+                });
+
+                //未审核订单
+                wx.request({
+                  url: host + 'miniprogram/Admin/applyCarHistory',
+                  data: {
+                    sessionid: wx.getStorageSync("sessionid"),
+                    page: 1,
+                    pageCount: 10,
+                    status: 0//查询未审核订单
+                  },
+                  method: "POST",
+                  success(res) {
+                    console.log(res)
+                    that.setData({
+                      uncheck: res.data.data,
+                    })
+                  }
+                })
+
+                //全部审核订单
+                wx.request({
+                  url: host + 'miniprogram/Admin/applyCarHistory',
+                  data: {
+                    sessionid: wx.getStorageSync("sessionid"),
+                    page: 1,
+                    pageCount: 10,
+                    status: 1//查询全部审核订单
+                  },
+                  method: "POST",
+                  success(res) {
+                    console.log(res)
+                    that.setData({
+                      ischeck: res.data.data,
+                    })
+                  }
+                })
+              }
+              else {
+                //提示失败原因
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'none',
+                  duration: 3000
+                });
+              }
             }
           })
-        }
-        else{
-          //提示失败原因
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none',
-            duration: 3000
-          });
         }
       }
     })
+    
   },
 
   //拒绝申请
