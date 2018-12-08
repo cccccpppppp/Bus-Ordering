@@ -7,7 +7,7 @@ Page({
     //选项卡信息
     tabs: ["未接受订单", "待完成","已完成订单"],
     activeIndex: 0,
-
+    ifload: true,
     //两个选项卡是否有数据的判断，false为没有，ture为有
     hasalldata: true,
     hasrefuse: true,
@@ -106,6 +106,9 @@ Page({
             hasall: true,
           })
         }
+        that.setData({
+          ifload: false,
+        })
       }
 
     }) //查询已完成请求
