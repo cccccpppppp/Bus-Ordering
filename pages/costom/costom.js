@@ -32,15 +32,17 @@ Page({
         wx.hideLoading();
         var data = res.data.data;
         var msg = res.data.msg;
+        console.log(data.status); //test
         if (data === null){
           wx.showToast({
             title: msg,
             icon: 'none'
           })
-        } else if(data.status !== '完成') {
+        } else if(!(data.status !== '完成') || (data.status !=='审核未通过')) {
           wx.redirectTo({
             url: './wait4Verifying/wait4Verifying?status=' + data.status + '&id=' + data.id,
           })
+          wx.setStorageSync('applyCarLately', data);    // 将最近一单的信息存储到本地
         }
       },
       fail: function(res) {

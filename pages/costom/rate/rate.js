@@ -100,6 +100,7 @@ Page({
     let is_clean = basicRate[5];
     let is_carry = basicRate[6];
     let evaluation_content = value.extraRate;
+    wx.showLoading();
     wx.request({
       url: host + 'miniprogram/Predetermine/evaluation',
       method: 'POST',
@@ -117,11 +118,23 @@ Page({
         evaluation_content: evaluation_content
       },
       success (res) {
-        wx.showToast({
+        wx.hideLoading();
+        if (res.data.msg === 'ok'){
+          wx.showToast({
           title: '评价成功',
-        })
+          })
+          wx.redirectTo({
+            url: '../costom'
+          });
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          });
+        }
       },
       fail() {
+        wx.hideLoading();
         wx.showToast({
           title: '网络异常',
           icon: 'none'

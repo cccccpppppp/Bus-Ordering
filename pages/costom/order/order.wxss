@@ -1,1 +1,4 @@
-/* pages/costom/order/order.wxss */
+.icard {
+    margin-top: 10px;
+  }
+  

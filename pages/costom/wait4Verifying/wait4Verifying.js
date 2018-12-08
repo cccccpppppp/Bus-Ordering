@@ -12,6 +12,7 @@ var req_status = function () {
     success: function (res) {
       wx.hideLoading();
       var data = res.data.data;
+      wx.setStorageSync('applyCarLately', data);    // 将最近一单订单的data存储到本地
       that.setData({
         msgIndex: data.status
       })
@@ -40,10 +41,23 @@ Page({
     msgIndex: '已提交'
   },
 
+  toIndex: () =>{
+    wx.redirectTo({
+      url: '../../index/index'
+    })
+  },
+
   toRate: function() {
     wx.redirectTo({
       url: '../rate/rate?id=' + this.data.id,
     })
+  },
+
+  // 跳转到order页面
+  navOrder: () => {
+    wx.navigateTo({
+      url: '../order/order',
+    });
   },
 
   /**
