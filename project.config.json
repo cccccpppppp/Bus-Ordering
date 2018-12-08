@@ -29,11 +29,8 @@
 			"list": []
 		},
 		"miniprogram": {
-<<<<<<< HEAD
-			"current": 11,
-=======
+
 			"current": 7,
->>>>>>> wt
 			"list": [
 				{
 					"id": -1,
@@ -79,7 +76,6 @@
 				},
 				{
 					"id": -1,
-<<<<<<< HEAD
 					"name": "地图",
 					"pathName": "pages/map/map",
 					"query": ""
@@ -105,11 +101,13 @@
 				{
 					"id": -1,
 					"name": "司机界面（新）",
-					"pathName": "pages/driver_order/driver_order"
-=======
-					"name": "申请授权页面",
-					"pathName": "pages/permission/permission"
->>>>>>> wt
+					"pathName": "pages/driver_order/driver_order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "管理员提交拒绝理由",
+					"pathName": "pages/admin/refuse/refuse"
 				}
 			]
 		}
