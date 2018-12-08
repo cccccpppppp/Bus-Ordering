@@ -20,8 +20,8 @@ Page({
    */
   onLoad: function (options) {
     //获取跳转接受的id
-    //var id = options.id;
-    var id =45;
+    var id = options.id;
+    //var id =45;
     console.log(id)
 
     var that = this;
@@ -77,7 +77,7 @@ Page({
               )
             }
 
-
+            //管理员
             else if (res.data.data.type == "管理人员")
             {
               that.setData({
@@ -115,6 +115,8 @@ Page({
                 })//获取订单详细信息
 
             }
+
+            //司机
             else
             {
               that.setData({
@@ -138,7 +140,7 @@ Page({
                   that.setData({
                     ifload: false,
                   })
-                  
+
                   // //审核是否通过
                   // if (res.data.data.status == "审核未通过") {
                   //   that.setData({
