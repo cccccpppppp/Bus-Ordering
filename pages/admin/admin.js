@@ -8,7 +8,7 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-
+    ifload: true,
     hasis:true,
     hasun:true,
     uncheck:[],
@@ -89,6 +89,9 @@ Page({
             hasis: true
           })
         }
+        that.setData({
+          ifload: false,
+        })
       }
     })
 
