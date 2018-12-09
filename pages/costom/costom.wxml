@@ -82,6 +82,7 @@
       </view>
     <view class="weui-btn-area">
       <button class="weui-btn" type="primary" form-type='submit'>申请用车</button>
+      <button class="weui-btn" type="primary" bindtap='toOrder'>查看我的历史订单</button>
     </view>
   </view>
 </form>
