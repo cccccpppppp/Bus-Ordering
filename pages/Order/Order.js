@@ -7,7 +7,9 @@ Page({
     //选项卡信息
     tabs: ["所有申请", "未通过申请"],
     activeIndex: 0,
+    
     //两个选项卡是否有数据的判断，false为没有，ture为有
+    ifload :true,
     hasalldata : true,
     hasrefuse: true,
     allorder:[
@@ -17,6 +19,7 @@ Page({
   },
   onLoad: function () {
     var that = this;
+    
     //选项卡函数
     wx.getSystemInfo({
       success: function (res) {
@@ -26,6 +29,7 @@ Page({
         });
       }
     });
+
       //获取用户类型
       wx.request({
         url: host + 'miniprogram/Common/getUserType',
@@ -92,6 +96,9 @@ Page({
                     hasrefuse: true,
                   })
                 }
+                that.setData({
+                  ifload: false,
+                })
               }
 
             })//查询未通过请求
@@ -126,6 +133,9 @@ Page({
                     hasalldata: true,
                   })
                 }
+                that.setData({
+                  ifload: false,
+                })
               }
             })//查询全部请求
 
@@ -153,12 +163,18 @@ Page({
                     hasrefuse: true,
                   })
                 }
+                that.setData({
+                  ifload: false,
+                })
               },
             })//查询未通过请求
 
           }
         }
       })
+
+
+
   },//onload函数
 
   //下拉到底部刷新
