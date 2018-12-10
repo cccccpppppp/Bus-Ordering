@@ -1,8 +1,13 @@
 /* pages/costom/costom.wxss */
-.contain{
+.contain {
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 20px;
   background-color: #FFFFFF;
   box-shadow: 2px 2px 2px #888888;
+}
+
+.my-location {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
