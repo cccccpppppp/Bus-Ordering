@@ -27,7 +27,7 @@
 
             <view wx:if="{{hasalldata}}">
 
-              <view  wx:for="{{allorder}}" wx:key="id">
+              <view wx:for="{{allorder}}" wx:key="id">
                 <view class="weui-form-preview">
                   <view class="weui-form-preview__hd">
                     <view class="weui-form-preview__item">
@@ -59,6 +59,22 @@
                 </view> -->
                 </view>
               </view>
+
+              <!--加载-->
+              <view wx:if="{{ifload_more}}">
+                <view class="weui-loadmore">
+                  <view class="weui-loading"></view>
+                  <view class="weui-loadmore__tips">正在加载更多</view>
+                </view>
+              </view>
+
+              <!--没有更多-->
+              <view wx:if="{{hasdatamore == false}}">
+                <view class="weui-loadmore weui-loadmore_line">
+                  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多申请了哦</view>
+                </view>
+              </view>
+
             </view>
 
             <view wx:else>
@@ -109,18 +125,20 @@
                 </view>
               </view>
 
-              <!--页面加载效果
-            <view class="weui-loadmore">
-              <view class="weui-loading"></view>
-              <view class="weui-loadmore__tips">正在加载</view>
-            </view>
-            -->
+              <!--加载-->
+              <view wx:if="{{ifload_more}}">
+                <view class="weui-loadmore">
+                  <view class="weui-loading"></view>
+                  <view class="weui-loadmore__tips">正在加载更多</view>
+                </view>
+              </view>
 
-              <!--暂无数据效果
-            <view class="weui-loadmore weui-loadmore_line">
-              <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
-            </view>
-            -->
+              <!--没有更多-->
+              <view wx:if="{{hasrefusemore == false}}">
+                <view class="weui-loadmore weui-loadmore_line">
+                  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多申请了哦</view>
+                </view>
+              </view>
 
             </view>
             <view wx:else>
