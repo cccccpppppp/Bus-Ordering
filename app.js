@@ -12,7 +12,7 @@ App({
   applyCarLately: function () {
     wx.showLoading();
     wx.request({
-      url: host + 'miniprogram/Predetermine/applyCarLately',
+      url: this.globalData.host + 'miniprogram/Predetermine/applyCarLately',
       data: {
         sessionid: wx.getStorageSync("sessionid")
       },

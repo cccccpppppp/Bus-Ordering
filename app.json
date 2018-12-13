@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/index/loading",
     "pages/index/index",
     "pages/costom/costom",
     "pages/costom/wait4Verifying/wait4Verifying",
