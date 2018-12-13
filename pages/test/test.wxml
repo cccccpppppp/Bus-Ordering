@@ -1,7 +1,9 @@
-<view class="map_container">
-  <map class="map" id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="16" markers="{{markers}}"></map>  
-</view>
-<view class="map_text">
-    <text class="h1">{{textData.name}}</text>
-    <text>{{textData.desc}}</text>
+<view class="container">
+  <button bindtap='getLocation'>打开地图选择位置</button>
+  <view wx:if="{{address !=''}}">
+    <view>位置名称:{{name}}</view>
+    <view>详细地址:{{address}}</view>
+    <view>纬度:{{latitude}}</view>
+    <view>经度:{{longitude}}</view>
+  </view>
 </view>

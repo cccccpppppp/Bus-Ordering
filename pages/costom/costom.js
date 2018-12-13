@@ -16,9 +16,15 @@ Page({
   data: {
     counter: 0,
     date: getDate(now),
-    time: getTime(now)
+    time: getTime(now),
+
+    start_place: '',
+    address: '',
+    start_place_latitude: '',
+    start_place_longitude: ''
   },
 
+  // 加载本页面时获取用户最近一单订单的信息，如果状态为完成则留在本页面，否则跳转到相应状态的页面
   onLoad: function() {
     wx.showLoading();
     wx.request({
@@ -85,6 +91,25 @@ Page({
     });
   },
 
+  // 打开自带地图选择位置并返回位置信息
+  chooseAdd: function() {
+    let that = this;
+    wx.chooseLocation({
+      success: function (result) {
+        let name = result.name;
+        let address = result.address;
+        let latitude = result.latitude;
+        let longitude = result.longitude;
+        that.setData({
+          start_place: name,
+          start_place_latitude: latitude,
+          start_place_longitude: longitude,
+          address: address
+        })
+      }
+    });
+  },
+
   //提交预定表单
   submitCar: function(e) {
     var that = this;
@@ -92,10 +117,12 @@ Page({
     var phone = value.phone;
     var name = value.name;
     var go_time = value.date + " " + value.time;
-    var start_place = value.start_place;
     var destination_place = value.destination_place;
     var people_number = value.people_number;
     var reason = value.reason;
+    var start_place = this.data.start_place;
+    let start_place_latitude = this.data.start_place_latitude;
+    let start_place_longitude = this.data.start_place_longitude;
     wx.request({
       url: host + "miniprogram/Predetermine/applyCar",
       data: {
@@ -104,6 +131,8 @@ Page({
         phone: phone,
         people_number: people_number,
         start_place: start_place,
+        start_place_latitude: start_place_latitude,
+        start_place_longitude: start_place_longitude,
         destination_place: destination_place,
         go_time: go_time,
         reason: reason
