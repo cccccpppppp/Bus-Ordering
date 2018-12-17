@@ -1,0 +1,13 @@
+{
+  "pages":[
+    "pages/index/loading",
+    "pages/index/index",
+    "pages/modifyInfo/modifyInfo"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "订车系统",
+    "navigationBarTextStyle":"black"
+  }
+}
