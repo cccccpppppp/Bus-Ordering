@@ -2,7 +2,9 @@
   "pages":[
     "pages/index/loading",
     "pages/index/index",
-    "pages/modifyInfo/modifyInfo"
+    "pages/modifyInfo/modifyInfo",
+    "pages/myInfo/myInfo",
+    "pages/costom/costom"
   ],
   "window":{
     "backgroundTextStyle":"light",
