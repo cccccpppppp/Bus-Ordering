@@ -37,12 +37,18 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "修改信息",
-					"pathName": "pages/modifyInfo/modifyInfo"
+					"pathName": "pages/modifyInfo/modifyInfo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "申请用车界面",
+					"pathName": "pages/costom/costom"
 				}
 			]
 		}

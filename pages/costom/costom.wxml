@@ -1,3 +1,4 @@
+<i-message id="message" />
 <form bindsubmit='submitCar'>
   <view class='contain'>
     <view class="weui-cells__title">出发</view>
@@ -8,14 +9,15 @@
             <view class="weui-label">出发地</view>
           </view>
           <view class="weui-cell__bd">
-            <view wx:if="{{start_place===''}}" class="weui-input my-location" bindtap="chooseAdd">
+            <!-- <view wx:if="{{start_place===''}}" class="weui-input my-location" bindtap="chooseAdd">
               <text>选择出发位置</text>
             </view>
-            <block wx:else>
+            <block wx:else> -->
               <view class="weui-input my-location" bindtap="chooseAdd">
-                <text>{{start_place}}</text>
+                <!-- <text>{{start_place}}</text> -->
+                <input class="weui-input" name='start_place' value='{{start_place}}'/>
               </view>
-            </block>
+            <!-- </block> -->
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -81,14 +83,13 @@
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" placeholder="请输入申请理由" style="height: 5em" bindinput="bindText" maxlength='200' name='reason' />
-          <view class="weui-textarea-counter">{{counter}}/200</view>
+          <textarea class="weui-textarea" placeholder="请输入申请理由" style="height: 5em" bindinput="bindText" maxlength='100' name='reason' />
+          <view class="weui-textarea-counter">{{counter}}/100</view>
         </view>
       </view>
     </view>
     <view class="weui-btn-area">
       <button class="weui-btn" type="primary" form-type='submit'>申请用车</button>
-      <button class="weui-btn" type="primary" bindtap='toOrder'>查看我的历史订单</button>
     </view>
   </view>
 </form>
