@@ -3,7 +3,7 @@ let host = app.globalData.host;
 let dic = {
   '预订人员': ['申请用车', 'costomUrl'],
   '管理人员': ['待审核','../adminUrl/adminUrl'],
-  '司机': ['待接单','driverUrl']
+  '司机': ['待接单','../driverUrl/driverUrl']
 };
 Page({
   data: {

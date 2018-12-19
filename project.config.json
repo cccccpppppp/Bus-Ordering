@@ -37,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -64,10 +64,16 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "详细订单界面",
 					"pathName": "pages/deorder/deorder",
-					"query": "id=97"
+					"query": "id=109"
+				},
+				{
+					"id": -1,
+					"name": "司机接单界面",
+					"pathName": "pages/driverUrl/driverUrl",
+					"query": ""
 				}
 			]
 		}
