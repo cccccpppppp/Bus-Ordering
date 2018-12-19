@@ -33,7 +33,7 @@ let initValidate = function () {
   };
   const messages = {
     start_place: {
-      required: '请填写目的地'
+      required: '请填写出发地'
     },
     destination_place: {
       required: '请填写目的地'
@@ -156,14 +156,11 @@ Page({
         },
         method: "POST",
         success: res => {
-          var msg = res.data.msg;
-          if (msg === "ok" || msg.indexOf("提交成功") !== -1) {
-            // wx.redirectTo({
-            //   url: "wait4Verifying/wait4Verifying"
-            // });
-            showModal({
-              msg: '提交成功'
-            })
+          let status = res.data.status;
+          if (status == 0) {
+            wx.redirectTo({
+              url: "./loading"
+            });
           } else {
             wx.showToast({
               title: res.data.msg,

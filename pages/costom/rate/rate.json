@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "i-rate": "../../../iView/rate/index"
+  },
+  "navigationBarTitleText": "评价"
+}

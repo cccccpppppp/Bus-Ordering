@@ -4,7 +4,12 @@
     "pages/index/index",
     "pages/modifyInfo/modifyInfo",
     "pages/myInfo/myInfo",
-    "pages/costom/costom"
+    "pages/costom/costom",
+    "pages/costom/order/order",
+    "pages/costom/rate/rate",
+    "pages/costom/wait4Verifying/wait4Verifying",
+    "pages/costom/loading"
+
   ],
   "window":{
     "backgroundTextStyle":"light",
