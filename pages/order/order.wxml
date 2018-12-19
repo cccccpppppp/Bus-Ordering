@@ -48,8 +48,13 @@
                       <view class="weui-form-preview__value">{{item.go_time}}</view>
                     </view>
                   </view>
-                  <view class="weui-form-preview__ft">
-                    <navigator url="../deorder/deorder?id={{item.apply_id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">详细信息</navigator>
+
+                  <view class="weui-form-preview__ft" wx:if="{{type!='司机'}}">
+                      <navigator url="../deorder/deorder?id={{item.apply_id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">详细信息</navigator>
+                    </view>
+
+                  <view class="weui-form-preview__ft" wx:else>
+                      <view id='{{item.apply_id}}' bindtap='finish' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">订单已完成</view>
                   </view>
 
                   <!-- <view class="weui-loadmore">
