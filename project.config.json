@@ -37,12 +37,37 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
 					"name": "修改信息",
-					"pathName": "pages/modifyInfo/modifyInfo"
+					"pathName": "pages/modifyInfo/modifyInfo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "待审核界面",
+					"pathName": "pages/adminUrl/adminUrl",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "同意界面",
+					"pathName": "pages/adminUrl/agree/agree",
+					"query": "id=1"
+				},
+				{
+					"id": -1,
+					"name": "订单界面",
+					"pathName": "pages/order/order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "详细订单界面",
+					"pathName": "pages/deorder/deorder",
+					"query": "id=97"
 				}
 			]
 		}

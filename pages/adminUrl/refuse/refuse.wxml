@@ -1,0 +1,15 @@
+<form bindsubmit="back">
+  <view class="weui-cells__title">拒绝原因</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <textarea name = "input" class="weui-textarea" placeholder="请输入拒绝原因" style="height: 3.3em" />
+        <view class="weui-textarea-counter">0/200</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-btn-area">
+    <button class="weui-btn" type="primary" form-type='submit'>确定</button>
+  </view>
+</form>
