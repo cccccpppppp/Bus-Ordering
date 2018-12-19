@@ -8,7 +8,9 @@
     "pages/adminUrl/agree/agree",
     "pages/order/order",
     "pages/deorder/deorder",
-    "pages/driverUrl/driverUrl"
+    "pages/driverUrl/driverUrl",
+    "pages/myInfo/myInfo",
+    "pages/costom/costom"
   ],
   "window": {
     "backgroundTextStyle": "light",

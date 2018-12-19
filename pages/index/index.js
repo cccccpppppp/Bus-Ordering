@@ -1,7 +1,7 @@
 const app = getApp();
 let host = app.globalData.host;
 let dic = {
-  '预订人员': ['申请用车', 'costomUrl'],
+  '预订人员': ['申请用车', '../costom/costom'],
   '管理人员': ['待审核','../adminUrl/adminUrl'],
   '司机': ['待接单','../driverUrl/driverUrl']
 };
@@ -17,7 +17,7 @@ Page({
       {
         name: '我的信息',
         icon: '../../images/icons/mine.png',
-        url: ''
+        url: '../myInfo/myInfo'
       },
       {
         name: '修改信息',

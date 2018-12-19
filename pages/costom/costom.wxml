@@ -1,0 +1,95 @@
+<i-message id="message" />
+<form bindsubmit='submitCar'>
+  <view class='contain'>
+    <view class="weui-cells__title">出发</view>
+    <view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">出发地</view>
+          </view>
+          <view class="weui-cell__bd">
+            <!-- <view wx:if="{{start_place===''}}" class="weui-input my-location" bindtap="chooseAdd">
+              <text>选择出发位置</text>
+            </view>
+            <block wx:else> -->
+              <view class="weui-input my-location" bindtap="chooseAdd">
+                <!-- <text>{{start_place}}</text> -->
+                <input class="weui-input" name='start_place' value='{{start_place}}'/>
+              </view>
+            <!-- </block> -->
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">目的地</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" name='destination_place' />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='form'>
+    <view class="weui-cells__title">订车信息</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">日期</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{date}}" name="date" start="2015-09-01" end="2018-12-30" bindchange="bindDateChange">
+            <view class="weui-input">{{date}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">时间</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="time" value="{{time}}" name="time" start="{{time}}" bindchange="bindTimeChange">
+            <view class="weui-input">{{time}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">姓名</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" name='name' placeholder="请输入您的姓名" maxlength='10' value='{{myInfo.name}}'/>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">手机号码</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" name='phone' placeholder="请输入手机号" maxlength='11' type='number' value='{{myInfo.phone}}'/>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">乘车人数</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" name='people_number' placeholder="请输入乘车人数" maxlength='2' type='number' />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title">申请理由</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入申请理由" style="height: 5em" bindinput="bindText" maxlength='100' name='reason' />
+          <view class="weui-textarea-counter">{{counter}}/100</view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" form-type='submit'>申请用车</button>
+    </view>
+  </view>
+</form>

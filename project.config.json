@@ -73,7 +73,9 @@
 					"id": -1,
 					"name": "司机接单界面",
 					"pathName": "pages/driverUrl/driverUrl",
-					"query": ""
+					"query": "",
+					"name": "申请用车界面",
+					"pathName": "pages/costom/costom"
 				}
 			]
 		}
