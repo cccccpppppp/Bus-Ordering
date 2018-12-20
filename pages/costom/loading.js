@@ -15,16 +15,27 @@ Page({
         sessionid: wx.getStorageSync("sessionid")
       },
       success(res) {
-        let data = res.data.data;
-        let status = data.status;
-        wx.setStorageSync('data', data);    // 将最近一单数据存储到本地
-        if(status === '完成') {
+        let data = res.data;
+        wx.setStorageSync('data', data.data);    // 将最近一单数据存储到本地
+        if(data.status == 0) {
+          if((data.data.status === '完成' && data.data.is_can_comment == 0) || (data.data.status ==='完成' && data.data.comment !== null)) {
+            wx.redirectTo({
+              url: './costom',
+            });
+          } else {
+          let status = data.data.status;
+          wx.redirectTo({
+              url: './wait4Verifying/wait4Verifying?status=' + status,
+            });
+          }
+        } else if (data.status == 1){
           wx.redirectTo({
             url: './costom',
           });
         } else {
-          wx.redirectTo({
-            url: './wait4Verifying/wait4Verifying?status=' + status,
+          wx.showToast({
+            title: data.msg,
+            icon: "none"
           });
         }
       }

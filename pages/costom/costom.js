@@ -157,7 +157,7 @@ Page({
         method: "POST",
         success: res => {
           let status = res.data.status;
-          if (status == 0) {
+          if (status == 0 || status == 1) {
             wx.redirectTo({
               url: "./loading"
             });
