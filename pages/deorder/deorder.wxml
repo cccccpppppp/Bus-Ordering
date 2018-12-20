@@ -1,0 +1,111 @@
+<view class="page__bd">
+
+  <view wx:if="{{ifload}}">
+    <view class="weui-loadmore">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+  </view>
+
+  <view wx:else>
+
+
+
+    <view class="weui-form-preview">
+      <view class="weui-form-preview__hd">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">目的地</view>
+          <view class="weui-form-preview__value_in-hd">{{resdata.destination_place}}</view>
+        </view>
+      </view>
+
+
+      <view class="weui-form-preview__bd">
+
+        <!--公共部分-->
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">出发时间</view>
+          <view class="weui-form-preview__value">{{resdata.go_time}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">申请人</view>
+          <view class="weui-form-preview__value">{{resdata.apply.name}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">申请人联系方式</view>
+          <view class="weui-form-preview__value">{{resdata.apply.phone}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">司机</view>
+          <view class="weui-form-preview__value">{{resdata.driver.name}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">司机联系方式</view>
+          <view class="weui-form-preview__value">{{resdata.driver.phone}}</view>
+        </view>
+
+        <!--申请人部分-->
+        <view wx:if="{{tpye == '预定人员'}}">
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">申请状态</view>
+            <view class="weui-form-preview__value">{{resdata.status}}</view>
+          </view>
+          <view wx:if="{{iffail}}" class="weui-form-preview__item">
+            <view class="weui-form-preview__label">未通过原因</view>
+            <view class="weui-form-preview__value">{{resdata.fail_cause}}</view>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">申请时间</view>
+            <view class="weui-form-preview__value">{{resdata.create_time}}</view>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">审核时间</view>
+            <view class="weui-form-preview__value">{{resdata.update_time}}</view>
+          </view>
+        </view>
+
+        <!--管理员部分-->
+        <view wx:if="{{type == '管理人员'}}">
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">申请状态</view>
+            <view class="weui-form-preview__value">{{resdata.status}}</view>
+          </view>
+          <view wx:if="{{iffail}}" class="weui-form-preview__item">
+            <view class="weui-form-preview__label">未通过原因</view>
+            <view class="weui-form-preview__value">{{resdata.fail_cause}}</view>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">申请创建时间</view>
+            <view class="weui-form-preview__value">{{resdata.create_time}}</view>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">申请审核时间</view>
+            <view class="weui-form-preview__value">{{resdata.update_time}}</view>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">审核人:</view>
+            <view class="weui-form-preview__value">{{resdata.admin.name}}</view>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">审核人联系方式</view>
+            <view class="weui-form-preview__value">{{resdata.admin.phone}}</view>
+          </view>
+
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">用户打分</view>
+            <view class="weui-form-preview__value">{{resdata.comment.mark}}分</view>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">用户评价</view>
+            <view class="weui-form-preview__value">{{resdata.comment.content}}</view>
+          </view>
+        </view>
+
+      </view>
+      <view class="weui-form-preview__ft">
+        <view class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='return_last'>返回</view>
+      </view>
+    </view>
+
+  </view>
+</view>

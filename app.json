@@ -1,8 +1,14 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/loading",
     "pages/index/index",
     "pages/modifyInfo/modifyInfo",
+    "pages/adminUrl/adminUrl",
+    "pages/adminUrl/refuse/refuse",
+    "pages/adminUrl/agree/agree",
+    "pages/order/order",
+    "pages/deorder/deorder",
+    "pages/driverUrl/driverUrl",
     "pages/myInfo/myInfo",
     "pages/costom/costom",
     "pages/costom/order/order",
@@ -11,10 +17,10 @@
     "pages/costom/loading"
 
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "订车系统",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   }
 }

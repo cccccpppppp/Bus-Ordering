@@ -2,8 +2,8 @@ const app = getApp();
 let host = app.globalData.host;
 let dic = {
   '预订人员': ['申请用车', '../costom/loading'],
-  '管理人员': ['待审核','adminUrl'],
-  '司机': ['待接单','driverUrl']
+  '管理人员': ['待审核','../adminUrl/adminUrl'],
+  '司机': ['待接单','../driverUrl/driverUrl']
 };
 Page({
   data: {
@@ -27,7 +27,7 @@ Page({
       {
         name: '历史订单',
         icon: '../../images/icons/order.png',
-        url: ''
+        url: '../order/order'
       }
     ]
   },

@@ -1,0 +1,62 @@
+<!--未审核申请-->
+
+<view wx:if="{{ifload}}">
+  <view class="weui-loadmore">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+</view>
+
+<view wx:else>
+  <view wx:if="{{haddata}}">
+    <view class="weui-form-preview" wx:for="{{order}}" wx:key="id">
+
+      <view class="weui-form-preview__hd">
+        <view class="weui-form-preview__label">申请人姓名</view>
+        <view class="weui-form-preview__value_in-hd">{{item.name}}</view>
+      </view>
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">出发地</view>
+          <view class="weui-form-preview__value">{{item.start_place}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">目的地</view>
+          <view class="weui-form-preview__value">{{item.destination_place}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">出发时间</view>
+          <view class="weui-form-preview__value">{{item.go_time}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">联系方式</view>
+          <view class="weui-form-preview__value">{{item.phone}}</view>
+        </view>
+      </view>
+      <view class="weui-form-preview__ft">
+        <view id='{{item.apply_id}}' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='know'>我知道了</view>
+      </view>
+    </view>
+
+    <!--加载-->
+    <view wx:if="{{ifload_more}}">
+      <view class="weui-loadmore">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载更多</view>
+      </view>
+    </view>
+
+    <!--没有更多-->
+    <view wx:if="{{hadmore == false}}">
+      <view class="weui-loadmore weui-loadmore_line">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多了哦</view>
+      </view>
+    </view>
+
+  </view>
+
+  <view wx:else>
+    <view class="no-data">还没有待接订单哦~</view>
+  </view>
+
+</view>

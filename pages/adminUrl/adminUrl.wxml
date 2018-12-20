@@ -1,0 +1,63 @@
+<!--未审核申请-->
+
+<view wx:if="{{ifload}}">
+  <view class="weui-loadmore">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+</view>
+
+<view wx:else>
+  <view wx:if="{{hadata}}">
+    <view class="weui-form-preview" wx:for="{{uncheck}}" wx:key="id">
+
+      <view class="weui-form-preview__hd">
+        <view class="weui-form-preview__label">姓名</view>
+        <view class="weui-form-preview__value_in-hd">{{item.name}}</view>
+      </view>
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">出发地</view>
+          <view class="weui-form-preview__value">{{item.start_place}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">目的地</view>
+          <view class="weui-form-preview__value">{{item.destination_place}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">出发时间</view>
+          <view class="weui-form-preview__value">{{item.go_time}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">理由</view>
+          <view class="weui-form-preview__value">{{item.reason}}</view>
+        </view>
+      </view>
+      <view class="weui-form-preview__ft">
+        <view id='{{item.apply_id}}' class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" bindtap='refuse'>拒绝</view>
+        <view id='{{item.apply_id}}' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='agree'>同意</view>
+      </view>
+    </view>
+
+    <!--加载-->
+    <view wx:if="{{ifload_more}}">
+      <view class="weui-loadmore">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载更多</view>
+      </view>
+    </view>
+
+    <!--没有更多-->
+    <view wx:if="{{hadmore == false}}">
+      <view class="weui-loadmore weui-loadmore_line">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多申请了哦</view>
+      </view>
+    </view>
+
+  </view>
+
+  <view wx:else>
+    <view class="no-data">还没有未审核申请哦~</view>
+  </view>
+
+</view>
