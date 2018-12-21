@@ -6,7 +6,7 @@
     <view class="weui-msg__text-area">
       <view class="weui-msg__title">{{msg[msgIndex][1]}}</view>
       <view class="weui-msg__desc">{{msg[msgIndex][2]}}</view>
-      <view class="weui-msg__desc">下拉刷新</view>
+      <view wx:if="{{msg !== '审核未通过'}}" class="weui-msg__desc">下拉刷新</view>
     </view>
     <view class="weui-msg__opr-area">
       <view class="weui-btn-area">
