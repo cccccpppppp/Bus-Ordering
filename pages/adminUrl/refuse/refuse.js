@@ -9,6 +9,7 @@ Page({
   data: {
     input: "",
     id: "",
+    t_text: 0
   },
 
   /**
@@ -55,5 +56,13 @@ Page({
         }
       }
     })
+  },
+  //文本域计数器
+  bindText: function (e) {
+    var t_text = e.detail.value.length;
+    // console.log(t_text)
+    this.setData({
+      counter: t_text
+    });
   }
 })
