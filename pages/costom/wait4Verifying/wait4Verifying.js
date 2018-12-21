@@ -30,6 +30,13 @@ Page({
     })
   },
 
+  callDriver: () => {
+    let applyCarLately = wx.getStorageSync('applyCarLately')
+    wx.makePhoneCall({
+      phoneNumber: applyCarLately.driver_phone_num
+    })
+  },
+
   // 跳转到order页面
   navOrder: () => {
     wx.navigateTo({

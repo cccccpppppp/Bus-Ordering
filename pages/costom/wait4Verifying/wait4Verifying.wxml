@@ -11,6 +11,7 @@
     <view class="weui-msg__opr-area">
       <view class="weui-btn-area">
         <button class="weui-btn" type="default" bindtap="navOrder">查看我提交的预定信息</button>
+        <button wx:if="{{msgIndex === '审核通过'}}" class="weui-btn" type="default" bindtap='callDriver'>拨打司机电话</button>
         <button wx:if="{{msgIndex === '审核未通过'}}" class="weui-btn" type="default" bindtap='toIndex'>返回预定页面</button>
         <button wx:if="{{msgIndex === '完成'}}" class="weui-btn" type="default" bindtap='toRate'>评价本次行程</button>
       </view>
