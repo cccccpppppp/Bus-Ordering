@@ -37,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -55,7 +55,7 @@
 					"id": 2,
 					"name": "同意界面",
 					"pathName": "pages/adminUrl/agree/agree",
-					"query": "id=1"
+					"query": "id=137"
 				},
 				{
 					"id": -1,
