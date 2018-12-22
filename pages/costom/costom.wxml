@@ -13,7 +13,7 @@
               <text>选择出发位置</text>
             </view>
             <block wx:else> -->
-              <view class="weui-input my-location" bindtap="chooseAdd">
+              <view class="weui-input my-location" bindtap="chooseStartAdd">
                 <!-- <text>{{start_place}}</text> -->
                 <input class="weui-input" name='start_place' value='{{start_place}}'/>
               </view>
@@ -24,8 +24,9 @@
           <view class="weui-cell__hd">
             <view class="weui-label">目的地</view>
           </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" name='destination_place' />
+          <view class="weui-cell__bd" bindtap='chooseDestinationAdd'>
+            <!-- <input class="weui-input" name='destination_place' /> -->
+            <input class="weui-input" name='destination_place' value='{{destination_place}}'/>
           </view>
         </view>
       </view>
@@ -39,7 +40,7 @@
           <view class="weui-label">日期</view>
         </view>
         <view class="weui-cell__bd">
-          <picker mode="date" value="{{date}}" name="date" start="2015-09-01" end="2018-12-30" bindchange="bindDateChange">
+          <picker mode="date" value="{{date}}" name="date" start="{{date}}" end="2018-12-30" bindchange="bindDateChange">
             <view class="weui-input">{{date}}</view>
           </picker>
         </view>
@@ -49,7 +50,7 @@
           <view class="weui-label">时间</view>
         </view>
         <view class="weui-cell__bd">
-          <picker mode="time" value="{{time}}" name="time" start="{{time}}" bindchange="bindTimeChange">
+          <picker mode="time" value="{{time}}" name="time" bindchange="bindTimeChange">
             <view class="weui-input">{{time}}</view>
           </picker>
         </view>
@@ -75,7 +76,10 @@
           <view class="weui-label">乘车人数</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" name='people_number' placeholder="请输入乘车人数" maxlength='2' type='number' />
+          <!-- <input class="weui-input" name='people_number' placeholder="请输入乘车人数" maxlength='2' type='number' /> -->
+          <picker name="people_number" bindchange="bindPeopleNumChange" range='{{people_number_range}}'>
+            <view class="weui-input">{{people_number_range[people_number_index]}}</view>
+          </picker>
         </view>
       </view>
     </view>

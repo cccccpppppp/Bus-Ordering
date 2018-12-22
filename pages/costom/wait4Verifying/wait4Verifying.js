@@ -33,7 +33,7 @@ Page({
   callDriver: () => {
     let applyCarLately = wx.getStorageSync('applyCarLately')
     wx.makePhoneCall({
-      phoneNumber: applyCarLately.driver_phone_num
+      phoneNumber: applyCarLately.driver.phone
     })
   },
 

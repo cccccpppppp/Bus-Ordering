@@ -1,21 +1,24 @@
-const util = require('../../utils/util.js')
-import WxValidate from '../../utils/WxValidate';
-const { $Message } = require('../../iView/base/index');
+const util = require("../../utils/util.js");
+import WxValidate from "../../utils/WxValidate";
+const { $Message } = require("../../iView/base/index");
 const app = getApp();
 let host = app.globalData.host;
 let now = new Date();
+let maxTime = new Date();
+maxTime.setDate(now.getDate() + 7);       // 可提前预约7天
 let formatTimeNow = util.formatTime(now);
+let formatMaxTime = util.formatTime(maxTime)
 let wxValidate;
 /**
  * 表单-验证字段
  */
-let initValidate = function () {
+let initValidate = function() {
   const rules = {
     start_place: {
-      required: true,
+      required: true
     },
     destination_place: {
-      required: true,
+      required: true
     },
     name: {
       required: true,
@@ -23,79 +26,87 @@ let initValidate = function () {
     },
     phone: {
       required: true,
-      tel: true,
-    },
-    people_number: {
-      required: true,
-      people_number: true,
-      range: [1, 4]
+      tel: true
     }
+    // people_number: {
+    //   required: true,
+    //   people_number: true,
+    //   range: [1, 4]
+    // }
   };
   const messages = {
     start_place: {
-      required: '请填写出发地'
+      required: "请填写出发地"
     },
     destination_place: {
-      required: '请填写目的地'
+      required: "请填写目的地"
     },
     name: {
-      required: '请填写姓名',
-      minlength:'请输入正确的名称'
+      required: "请填写姓名",
+      minlength: "请输入正确的名称"
     },
-    phone:{
-      required:'请填写手机号',
-      tel:'请填写正确的手机号'
-    },
-    people_number: {
-      required:'请填写人数',
-      people_number:'请填写正确的人数',
-      range:'乘车人数必须在1~10之间'
+    phone: {
+      required: "请填写手机号",
+      tel: "请填写正确的手机号"
     }
-  }
+    // people_number: {
+    //   required:'请填写人数',
+    //   people_number:'请填写正确的人数',
+    //   range:'乘车人数必须在1~10之间'
+    // }
+  };
   wxValidate = new WxValidate(rules, messages);
 };
-let showModal = function (error) {
+let showModal = function(error) {
   $Message({
     content: error.msg,
-    type: 'error'
-});
-}
+    type: "error"
+  });
+};
 Page({
   data: {
     counter: 0,
-    start_place: '',
+    start_place: "",
     myInfo: {
-      "name": null,
-      "phone": null,
-      "type": null
+      name: null,
+      phone: null,
+      type: null
     },
-    date: '2018-12-18',
-    time: '5:32',
-    start_place_latitude: '',
-    start_place_longitude: ''
-
+    date: "2018-12-18",
+    time: "5:32",
+    maxDate: '2018-12-31',
+    start_place_latitude: "",
+    start_place_longitude: "",
+    people_number_range: [1, 2, 3, 4],
+    people_number_index: 0
   },
 
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.setData({
-      myInfo: wx.getStorageSync('user_info'),
+      myInfo: wx.getStorageSync("user_info"),
       date: formatTimeNow.formatedDate,
-      time: formatTimeNow.formatedTime
+      time: formatTimeNow.formatedTime,
+      maxDate: formatMaxTime.formatedDate
     });
     initValidate();
   },
-  bindDateChange: function (e) {
+  bindDateChange: function(e) {
     this.setData({
       date: e.detail.value
     });
   },
-  bindTimeChange: function (e) {
+  bindTimeChange: function(e) {
     this.setData({
       time: e.detail.value
     });
   },
+  bindPeopleNumChange: function(e) {
+    this.setData({
+      people_number_index: e.detail.value
+    });
+  },
   //文本域计数器
-  bindText: function (e) {
+  bindText: function(e) {
     var t_text = e.detail.value.length;
     // console.log(t_text)
     this.setData({
@@ -103,10 +114,10 @@ Page({
     });
   },
   // 打开自带地图选择位置并返回位置信息
-  chooseAdd: function () {
+  chooseStartAdd: function() {
     let that = this;
     wx.chooseLocation({
-      success: function (result) {
+      success: function(result) {
         let name = result.name;
         let address = result.address;
         let latitude = result.latitude;
@@ -116,14 +127,32 @@ Page({
           start_place_latitude: latitude,
           start_place_longitude: longitude,
           address: address
-        })
+        });
+      }
+    });
+  },
+  // 打开自带地图选择位置并返回位置信息
+  chooseDestinationAdd: function() {
+    let that = this;
+    wx.chooseLocation({
+      success: function(result) {
+        let name = result.name;
+        let address = result.address;
+        let latitude = result.latitude;
+        let longitude = result.longitude;
+        that.setData({
+          destination_place: name,
+          // destination_place_latitude: latitude,
+          // destination_place_longitude: longitude,
+          // destination_address: address
+        });
       }
     });
   },
 
   //调用验证函数
-  submitCar: function (e) {
-    console.log('form发生了submit事件，携带的数据为：', e.detail.value);
+  submitCar: function(e) {
+    console.log("form发生了submit事件，携带的数据为：", e.detail.value);
     const params = e.detail.value;
     let phone = params.phone;
     let name = params.name;
@@ -136,9 +165,9 @@ Page({
     let start_place_longitude = this.data.start_place_longitude;
     //校验表单
     if (!wxValidate.checkForm(params)) {
-      const error = wxValidate.errorList[0]
-      showModal(error)
-      return false
+      const error = wxValidate.errorList[0];
+      showModal(error);
+      return false;
     } else {
       wx.request({
         url: host + "miniprogram/Apply_car/applyCar",
@@ -171,4 +200,4 @@ Page({
       });
     }
   }
-})
+});

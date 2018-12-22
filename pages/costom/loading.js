@@ -16,7 +16,7 @@ Page({
       },
       success(res) {
         let data = res.data;
-        wx.setStorageSync('data', data.data);    // 将最近一单数据存储到本地
+        wx.setStorageSync('applyCarLately', data.data);    // 将最近一单数据存储到本地
         if(data.status == 0) {
           if((data.data.status === '完成' && data.data.is_can_comment == 0) || (data.data.status ==='完成' && data.data.comment !== null)) {
             wx.redirectTo({
