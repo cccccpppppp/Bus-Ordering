@@ -63,4 +63,9 @@ Page({
       ifload: false
     })
   },
+  return_last(){
+    wx.navigateBack({
+      delta: 1
+    })
+  }
 })
