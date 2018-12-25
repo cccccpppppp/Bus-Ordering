@@ -5,7 +5,12 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    myInfo: {
+      name: '',
+      phone: ''
+    }
+  },
   modifyInfo: e => {
     let name = e.detail.value.name;
     let phone = e.detail.value.phone;
@@ -67,5 +72,9 @@ Page({
     });
   },
 
-  onLoad: options => {}
+  onLoad: function (options) {
+    this.setData({
+      myInfo: wx.getStorageSync('user_info')
+    })
+  },
 });

@@ -8,31 +8,38 @@ Page({
   data: {
     checkboxItems: [{
         name: '熟悉路况',
-        value: '0'
+        value: '0',
+        checked: true
       },
       {
         name: '准时',
-        value: '1'
+        value: '1',
+        checked: true
       },
       {
         name: '安全驾驶',
-        value: '2'
+        value: '2',
+        checked: true
       },
       {
         name: '车内无异味',
-        value: '3'
+        value: '3',
+        checked: true
       },
       {
         name: '准备有矿泉水',
-        value: '4'
+        value: '4',
+        checked: true
       },
       {
         name: '车内干净卫生',
-        value: '5'
+        value: '5',
+        checked: true
       },
       {
         name: '到达帮拿行李',
-        value: '6'
+        value: '6',
+        checked: true
       }
     ],
     counter: 0,
