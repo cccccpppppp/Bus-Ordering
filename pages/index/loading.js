@@ -42,7 +42,10 @@ Page({
             })
           },
           fail() {
-            console.log('login()异常')
+            wx.showModal({
+              title: '登陆异常',
+              content: ''
+            })
           }
 
         })
