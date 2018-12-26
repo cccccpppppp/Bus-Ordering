@@ -1,6 +1,5 @@
 const app = getApp();
 let host = app.globalData.host;
-let sessionid = wx.getStorageSync("sessionid");
 Page({
   /**
    * 页面的初始数据
@@ -23,7 +22,7 @@ Page({
             url: host + "miniprogram/Common/setInfo",
             method: "POST",
             data: {
-              sessionid: sessionid,
+              sessionid: wx.getStorageSync("sessionid"),
               name: name,
               phone: phone
             },
@@ -38,7 +37,7 @@ Page({
                     wx.request({
                       url: host + "miniprogram/Common/info",
                       data: {
-                        sessionid: sessionid
+                        sessionid: wx.getStorageSync("sessionid")
                       },
                       success: res => {
                         let pages = getCurrentPages(); //获取页面栈
