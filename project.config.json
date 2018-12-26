@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -37,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -67,7 +67,7 @@
 					"id": 4,
 					"name": "详细订单界面",
 					"pathName": "pages/deorder/deorder",
-					"query": "id=109"
+					"query": "id=145"
 				},
 				{
 					"id": -1,

@@ -96,6 +96,20 @@
             <view class="weui-form-preview__value">{{resdata.comment.mark}}分</view>
           </view>
           <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">司机特点</view>
+            <view class="weui-form-preview__value">
+            <text wx:if ="{{resdata.comment.is_familiar_route == 1}}">熟悉路线、</text>
+            <text wx:if ="{{resdata.comment.is_punctuality == 1}}">准时、</text>
+            <text wx:if ="{{resdata.comment.is_have_water == 1}}">有矿泉水、</text>
+            <text wx:if ="{{resdata.comment.is_safe_driving == 1}}">安全驾驶</text> 
+            </view>
+            <view class="weui-form-preview__value">
+            <text wx:if ="{{resdata.comment.is_clean == 1}}">车内干净、</text>
+            <text wx:if ="{{resdata.comment.is_have_peculiar_smell == 1}}">车内无异味、</text>
+            <text wx:if ="{{resdata.comment.is_help_luggage == 1}}">帮搬行李</text>
+            </view>
+          </view>   
+          <view class="weui-form-preview__item">
             <view class="weui-form-preview__label">用户评价</view>
             <view class="weui-form-preview__value">{{resdata.comment.content}}</view>
           </view>
