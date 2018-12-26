@@ -74,15 +74,17 @@ Page({
         that.setData({
           msgIndex: data.status,
           is_can_comment: data.is_can_comment,
-          ['msg.审核未通过[2]']: fail_cause
-        })
+          ['msg.审核未通过[2]']: fail_cause,
+        });
+        wx.stopPullDownRefresh();
       },
       fail: function (res) {
         wx.hideLoading();
         wx.showToast({
           title: '网络异常',
           icon: 'none'
-        })
+        });
+        wx.stopPullDownRefresh();
       },
     })
   }
