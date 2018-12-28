@@ -22,6 +22,7 @@ Page({
     this.setData({
       id: options.id
     })
+    itemList = [];
     wx.request({
       url: host + 'miniprogram/Admin/getDriverInfoList',
       data: {
