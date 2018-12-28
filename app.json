@@ -14,8 +14,8 @@
     "pages/costom/order/order",
     "pages/costom/rate/rate",
     "pages/costom/wait4Verifying/wait4Verifying",
-    "pages/costom/loading"
-
+    "pages/costom/loading",
+    "pages/driverUrl/add/add"
   ],
   "window": {
     "backgroundTextStyle": "light",
