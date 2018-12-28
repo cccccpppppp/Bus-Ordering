@@ -69,7 +69,7 @@
           <view class="weui-label">乘车人数</view>
         </view>
         <view class="weui-cell__bd">
-          <picker name="people_number" bindchange="bindPeopleNumChange" range='{{people_number_range}}'>
+          <picker name="people_number" bindchange="bindPeopleNumChange" range='{{people_number_range}}' value='{{people_number_index}}'>
             <view class="weui-input">{{people_number_range[people_number_index]}}</view>
           </picker>
         </view>

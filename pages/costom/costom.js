@@ -77,7 +77,7 @@ Page({
     maxDate: '2018-12-31',
     start_place_latitude: "",
     start_place_longitude: "",
-    people_number_range: [1, 2, 3, 4],
+    people_number_range: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     people_number_index: 0
   },
 
@@ -159,7 +159,7 @@ Page({
     let name = params.name;
     let go_time = params.date + " " + params.time;
     let destination_place = params.destination_place;
-    let people_number = params.people_number;
+    let people_number = this.data.people_number_range[params.people_number];
     let reason = params.reason;
     let start_place = params.start_place;
     let start_place_latitude = this.data.start_place_latitude;
