@@ -7,7 +7,7 @@ let now = new Date();
 let maxTime = new Date();
 maxTime.setDate(now.getDate() + 7);       // 可提前预约7天
 let formatTimeNow = util.formatTime(now);
-let formatMaxTime = util.formatTime(maxTime)
+let formatMaxTime = util.formatTime(maxTime);
 let wxValidate;
 /**
  * 表单-验证字段
@@ -86,8 +86,9 @@ Page({
       myInfo: wx.getStorageSync("user_info"),
       date: formatTimeNow.formatedDate,
       time: formatTimeNow.formatedTime,
-      maxDate: formatMaxTime.formatedDate
+      maxDate: formatMaxTime.formatedDate,
     });
+    console.log(formatMaxTime.formatedDate);
     initValidate();
   },
   bindDateChange: function(e) {
