@@ -1,16 +1,19 @@
-<!--index.wxml-->
 <view class="container">
-  <image class="header" background-size="cover" src="{{header}}"></image>
-  <view class="grid">
-    <view class="page__bd">
-      <view class="weui-grids">
-        <block wx:for="{{menu}}" wx:key="name">
-          <navigator url="{{item.url}}" class="weui-grid" hover-class="weui-grid_active">
-            <image class="weui-grid__icon" src="{{item.icon}}" />
-            <view class="weui-grid__label">{{item.name}}</view>
-          </navigator>
-        </block>
-      </view>
-    </view>
-  </view>
+	<image class="header" background-size="cover" src="{{header}}" />
+	<view class="grid">
+		<view class="page__bd">
+			<view class="weui-grids">
+				<block wx:for="{{menu}}" wx:key="name">
+					<navigator url="{{item.url}}" class="weui-grid" hover-class="weui-grid_active">
+						<!-- <i-badge wx:if="{{item.name === '待审核'}}" dot></i-badge> -->
+						<view wx:if="{{item.name === '待审核' && hasNewOrder}}" class="weui-badge weui-badge_dot redDot"></view>
+						<view wx:if="{{item.name === '待接单' && hasNewOrder}}" class="weui-badge weui-badge_dot redDot"></view>
+						<image class="weui-grid__icon" src="{{item.icon}}" />
+						<view class="weui-grid__label">{{item.name}}</view>
+					</navigator>
+				</block>
+			</view>
+		</view>
+	</view>
 </view>
+

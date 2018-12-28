@@ -30,9 +30,6 @@ Page({
               if (res.data.status === 0) {
                 wx.hideLoading();
                 wx.showToast({
-                  title: "",
-                  duration: 2000,
-                  mask: false,
                   success: result => {
                     wx.request({
                       url: host + "miniprogram/Common/info",

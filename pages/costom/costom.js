@@ -196,6 +196,12 @@ Page({
               icon: "none"
             });
           }
+        },
+        fail() {
+          wx.showModal({
+            title: '登陆异常',
+            content: ''
+          })
         }
       });
     }

@@ -2,3 +2,9 @@
   width: 100%;
   height: 500rpx;
 }
+
+.redDot {
+  position: absolute;
+  top: 0em;
+  right: -0.4em;
+}

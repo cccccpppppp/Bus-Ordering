@@ -33,18 +33,24 @@ Page({
                 sessionid: wx.getStorageSync("sessionid")
               },
               success: res => {
-                wx.setStorageSync("user_info", res.data.data); // 将用户信息存储到本地
+                let user_info = res.data.data;
+                wx.setStorageSync("user_info", user_info); // 将用户信息存储到本地
                 wx.redirectTo({
                   url: './index',
                 });
+              },
+              fail() {
+                wx.showModal({
+                  title: '网络异常',
+                  content: ''
+                })
               }
 
             })
           },
           fail() {
             wx.showModal({
-              title: '登陆异常',
-              content: ''
+              title: '登陆异常'
             })
           }
 
