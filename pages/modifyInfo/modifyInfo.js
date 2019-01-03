@@ -17,7 +17,9 @@ Page({
       content: "你的信息将被修改",
       success: function(res) {
         if (res.confirm) {
-          wx.showLoading();
+          wx.showLoading({
+            title: '加载中',
+          })
           wx.request({
             url: host + "miniprogram/Common/setInfo",
             method: "POST",
@@ -30,6 +32,7 @@ Page({
               if (res.data.status === 0) {
                 wx.hideLoading();
                 wx.showToast({
+                  title:'成功',
                   success: result => {
                     wx.request({
                       url: host + "miniprogram/Common/info",
@@ -43,7 +46,7 @@ Page({
                         prevPage.changeData(res.data.data.type);
                         setTimeout(function() {
                           wx.navigateBack();
-                        }, 2000);
+                        }, 500);
                       }
                     });
                   },
