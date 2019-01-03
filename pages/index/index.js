@@ -33,22 +33,35 @@ Page({
       }
     ]
   },
-
-//   changeData: function(type){
-//     this.setData({
-//       'menu[0].name': dic[type][0],
-//       'menu[0].url': dic[type][1]
-//     })
-//  },
+// 修改信息后转换用户类型
+  changeData: function(type){
+    this.setData({
+      'menu[0].name': dic[type][0],
+      'menu[0].url': dic[type][1]
+    })
+ },
   // 检索本地存储的user_info并根据用户类型选择显示menu的内容
   onLoad: function () {
     let that = this;
     let user_info = wx.getStorageSync("user_info");
-    this.setData({
-      // userType: user_info.type,
-      'menu[0].name': dic[user_info.type][0],
-      'menu[0].url': dic[user_info.type][1]
-    });
+    if(user_info.type==='司机') {
+      this.setData({
+        'menu[0].name': dic[user_info.type][0],
+        'menu[0].url': dic[user_info.type][1],
+        'menu[4]':{
+          name: '添加订单',
+          icon: '../../images/icons/add.png',
+          url: '../driverUrl/add/add'
+        }
+      });
+    }
+    else {
+      this.setData({
+        // userType: user_info.type,
+        'menu[0].name': dic[user_info.type][0],
+        'menu[0].url': dic[user_info.type][1]
+      });
+    }
   },
   onShow: function () {
     let that = this;
