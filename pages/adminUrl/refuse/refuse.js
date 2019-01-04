@@ -29,7 +29,8 @@ Page({
         sessionid: wx.getStorageSync("sessionid"),
         apply_id: that.data.id,
         status: 2, // 审核未通过
-        fail_cause: that.data.input //未通过原因
+        fail_cause: that.data.input, //未通过原因
+        is_can_comment: 0
       },
       success(res) {
         if (res.data.msg == "成功") {
