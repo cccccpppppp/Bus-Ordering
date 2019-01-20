@@ -1,13 +1,19 @@
 <view class="icard">
-    <i-card title="{{myOrder.apply.name}}" extra="{{myOrder.status}}">
+    <i-card title="{{myOrder.apply.name}}" extra="{{statusList[myOrder.status]}}">
         <view slot="content">出发时间：{{myOrder.go_time}}</view>
         <view slot="content">出发地：{{myOrder.start_place}}</view>
         <view slot="content">目的地：{{myOrder.destination_place}}</view>
         <view slot="content">乘车人数：{{myOrder.people_number}}</view>
-        <view slot="content">申请理由：{{myOrder.reason}}</view>
+        <view slot="content">申请事由：{{myOrder.reason}}</view>
         <view wx:if="{{myOrder.driver}}" slot="content">接单司机：{{myOrder.driver.name}}</view>
         <view wx:if="{{myOrder.check}}" slot="content">审核人员：{{myOrder.check.name}}</view>
         <view wx:if="{{myOrder.fail_cause}}" slot="content">拒绝原因：{{myOrder.fail_cause}}</view>
+        <!-- <view wx:if="{{myOrder.check_time}}" slot="content">审核时间：{{myOrder.check_time}}</view> -->
+        <view wx:if="{{myOrder.cancel_cause}}" slot="content">司机取消原因：{{myOrder.cancel_cause}}</view>
+        <!-- <view wx:if="{{myOrder.cancel_time}}" slot="content">取消时间：{{myOrder.cancel_time}}</view> -->
         <view slot="footer">提交时间: {{myOrder.create_time}}</view>
+        <view wx:if="{{myOrder.cancel_time}}" slot="footer">取消时间: {{myOrder.cancel_time}}</view>
+        <view wx:if="{{myOrder.check_time}}" slot="footer">审核时间: {{myOrder.check_time}}</view>
+        <view wx:if="{{myOrder.finish_time}}" slot="footer">完成时间: {{myOrder.finish_time}}</view>
     </i-card>
 </view>

@@ -1,9 +1,9 @@
 const app = getApp();
 let host = app.globalData.host;
 let dic = {
-  '预订人员': ['申请用车', '../costom/loading'],
-  '管理人员': ['待审核','../adminUrl/adminUrl'],
-  '司机': ['待接单','../driverUrl/driverUrl']
+  0: ['申请用车', '../costom/loading'],
+  1: ['待审核','../adminUrl/adminUrl'],
+  2: ['待接单','../driverUrl/driverUrl']
 };
 Page({
   data: {
@@ -33,18 +33,18 @@ Page({
       }
     ]
   },
-// 修改信息后转换用户类型
-  changeData: function(type){
-    this.setData({
-      'menu[0].name': dic[type][0],
-      'menu[0].url': dic[type][1]
-    })
- },
+  // 修改信息后转换用户类型
+//   changeData: function(type){
+//     this.setData({
+//       'menu[0].name': dic[type][0],
+//       'menu[0].url': dic[type][1]
+//     })
+//  },
   // 检索本地存储的user_info并根据用户类型选择显示menu的内容
   onLoad: function () {
     let that = this;
     let user_info = wx.getStorageSync("user_info");
-    if(user_info.type==='司机') {
+    if(user_info.type===2) {
       this.setData({
         'menu[0].name': dic[user_info.type][0],
         'menu[0].url': dic[user_info.type][1],
@@ -67,8 +67,8 @@ Page({
     let that = this;
     let user_info = wx.getStorageSync("user_info");
     let status = 0;
-    if (user_info.type !== '预订人员') {
-      if (user_info === '司机') { status = 1; }
+    if (user_info.type !== 0) {
+      if (user_info.type === 2) { status = 1; }
       wx.request({
         url: host + 'miniprogram/Common/applyCarList',
         data: {
