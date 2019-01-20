@@ -1,5 +1,7 @@
-<i-card title="我的信息">
-    <view slot="content">姓名：{{myInfo.name}}</view>
-    <view slot="content">手机号码：{{myInfo.phone}}</view>
-    <view slot="content">身份：{{myInfo.type}}</view>
-</i-card>
+<view style="margin-top: 10px">
+    <i-card title="我的信息">
+        <view slot="content">姓名：{{myInfo.name}}</view>
+        <view slot="content">手机号码：{{myInfo.phone}}</view>
+        <view slot="content">身份：{{typeList[myInfo.type]}}</view>
+    </i-card>
+</view>

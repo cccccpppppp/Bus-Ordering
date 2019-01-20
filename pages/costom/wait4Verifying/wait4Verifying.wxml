@@ -6,14 +6,16 @@
     <view class="weui-msg__text-area">
       <view class="weui-msg__title">{{msg[msgIndex][1]}}</view>
       <view class="weui-msg__desc">{{msg[msgIndex][2]}}</view>
-      <view wx:if="{{msg !== '审核未通过'}}" class="weui-msg__desc">下拉刷新</view>
+      <view wx:if="{{msgIndex !== 2 && msgIndex !== 5}}" class="weui-msg__desc">下拉刷新</view>
     </view>
     <view class="weui-msg__opr-area">
       <view class="weui-btn-area">
         <button class="weui-btn" type="default" bindtap="navOrder">查看我提交的预定信息</button>
-        <button wx:if="{{msgIndex === '审核通过'}}" class="weui-btn" type="default" bindtap='callDriver'>拨打司机电话</button>
-        <button wx:if="{{msgIndex === '审核未通过'}}" class="weui-btn" type="default" bindtap='toIndex'>返回预定页面</button>
-        <button wx:if="{{msgIndex === '完成'}}" class="weui-btn" type="default" bindtap='toRate'>评价本次行程</button>
+        <picker bindchange="bindPickerChange" value="{{driverListIndex}}" range="{{driverList}}" bindchange="callDriver">
+          <button wx:if="{{[1, 3, 4, 5].includes(msgIndex)}}" class="weui-btn" type="default">拨打司机电话</button>
+        </picker>
+        <button wx:if="{{msgIndex === 2 || msgIndex === 5}}" class="weui-btn" type="default" bindtap='toIndex'>返回预定页面</button>
+        <button wx:if="{{msgIndex === 6}}" class="weui-btn" type="default" bindtap='toRate'>评价本次行程</button>
       </view>
     </view>
   </view>
