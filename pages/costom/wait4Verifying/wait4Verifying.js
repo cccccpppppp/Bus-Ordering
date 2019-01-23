@@ -35,8 +35,12 @@ Page({
 
   callDriver: (e) => {
     let applyCarLately = wx.getStorageSync("applyCarLately");
+    let phoneNums = []
+    for (let driver of applyCarLately.drivers) {
+      phoneNums.push(driver.phone);
+    }
     wx.makePhoneCall({
-      phoneNumber: applyCarLately.driver.phone[e.detail.value]//待确认
+      phoneNumber: phoneNums[e.detail.value]
     });
   },
 
@@ -46,22 +50,34 @@ Page({
       url: "../order/order"
     });
   },
-
+  /**
+   * 更新最近一单信息中申请状态、拒绝理由、取消理由和是否可评论的值
+   * @param {object} applyCarLately 
+   */
+  getItems: function(applyCarLately) {
+    let fail_cause = "拒绝理由：" + applyCarLately.fail_cause;       // 管理员拒绝理由
+    let status = applyCarLately.status;
+    let cancel_cause = "取消理由：" + applyCarLately.cancel_cause;  // 司机取消理由
+    let driverList = [];
+    let is_can_comment = applyCarLately.is_can_comment;
+    // 循环遍历接单司机的手机号码
+    for (let driver of applyCarLately.drivers) {
+      driverList.push(driver.name);
+    }
+    this.setData({
+      msgIndex: status,
+      driverList: driverList,
+      ["msg.[2][2]"]: fail_cause,
+      ["msg.[5][2]"]: cancel_cause,
+      is_can_comment: is_can_comment
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     let applyCarLately = wx.getStorageSync("applyCarLately");
-    let fail_cause = "拒绝理由：" + applyCarLately.fail_cause;       // 管理员拒绝理由
-    let status = applyCarLately.status;
-    let cancel_cause = "取消理由：" + applyCarLately.cancel_cause;  // 司机取消理由
-    let driverList = applyCarLately.driver//待确认
-    this.setData({
-      msgIndex: status,
-      driverList: driverList,
-      ["msg.[2][2]"]: fail_cause,
-      ["msg.[5][2]"]: cancel_cause
-    });
+    this.getItems(applyCarLately);
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -77,18 +93,9 @@ Page({
       method: "GET",
       success: function(res) {
         wx.hideLoading();
-        var data = res.data.data;
-        let fail_cause = "拒绝理由：" + data.fail_cause;
-        let cancel_cause = "取消理由：" + data.cancel_cause;
-        let driverList = data.driver//待确认
-        wx.setStorageSync("applyCarLately", data); // 将最近一单订单的data存储到本地
-        that.setData({
-          msgIndex: data.status,
-          is_can_comment: data.is_can_comment,
-          driverList: driverList,
-          ["msg.[2][2]"]: fail_cause,
-          ["msg.[5][2]"]: cancel_cause,
-        });
+        let applyCarLately = res.data.data;
+        that.getItems(applyCarLately);
+        wx.setStorageSync("applyCarLately", applyCarLately); // 将最近一单订单的data存储到本地
       },
       fail: function(res) {
         wx.hideLoading();
