@@ -37,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -55,7 +55,7 @@
 					"id": 2,
 					"name": "同意界面",
 					"pathName": "pages/adminUrl/agree/agree",
-					"query": "id=137"
+					"query": "id=166"
 				},
 				{
 					"id": -1,
@@ -84,7 +84,8 @@
 				{
 					"id": -1,
 					"name": "司机",
-					"pathName": "pages/driverUrl/add/add"
+					"pathName": "pages/driverUrl/add/add",
+					"query": ""
 				}
 			]
 		}

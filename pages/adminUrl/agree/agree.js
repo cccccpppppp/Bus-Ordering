@@ -8,10 +8,9 @@ Page({
    */
   data: {
     id: "1",
-    drive: [],
+    ifload:true,
     is_can_comment: 1,
     drive_data:[],
-    drive_name : "请选择司机"
   },
 
   /**
@@ -20,6 +19,7 @@ Page({
   onLoad: function(options) {
     var that = this;
     this.setData({
+      ifload:true,
       id: options.id
     })
     itemList = [];
@@ -29,41 +29,35 @@ Page({
         sessionid: wx.getStorageSync("sessionid"),
       },
       success(res) {
-        that.setData({
-          drive_data : res.data.data
-        })
-        console.log(that.data.drive_data)
-        for(var i = 0;i < that.data.drive_data.length;i++)
+        var select = [];
+        select = res.data.data
+        for (var i in select)
         {
-          itemList = itemList.concat(res.data.data[i].name);
+          select[i].checked = false
         }
+        that.setData({
+          drive_data : select,
+          ifload:false,
+        })
       }
     })
   },
 
   //-------------选择司机事件--------------//
-  open: function() {
+  checkboxChange: function(e) {
     var that = this;
-    wx.showActionSheet({
-      itemList: itemList,
-      success: function(res) {
-        if (!res.cancel) {
-          // that.setData({
-          //   drive : [],
-          //   //drive: that.data.drive_data[res.tapIndex].phone,
-          //   drive: that.data.drive.concat(that.data.drive_data[res.tapIndex].phone),
-          //   drive_name: that.data.drive_data[res.tapIndex].name
-          // })
-          that.setData({
-            drive:[]
-          })
-          that.setData({
-            drive: that.data.drive.concat(that.data.drive_data[res.tapIndex].phone),
-            drive_name: that.data.drive_data[res.tapIndex].name
-          })
-        }
-      }
-    });
+    var select = that.data.drive_data
+    console.log(e)
+    for (var i in select) {
+      select[i].checked = false
+    }
+    for (var i in e.detail.value)
+    {
+      select[e.detail.value[i]].checked = true
+    }
+    that.setData({
+      drive_data : select
+    })
   },
 
   //-----------------点击开关事件---------------//
@@ -83,7 +77,17 @@ Page({
   //提交表单
   post() {
     var that = this
-    if (that.data.drive.length == 0) {
+    var ifnull = true;
+    var drivelist = [];
+    for(var i in that.data.drive_data)
+    {
+      if(that.data.drive_data[i].checked==true)
+      {
+        drivelist = drivelist.concat(that.data.drive_data[i].phone)
+        ifnull = false
+      }
+    }
+    if (ifnull == true) {
       wx.showToast({
         title: '请至少选择一个司机',
         icon: 'none',
@@ -96,7 +100,7 @@ Page({
           sessionid: wx.getStorageSync("sessionid"),
           apply_id: that.data.id,
           status: 1,//审核通过
-          driverPhonList: that.data.drive,
+          driverPhonList: drivelist,
           is_can_comment: that.data.is_can_comment
         },
         method : "GET",
