@@ -45,12 +45,13 @@ Page({
         sessionid: wx.getStorageSync("sessionid"),
       },
       success(res) {
-        if (res.data.data.type == "管理人员" || res.data.data.type == "预订人员") {
+        if (res.data.data.type == 0 || res.data.data.type == 1) {
           that.getunfinish(1);
           that.setData({
             tabs: ["未完成订单", "已完成订单", "未通过订单"]
           })
-        } else if (res.data.data.type == "司机") {
+        } else if (res.data.data.type == 2) {
+          that.getunfinish(3);
           that.getunfinish(4);
           that.setData({
             type: "司机"
@@ -117,7 +118,7 @@ Page({
         sessionid: wx.getStorageSync("sessionid"),
         page: page,
         number: 10,
-        status: 3
+        status: 6
       },
       success(res) {
         that.setData({
@@ -240,6 +241,16 @@ Page({
           })
         }
       }
+    })
+  },
+  // 取消订单
+  cancel(e)
+  {
+    var that = this;
+    var id = e.target.id;
+    unpage = 1;
+    wx.navigateTo({
+      url: 'cancel/cancel?id=' + id,
     })
   },
 

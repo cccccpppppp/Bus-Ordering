@@ -54,6 +54,7 @@
                     </view>
 
                   <view class="weui-form-preview__ft" wx:else>
+                      <view id='{{item.apply_id}}' bindtap='cancel' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">取消订单</view>
                       <view id='{{item.apply_id}}' bindtap='finish' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">订单已完成</view>
                   </view>
 
