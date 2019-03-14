@@ -46,14 +46,14 @@ Page({
       },
       success(res) {
         if (res.data.data.type == 0 || res.data.data.type == 1) {
+          that.getunfinish(0);
           that.getunfinish(1);
+          that.getunfinish(3);
+          that.getunfinish(4);
           that.setData({
             tabs: ["未完成订单", "已完成订单", "未通过订单"]
           })
         } else if (res.data.data.type == 2) {
-          that.getunfinish(0);
-          that.getunfinish(1);
-          that.getunfinish(3);
           that.getunfinish(4);
           that.setData({
             type: "司机"
