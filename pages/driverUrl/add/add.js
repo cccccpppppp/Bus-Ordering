@@ -89,9 +89,15 @@ Page({
         success: res => {
           let status = res.data.status;
           if (status == 0 || status == 1) {
-            wx.redirectTo({
-              url: "./loading"
+            wx.showToast({
+              title: res.data.msg,
+              icon: "success"
             });
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 3000);
           } else {
             wx.showToast({
               title: res.data.msg,
