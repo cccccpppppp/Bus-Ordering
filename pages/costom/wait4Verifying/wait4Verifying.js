@@ -1,5 +1,6 @@
 const app = getApp();
-var host = app.globalData.host;
+const host = app.globalData.host;
+let sesionid = wx.getStorageSync('sessionid');
 // let fail_cause = '拒绝理由:' + wx.getStorageSync('applyCarLately').fail_cause;
 Page({
   /**
@@ -21,18 +22,30 @@ Page({
     is_can_comment: 0
   },
 
+  // 返回预车页面
   toIndex: () => {
     wx.redirectTo({
       url: "../../costom/costom"
     });
   },
 
+  // 评价
   toRate: function() {
     wx.navigateTo({
       url: "../rate/rate"
     });
   },
 
+  // 取消订单
+  cancel: function() {
+    wx.showLoading({
+      title: '发送中',
+    })
+    // wx.request({
+    //   url: host + 'miniprogram/Common/cancel',
+    // })
+  },
+  //拨打司机电话
   callDriver: (e) => {
     let applyCarLately = wx.getStorageSync("applyCarLately");
     let phoneNums = []
@@ -72,6 +85,12 @@ Page({
       is_can_comment: is_can_comment
     });
   },
+  // 上一单申请是完成状态时点击“我知道了”将hasRead值存储在本地，并跳转到首页
+  getIt: function() {
+    let hasRead = 1;
+    wx.setStorageSync("hasRead", hasRead);
+    this.toIndex();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -105,6 +124,8 @@ Page({
         });
       }
     });
+    
+    // 停止下拉刷新
     wx.stopPullDownRefresh();
   }
 });

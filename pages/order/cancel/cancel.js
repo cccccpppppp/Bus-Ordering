@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    counter: 0,
     input: "",
     id: "",
     t_text: 0

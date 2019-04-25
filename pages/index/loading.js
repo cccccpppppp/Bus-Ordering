@@ -25,12 +25,13 @@ Page({
           },
           method: "POST",
           success(res) {
-            wx.setStorageSync("sessionid", res.data.data.sessionid); // 将sessionid存储到本地
+            let sessionid = res.data.data.sessionid
+            wx.setStorageSync("sessionid", sessionid); // 将sessionid存储到本地
             //获取用户类型
             wx.request({
               url: host + 'miniprogram/Common/info',
               data: {
-                sessionid: wx.getStorageSync("sessionid")
+                sessionid: sessionid
               },
               success: res => {
                 let user_info = res.data.data;
@@ -42,7 +43,6 @@ Page({
               fail() {
                 wx.showModal({
                   title: '网络异常',
-                  content: ''
                 })
               }
 

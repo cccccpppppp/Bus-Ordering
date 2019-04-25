@@ -55,6 +55,7 @@ Page({
           })
         } else if (res.data.data.type == 2) {
           that.getunfinish(4);
+          that.getunfinish(3);
           that.setData({
             type: "司机"
           })

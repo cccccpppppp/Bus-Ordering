@@ -170,10 +170,11 @@ Page({
       showModal(error);
       return false;
     } else {
+      let sessionid = wx.getStorageSync("sessionid");
       wx.request({
         url: host + "miniprogram/Apply_car/applyCar",
         data: {
-          sessionid: wx.getStorageSync("sessionid"),
+          sessionid: sessionid,
           name: name,
           phone: phone,
           people_number: people_number,
@@ -201,7 +202,6 @@ Page({
         fail() {
           wx.showModal({
             title: '登陆异常',
-            content: ''
           })
         }
       });

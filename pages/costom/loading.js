@@ -9,10 +9,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let sessionid = wx.getStorageSync("sessionid");
     wx.request({
       url: host + 'miniprogram/Apply_car/applyCarLately',
       data: {
-        sessionid: wx.getStorageSync("sessionid")
+        sessionid: sessionid
       },
       success(res) {
         let data = res.data;

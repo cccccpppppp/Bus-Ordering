@@ -17,6 +17,7 @@ Page({
       content: "你的信息将被修改",
       success: function(res) {
         if (res.confirm) {
+          let sessionid = wx.getStorageSync("sessionid");
           wx.showLoading({
             title: '加载中',
           })
@@ -24,7 +25,7 @@ Page({
             url: host + "miniprogram/Common/setInfo",
             method: "POST",
             data: {
-              sessionid: wx.getStorageSync("sessionid"),
+              sessionid: sessionid,
               name: name,
               phone: phone
             },
@@ -37,7 +38,7 @@ Page({
                     wx.request({
                       url: host + "miniprogram/Common/info",
                       data: {
-                        sessionid: wx.getStorageSync("sessionid")
+                        sessionid: sessionid
                       },
                       success: res => {
                         let pages = getCurrentPages(); //获取页面栈

@@ -14,7 +14,7 @@
         <picker bindchange="bindPickerChange" value="{{driverListIndex}}" range="{{driverList}}" bindchange="callDriver" class="weui-btn">
           <button wx:if="{{msgIndex === 1 || msgIndex === 3 || msgIndex === 4}}" type="default">拨打司机电话</button>
         </picker>
-        <button wx:if="{{msgIndex === 2 || msgIndex === 5 || msgIndex === 6}}" class="weui-btn" type="default" bindtap='toIndex'>返回预定页面</button>
-        <button wx:if="{{msgIndex === 6 && is_can_comment === 1}}" class="weui-btn" type="default" bindtap='toRate'>评价本次行程</button>
+        <button wx:if="{{msgIndex === 2 || msgIndex === 5 || msgIndex === 6}}" class="weui-btn" type="default" bindtap='getIt'>返回预定页面</button>
+        <button wx:if="{{msgIndex === 6 && is_can_comment === 1}}" class="weui-btn" type="primary" bindtap='toRate'>评价本次行程</button>
       </view>
 </view>
