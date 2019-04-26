@@ -58,6 +58,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.setData({
+      ifload: false,
+      sessionid: app.globalData.sessionid
+    });
     id = options.id;
     var that = this;
     this.getusertype();
@@ -67,7 +71,7 @@ Page({
         "Content-Type": "application/json; charset=utf-8"
       },
       data: {
-        sessionid: wx.getStorageSync("sessionid"),
+        sessionid: that.data.sessionid,
         id: id
       },
       success(res) {
@@ -85,9 +89,7 @@ Page({
         }
       }
     })
-    this.setData({
-      ifload: false
-    })
+    
   },
   return_last(){
     wx.navigateBack({

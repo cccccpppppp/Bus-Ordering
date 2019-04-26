@@ -9,7 +9,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let sessionid = wx.getStorageSync("sessionid");
+    let sessionid = app.globalData.sessionid;
     wx.request({
       url: host + 'miniprogram/Apply_car/applyCarLately',
       data: {
@@ -17,9 +17,10 @@ Page({
       },
       success(res) {
         let data = res.data;
-        wx.setStorageSync('applyCarLately', data.data);    // 将最近一单数据存储到本地
+        let applyCarLately = data.data;
+        wx.setStorageSync('applyCarLately', applyCarLately);    // 将最近一单数据存储到本地
         if(data.status == 0) {
-          if((data.data.status === '完成' && data.data.is_can_comment == 0) || (data.data.status ==='完成' && data.data.comment !== null)) {
+          if ((applyCarLately.status === '完成' && applyCarLately.is_can_comment == 0) || (applyCarLately.status === '完成' && applyCarLately.comment !== null)) {
             wx.redirectTo({
               url: './costom',
             });

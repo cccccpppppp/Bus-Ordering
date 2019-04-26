@@ -63,8 +63,10 @@ Page({
       });
     }
   },
+  // 如果有新订单hasNewOrder为true，显示小红点
   onShow: function () {
-    let that = this;
+    let sessionid = app.globalData.sessionid;
+    var that = this;
     let user_info = wx.getStorageSync("user_info");
     let status = 0;
     if (user_info.type !== 0) {
@@ -72,7 +74,7 @@ Page({
       wx.request({
         url: host + 'miniprogram/Common/applyCarList',
         data: {
-          sessionid: wx.getStorageSync("sessionid"),
+          sessionid: sessionid,
           status: status
         },
         method: 'GET',

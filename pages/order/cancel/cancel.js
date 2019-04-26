@@ -18,7 +18,8 @@ Page({
   onLoad: function (options) {
     var that = this
     that.setData({
-      id: options.id
+      id: options.id,
+      sessionid: app.globalData.sessionid
     })
   },
   back(e) {
@@ -27,7 +28,7 @@ Page({
     wx.request({
       url: host + "miniprogram/Common/cancel",
       data: {
-        sessionid: wx.getStorageSync("sessionid"),
+        sessionid: that.data.sessionid,
         apply_id: that.data.id,
         cancel_cause: that.data.input, //未通过原因
       },

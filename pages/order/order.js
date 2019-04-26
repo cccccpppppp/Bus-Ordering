@@ -36,13 +36,15 @@ Page({
     unpage = 1;
     page = 1;
     nopage = 1;
-
+    this.setData({
+      sessionid: app.globalData.sessionid
+    });
 
     //获取用户类型
     wx.request({
       url: host + 'miniprogram/Common/info',
       data: {
-        sessionid: wx.getStorageSync("sessionid"),
+        sessionid: that.data.sessionid,
       },
       success(res) {
         if (res.data.data.type == 0 || res.data.data.type == 1) {
@@ -81,7 +83,7 @@ Page({
     wx.request({
       url: host + 'miniprogram/Common/applyCarList',
       data: {
-        sessionid: wx.getStorageSync("sessionid"),
+        sessionid: that.data.sessionid,
         page: unpage,
         number: 10,
         status: status
@@ -118,7 +120,7 @@ Page({
     wx.request({
       url: host + 'miniprogram/Common/applyCarList',
       data: {
-        sessionid: wx.getStorageSync("sessionid"),
+        sessionid: that.data.sessionid,
         page: page,
         number: 10,
         status: 6
@@ -154,7 +156,7 @@ Page({
     wx.request({
       url: host + 'miniprogram/Common/applyCarList',
       data: {
-        sessionid: wx.getStorageSync("sessionid"),
+        sessionid: that.data.sessionid,
         page: nopage,
         number: 10,
         status: 2
@@ -219,7 +221,7 @@ Page({
     wx.request({
       url: host + 'miniprogram/Driver/finish',
       data: {
-        sessionid: wx.getStorageSync("sessionid"),
+        sessionid: that.data.sessionid,
         apply_id: id,
       },
       success(res)

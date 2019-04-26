@@ -16,6 +16,7 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
+      sessionid: app.globalData.sessionid,
       id: options.id
     });
   },
@@ -26,7 +27,7 @@ Page({
     wx.request({
       url: host + "miniprogram/Admin/check",
       data: {
-        sessionid: wx.getStorageSync("sessionid"),
+        sessionid: that.data.sessionid,
         apply_id: that.data.id,
         status: 2, // 审核未通过
         fail_cause: that.data.input, //未通过原因

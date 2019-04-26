@@ -10,14 +10,14 @@ Page({
       phone: ''
     }
   },
-  modifyInfo: e => {
+  modifyInfo: function(e) {
+    let that = this;
     let name = e.detail.value.name;
     let phone = e.detail.value.phone;
     wx.showModal({
       content: "你的信息将被修改",
       success: function(res) {
         if (res.confirm) {
-          let sessionid = wx.getStorageSync("sessionid");
           wx.showLoading({
             title: '加载中',
           })
@@ -25,7 +25,7 @@ Page({
             url: host + "miniprogram/Common/setInfo",
             method: "POST",
             data: {
-              sessionid: sessionid,
+              sessionid: that.data.sessionid,
               name: name,
               phone: phone
             },
@@ -38,7 +38,7 @@ Page({
                     wx.request({
                       url: host + "miniprogram/Common/info",
                       data: {
-                        sessionid: sessionid
+                        sessionid: that.data.sessionid
                       },
                       success: res => {
                         let pages = getCurrentPages(); //获取页面栈
@@ -74,7 +74,8 @@ Page({
 
   onLoad: function (options) {
     this.setData({
-      myInfo: wx.getStorageSync('user_info')
+      myInfo: wx.getStorageSync('user_info'),
+      sessionid: app.globalData.sessionid
     })
   },
 });

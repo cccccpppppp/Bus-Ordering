@@ -20,13 +20,14 @@ Page({
     var that = this;
     this.setData({
       ifload:true,
-      id: options.id
+      id: options.id,
+      sessionid: app.globalData.sessionid
     })
     itemList = [];
     wx.request({
       url: host + 'miniprogram/Admin/getDriverInfoList',
       data: {
-        sessionid: wx.getStorageSync("sessionid"),
+        sessionid: that.globalData.sessionid,
       },
       success(res) {
         var select = [];
@@ -97,7 +98,7 @@ Page({
       wx.request({
         url: host + 'miniprogram/Admin/check',
         data: {
-          sessionid: wx.getStorageSync("sessionid"),
+          sessionid: that.data.sessionid,
           apply_id: that.data.id,
           status: 1,//审核通过
           driverPhonList: drivelist,

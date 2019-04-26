@@ -17,7 +17,6 @@ Page({
     //获取code并请求获得sessionid存入本地
     wx.login({
       success(res) {
-        // console.log(res.code);
         wx.request({
           url: host + "miniprogram/Common/login",
           data: {
@@ -26,7 +25,8 @@ Page({
           method: "POST",
           success(res) {
             let sessionid = res.data.data.sessionid
-            wx.setStorageSync("sessionid", sessionid); // 将sessionid存储到本地
+            // wx.setStorageSync("sessionid", sessionid); // 将sessionid存储到本地
+            app.globalData.sessionid = sessionid;
             //获取用户类型
             wx.request({
               url: host + 'miniprogram/Common/info',

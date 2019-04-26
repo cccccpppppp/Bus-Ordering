@@ -29,6 +29,7 @@ Page({
 
   onLoad: function (options) {
     this.setData({
+      sessionid: app.globalData.sessionid,
       myInfo: wx.getStorageSync("user_info"),
       date: formatTimeNow.formatedDate,
       time: formatTimeNow.formatedTime,
@@ -78,7 +79,7 @@ Page({
       wx.request({
         url: host + "miniprogram/Driver/add",
         data: {
-          sessionid: wx.getStorageSync("sessionid"),
+          sessionid: that.data.sessionid,
           people_number: people_number,
           start_place: start_place,
           destination_place: destination_place,

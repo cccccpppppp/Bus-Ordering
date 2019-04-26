@@ -1,7 +1,6 @@
 const app = getApp();
 var host = app.globalData.host;
 var page = 1;
-
 Page({
   data: {
     ifload : true,//是否加载界面
@@ -9,6 +8,7 @@ Page({
     hadmore: true,//是否有更多数据
     ifload_more : false,
     uncheck: [],
+    sessionid: app.globalData.sessionid
   },
 
   //发送请求获取数据
@@ -17,7 +17,7 @@ Page({
     wx.request({
       url: host + 'miniprogram/Common/applyCarList',
       data: {
-        sessionid: wx.getStorageSync("sessionid"),
+        sessionid: that.data.sessionid,
         page: page,
         number: 10,
         status: 0
@@ -53,13 +53,17 @@ Page({
   },
 
   //生命周期函数--监听页面加载
-  onShow: function(options) {
+  onLoad: function(options) {
     page = 1;
     this.setData({
+      sessionid: app.globalData.sessionid,
       uncheck : [],
       ifload : true,
     })
     this.getdata();
+  },
+  onShow: function(options) {
+    
   },
 
   //页面下拉到底部

@@ -170,7 +170,7 @@ Page({
       showModal(error);
       return false;
     } else {
-      let sessionid = wx.getStorageSync("sessionid");
+      let sessionid = app.globalData.sessionid;
       wx.request({
         url: host + "miniprogram/Apply_car/applyCar",
         data: {

@@ -1,6 +1,5 @@
 const app = getApp();
 const host = app.globalData.host;
-let sesionid = wx.getStorageSync('sessionid');
 // let fail_cause = '拒绝理由:' + wx.getStorageSync('applyCarLately').fail_cause;
 Page({
   /**
@@ -95,6 +94,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.setData({sessionid: app.globalData.sessionid});
     let applyCarLately = wx.getStorageSync("applyCarLately");
     this.getItems(applyCarLately);
   },
@@ -107,7 +107,7 @@ Page({
     wx.request({
       url: host + "miniprogram/Apply_car/applyCarLately",
       data: {
-        sessionid: wx.getStorageSync("sessionid")
+        sessionid: that.data.sessionid
       },
       method: "GET",
       success: function(res) {

@@ -13,6 +13,10 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  onLoad: function() {
+    this.setData({sessionid: app.globalData.sessionid});
+  },
+
   onShow: function (options) {
     page = 1;
     var that = this;
@@ -25,7 +29,7 @@ Page({
     wx.request({
       url: host + 'miniprogram/Common/applyCarList',
       data: {
-        sessionid: wx.getStorageSync("sessionid"),
+        sessionid: that.data.sessionid,
         page: page,
         number: 10,
         status: 1
@@ -66,7 +70,7 @@ Page({
     wx.request({
       url: host + 'miniprogram/Driver/accept',
       data:{
-        sessionid: wx.getStorageSync("sessionid"),
+        sessionid: that.data.sessionid,
         apply_id : id
       },
       success(res)

@@ -85,12 +85,13 @@ Page({
 
   //提交评价
   submitRate: function (e) {
+    let that = this;
     let value = e.detail.value;
     let applyCarLately = wx.getStorageSync('applyCarLately');
     let apply_id = applyCarLately.apply_id;
     let mark = this.data.starIndex * 2;
     let basicRate = value.basicRate; // 获取基本评价的内容(Array)
-    console.log(basicRate);
+    // console.log(basicRate);
     let allBRate = ['0', '1', '2', '3', '4', '5', '6']; // 所有基本评价的内容
     // 将basicRate转化为['0', '1', '0', '1']的形式
     basicRate = allBRate.map(function (x) {
@@ -113,7 +114,7 @@ Page({
       url: host + 'miniprogram/Apply_car/comment',
       method: 'POST',
       data: {
-        sessionid: wx.getStorageSync("sessionid"),
+        sessionid: that.data.sessionid,
         apply_id: apply_id,
         mark: mark,
         is_familiar_route: is_familiar_route,
@@ -159,6 +160,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.setData({
+      sessionid: app.globalData.sessionid
+    });
   }
 })
