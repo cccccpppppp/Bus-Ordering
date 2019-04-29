@@ -27,7 +27,7 @@ Page({
     wx.request({
       url: host + 'miniprogram/Admin/getDriverInfoList',
       data: {
-        sessionid: that.globalData.sessionid,
+        sessionid: that.data.sessionid,
       },
       success(res) {
         var select = [];
