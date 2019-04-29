@@ -54,16 +54,15 @@ Page({
 
   //生命周期函数--监听页面加载
   onLoad: function(options) {
+    this.data.sessionid = app.globalData.sessionid;
+  },
+  onShow: function(options) {
     page = 1;
     this.setData({
-      sessionid: app.globalData.sessionid,
       uncheck : [],
       ifload : true,
     })
     this.getdata();
-  },
-  onShow: function(options) {
-    
   },
 
   //页面下拉到底部

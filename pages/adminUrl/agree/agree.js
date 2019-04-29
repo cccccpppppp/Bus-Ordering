@@ -18,16 +18,16 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
+    this.data.sessionid = app.globalData.sessionid;
     this.setData({
       ifload:true,
       id: options.id,
-      sessionid: app.globalData.sessionid
     })
     itemList = [];
     wx.request({
       url: host + 'miniprogram/Admin/getDriverInfoList',
       data: {
-        sessionid: that.globalData.sessionid,
+        sessionid: that.data.sessionid,
       },
       success(res) {
         var select = [];

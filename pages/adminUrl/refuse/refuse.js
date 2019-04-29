@@ -8,7 +8,7 @@ Page({
   data: {
     input: "",
     id: "",
-    t_text: 0
+    counter: 0
   },
 
   /**
