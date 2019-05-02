@@ -56,6 +56,7 @@ Page({
             tabs: ["未完成订单", "已完成订单", "未通过订单"]
           })
         } else if (res.data.data.type == 2) {
+          that.getunfinish(0);
           that.getunfinish(4);
           that.getunfinish(3);
           that.setData({
