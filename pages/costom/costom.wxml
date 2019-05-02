@@ -9,18 +9,20 @@
             <view class="weui-label">出发地</view>
           </view>
           <view class="weui-cell__bd">
-              <view class="weui-input my-location" bindtap="chooseStartAdd">
-                <input class="weui-input" name='start_place' value='{{start_place}}'/>
+              <view class="weui-input my-location">
+                <input class="weui-input" name='start_place' value='{{start_place}}' />
               </view>
           </view>
+          <button class="chooseLocation" bindtap="chooseStartAdd"><image class="btnImg" src="../../images/icons/location.svg" /></button>
         </view>
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
             <view class="weui-label">目的地</view>
           </view>
-          <view class="weui-cell__bd" bindtap='chooseDestinationAdd'>
-            <input class="weui-input" name='destination_place' value='{{destination_place}}'/>
+          <view class="weui-cell__bd">
+            <input class="weui-input" name='destination_place' value='{{destination_place}}' />
           </view>
+          <button class="chooseLocation" bindtap="chooseDestinationAdd"><image class="btnImg" src="../../images/icons/location.svg" /></button>
         </view>
       </view>
     </view>
