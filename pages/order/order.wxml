@@ -44,8 +44,12 @@
                       <view class="weui-form-preview__value">{{item.drivers[0].name}}</view>
                     </view>
                     <view wx:else class="weui-form-preview__item">
-                      <view class="weui-form-preview__label">申请人</view>
+                      <view class="weui-form-preview__label">乘车人</view>
                       <view class="weui-form-preview__value">{{item.name}}</view>
+                    </view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">申请人</view>
+                      <view class="weui-form-preview__value">{{item.apply.name}}</view>
                     </view>
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">发车时间</view>
@@ -56,10 +60,16 @@
                   <view class="weui-form-preview__ft" wx:if="{{type!='司机'}}">
                       <navigator url="../deorder/deorder?id={{item.apply_id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">详细信息</navigator>
                     </view>
-
+              
                   <view class="weui-form-preview__ft" wx:else>
+                  <navigator url="../deorder/deorder?id={{item.apply_id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">详细信息</navigator>
+                      <view wx:if="{{item.type==1}}">
+                      
+                      </view>
+                      <view wx:else>
                       <view id='{{item.apply_id}}' bindtap='cancel' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">取消订单</view>
                       <view id='{{item.apply_id}}' bindtap='finish' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">订单已完成</view>
+                      </view>
                   </view>
 
                   <!-- <view class="weui-loadmore">
@@ -124,8 +134,12 @@
                       <view class="weui-form-preview__value">{{item.drivers[0].name}}</view>
                     </view>
                     <view wx:else class="weui-form-preview__item">
-                      <view class="weui-form-preview__label">申请人</view>
+                      <view class="weui-form-preview__label">乘车人</view>
                       <view class="weui-form-preview__value">{{item.name}}</view>
+                    </view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">申请人</view>
+                      <view class="weui-form-preview__value">{{item.apply.name}}</view>
                     </view>
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">发车时间</view>
@@ -194,8 +208,12 @@
                       <view class="weui-form-preview__value">{{item.drivers[0].name}}</view>
                     </view>
                     <view wx:else class="weui-form-preview__item">
-                      <view class="weui-form-preview__label">申请人</view>
+                      <view class="weui-form-preview__label">乘车人</view>
                       <view class="weui-form-preview__value">{{item.name}}</view>
+                    </view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">申请人</view>
+                      <view class="weui-form-preview__value">{{item.apply.name}}</view>
                     </view>
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">发车时间</view>
