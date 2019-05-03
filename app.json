@@ -23,5 +23,6 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "订车系统",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

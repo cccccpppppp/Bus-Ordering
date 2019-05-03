@@ -1,8 +1,15 @@
+var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const app = getApp();
 var host = app.globalData.host;
+var unpage = 1;
+var page = 1;
+var nopage = 1;
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    tabs: ['未完成', '已完成'],
     ifload: true, //是否加载界面
     hadundata: true, //是否有数据
     hadfinishdata: true,
@@ -15,15 +22,24 @@ Page({
     unfinish: [], //未完成订单
     finish: [], //已完成订单
     notpass: [], //未通过订单
-    unpage: 1,
-    page: 1,
-    nopage: 1,
-    tabs: ["未完成订单", "已完成订单", "未通过订单"],
-    current: '0'
+    tabs: ["未完成订单", "已完成订单"],
+    activeIndex: 0,
+    sliderOffset: 0,
+    sliderLeft: 0
   },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
   onLoad: function(options) {
-    this.data.sessionid = app.globalData.sessionid;
     var that = this;
+    unpage = 1;
+    page = 1;
+    nopage = 1;
+    this.setData({
+      sessionid: app.globalData.sessionid
+    });
+
     //获取用户类型
     wx.request({
       url: host + 'miniprogram/Common/info',
@@ -53,13 +69,17 @@ Page({
         })
       }
     }) //获取用户类型
+
+
     this.getfinish();
     this.getnopass();
   },
+
+
+
   //获取未完成订单
   getunfinish(status) {
     var that = this;
-    let unpage = this.data.unpage;
     //请求
     wx.request({
       url: host + 'miniprogram/Common/applyCarList',
@@ -92,10 +112,11 @@ Page({
       },
     })
   },
+
+
   //获取已完成订单
   getfinish() {
     var that = this;
-    let page = this.data.page;
     //请求
     wx.request({
       url: host + 'miniprogram/Common/applyCarList',
@@ -128,10 +149,10 @@ Page({
       },
     })
   },
+
   //获取未通过订单
   getnopass() {
     var that = this;
-    let nopage = this.data.nopage;
     //请求
     wx.request({
       url: host + 'miniprogram/Common/applyCarList',
@@ -164,6 +185,7 @@ Page({
       },
     })
   },
+
   onReachBottom() {
     var that = this;
     that.setData({
@@ -191,11 +213,12 @@ Page({
       ifload_more: false
     })
   },
+
   //点击订单已完成
   finish(e) {
     var id = e.target.id;
     var that = this;
-    // unpage = 1;
+    unpage = 1;
     wx.request({
       url: host + 'miniprogram/Driver/finish',
       data: {
@@ -231,17 +254,18 @@ Page({
   {
     var that = this;
     var id = e.target.id;
-    // unpage = 1;
+    unpage = 1;
     wx.navigateTo({
       url: 'cancel/cancel?id=' + id,
     })
   },
-  handleChange({
-    detail
-  }) {
+
+  //选项卡点击切换函数
+  tabClick: function(e) {
     this.setData({
-      current: detail.key
+      sliderOffset: e.currentTarget.offsetLeft,
+      activeIndex: e.currentTarget.id
     });
-  },
+  }
 
 })

@@ -20,7 +20,7 @@ Page({
         let applyCarLately = data.data;
         wx.setStorageSync('applyCarLately', applyCarLately);    // 将最近一单数据存储到本地
         if(data.status == 0) {
-          if ((applyCarLately.status === '完成' && applyCarLately.is_can_comment == 0) || (applyCarLately.status === '完成' && applyCarLately.comment !== null)) {
+          if ((applyCarLately.status === 6 && applyCarLately.is_can_comment) || (applyCarLately.status === 6 && applyCarLately.comment !== null)) {
             wx.redirectTo({
               url: './costom',
             });
