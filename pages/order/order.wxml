@@ -8,12 +8,17 @@
 </i-tabs>
 <view class="unfinished" wx:if="{{current === '0'}}">
   <!-- 未完成选项卡 -->
-  <view wx:if="{{ifload}}">
+  <!-- <view wx:if="{{ifload}}">
     <view class="weui-loadmore">
       <view class="weui-loading"></view>
       <view class="weui-loadmore__tips">正在加载</view>
     </view>
-  </view>
+  </view> -->
+  <!-- <i-spin size="large" fix wx:if="{{1}}"></i-spin> -->
+  <i-spin custom wx:if="{{ifload}}">
+    <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+    <view>加载中...</view>
+  </i-spin>
   <view wx:else>
     <view wx:if="{{hadundata}}">
       <view wx:for="{{unfinish}}" wx:key="apply_id">
@@ -73,16 +78,20 @@
       </view>
       <!-- 加载 -->
       <view wx:if="{{ifload_more}}">
-        <view class="weui-loadmore">
+        <!-- <view class="weui-loadmore">
           <view class="weui-loading"></view>
           <view class="weui-loadmore__tips">正在加载更多</view>
-        </view>
+        </view> -->
+        <i-spin custom>
+          <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+        </i-spin>
       </view>
       <!-- 没有更多 -->
-      <view wx:if="{{hadunmore == false}}">
-        <view class="weui-loadmore weui-loadmore_line">
+      <view wx:if="{{!hadunmore}}">
+        <!-- <view class="weui-loadmore weui-loadmore_line">
           <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多了哦</view>
-        </view>
+        </view> -->
+        <i-divider content="加载已经完成,没有其他数据" color="#2d8cf0" lineColor="#2d8cf0"></i-divider>
       </view>
     </view>
     <view wx:else>
@@ -92,12 +101,16 @@
 </view>
 <view class="finished" wx:if="{{current === '1'}}">
   <!-- 已完成选项卡 -->
-  <view wx:if="{{ifload}}">
+  <!-- <view wx:if="{{ifload}}">
     <view class="weui-loadmore">
       <view class="weui-loading"></view>
       <view class="weui-loadmore__tips">正在加载</view>
     </view>
-  </view>
+  </view> -->
+  <i-spin custom wx:if="{{ifload}}">
+    <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+    <view>加载中...</view>
+  </i-spin>
   <view wx:else>
     <view wx:if="{{hadfinishdata}}">
       <view wx:for="{{finish}}" wx:key="id">
@@ -139,16 +152,20 @@
       </view>
       <!-- 加载 -->
       <view wx:if="{{ifload_more}}">
-        <view class="weui-loadmore">
+        <!-- <view class="weui-loadmore">
           <view class="weui-loading"></view>
           <view class="weui-loadmore__tips">正在加载更多</view>
-        </view>
+        </view> -->
+        <i-spin custom>
+          <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+        </i-spin>
       </view>
       <!-- 没有更多 -->
-      <view wx:if="{{hadfinishmore == false}}">
-        <view class="weui-loadmore weui-loadmore_line">
+      <view wx:if="{{!hadunmore}}">
+        <!-- <view class="weui-loadmore weui-loadmore_line">
           <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多了哦</view>
-        </view>
+        </view> -->
+        <i-divider content="加载已经完成,没有其他数据" color="#2d8cf0" lineColor="#2d8cf0"></i-divider>
       </view>
     </view>
     <view wx:else>
@@ -157,12 +174,16 @@
   </view>
 </view>
 <view class="cancled" wx:if="{{current === '2'}}">
-  <view wx:if="{{ifload}}">
+  <!-- <view wx:if="{{ifload}}">
     <view class="weui-loadmore">
       <view class="weui-loading"></view>
       <view class="weui-loadmore__tips">正在加载</view>
     </view>
-  </view>
+  </view> -->
+  <i-spin custom wx:if="{{ifload}}">
+    <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+    <view>加载中...</view>
+  </i-spin>
   <view wx:else>
     <view wx:if="{{hadnopassdata}}">
       <view wx:for="{{notpass}}" wx:key="id">
@@ -208,16 +229,20 @@
       </view>
       <!-- 加载 -->
       <view wx:if="{{ifload_more}}">
-        <view class="weui-loadmore">
+        <!-- <view class="weui-loadmore">
           <view class="weui-loading"></view>
           <view class="weui-loadmore__tips">正在加载更多</view>
-        </view>
+        </view> -->
+        <i-spin custom>
+          <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+        </i-spin>
       </view>
       <!-- 没有更多 -->
-      <view wx:if="{{hadnopassmore == false}}">
-        <view class="weui-loadmore weui-loadmore_line">
+      <view wx:if="{{!hadunmore}}">
+        <!-- <view class="weui-loadmore weui-loadmore_line">
           <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多了哦</view>
-        </view>
+        </view> -->
+        <i-divider content="加载已经完成,没有其他数据" color="#2d8cf0" lineColor="#2d8cf0"></i-divider>
       </view>
     </view>
     <view wx:else>

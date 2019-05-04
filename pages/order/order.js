@@ -166,24 +166,25 @@ Page({
   },
   onReachBottom() {
     var that = this;
+    let current = this.data.current;
     that.setData({
       ifload_more: true
     })
 
-    if (this.data.activeIndex == 0) {
-      if (that.data.hadunmore == true) {
-        if (that.data.type == "司机") {
+    if (current === '0') {
+      if (that.data.hadunmore) {
+        if (that.data.type === "司机") {
           that.getunfinish(4);
         } else {
           that.getunfinish(1);
         }
       }
-    } else if (this.data.activeIndex == 1) {
-      if (that.data.hadfinishmore == true) {
+    } else if (current === '1') {
+      if (that.data.hadfinishmore) {
         that.getfinish();
       }
     } else {
-      if (that.data.hadnopassmore == true) {
+      if (that.data.hadnopassmore) {
         that.getnopass();
       }
     }

@@ -2,6 +2,8 @@
   "usingComponents": {
       "i-spin": "../../iView/spin/index",
       "i-tabs": "../../iView/tabs/index",
-      "i-tab": "../../iView/tab/index"
+      "i-tab": "../../iView/tab/index",
+      "i-icon": "../../iView/icon/index",
+      "i-divider": "../../iView/divider/index"
   }
 }
