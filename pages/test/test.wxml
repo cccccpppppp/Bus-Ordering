@@ -1,0 +1,9 @@
+<button bindtap='login'>登陆</button>
+<button bindtap='getDepartments'>获取所有部门列表</button>
+<button bindtap='getApplyCount'>获取订单总数</button>
+<picker bindchange="bindPickerChange" value="{{dIndex}}" range="{{departments}}" range-key='name'>
+  <view class="picker">
+    当前选择：{{departments[dIndex].id}}
+    value: {{dIndex}}
+  </view>
+</picker>

@@ -16,7 +16,8 @@
     "pages/costom/wait4Verifying/wait4Verifying",
     "pages/costom/loading",
     "pages/driverUrl/add/add",
-    "pages/order/cancel/cancel"
+    "pages/order/cancel/cancel",
+    "pages/test/test"
   ],
   "window": {
     "backgroundTextStyle": "light",

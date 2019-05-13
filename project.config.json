@@ -9,10 +9,11 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"autoAudits": false
+		"autoAudits": false,
+		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.3",
+	"libVersion": "2.6.6",
 	"appid": "wx9f8f7c6fdbb30400",
 	"projectname": "DCXT",
 	"debugOptions": {
@@ -39,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 11,
 			"list": [
 				{
 					"id": -1,
@@ -94,6 +95,26 @@
 					"name": "取消订单",
 					"pathName": "pages/order/cancel/cancel",
 					"query": "id=166"
+				},
+				{
+					"id": -1,
+					"name": "测试",
+					"pathName": "pages/test/test",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "测试界面",
+					"pathName": "pages/test/test",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "测试",
+					"pathName": "pages/test/test",
+					"scene": null
 				}
 			]
 		}

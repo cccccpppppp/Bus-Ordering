@@ -3,6 +3,7 @@ var host = app.globalData.host;
 Page({
   data: {
     tabs: ['未完成', '已完成'],
+    count:[0, 3, 0],
     ifload: true, //是否加载界面
     hadundata: true, //是否有数据
     hadfinishdata: true,
