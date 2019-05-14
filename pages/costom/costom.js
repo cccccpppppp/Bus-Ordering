@@ -11,20 +11,22 @@ let formatMaxTime = util.formatTime(maxTime);
 Page({
   wxValidate: {},
   data: {
-    counter: 0,
-    start_place: "",
-    myInfo: {
+    counter: 0,  // 文本域字数
+    start_place: "", // 起始位置
+    myInfo: {  // 我的信息
       name: null,
       phone: null,
       type: null
     },
-    date: "2018-12-18",
-    time: "5:32",
-    maxDate: '2018-12-31',
-    start_place_latitude: "",
-    start_place_longitude: "",
-    people_number_range: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    people_number_index: 0
+    dIndex: 0,  // 部门选择索引
+    departments: [],// 部门列表
+    date: "2018-12-18", // 订车日期
+    time: "5:32",    // 订车时间
+    maxDate: '2018-12-31',  // 最大订车时间
+    start_place_latitude: "", // 起始位置经度
+    start_place_longitude: "",// 起始位置纬度
+    people_number_range: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], //人数选择列表
+    people_number_index: 0  //人数选择索引
   },
   /**
    * 表单-验证字段
@@ -88,8 +90,33 @@ Page({
       time: formatTimeNow.formatedTime,
       maxDate: formatMaxTime.formatedDate,
     });
-    console.log(formatMaxTime.formatedDate);
+    // console.log(formatMaxTime.formatedDate);
     this.initValidate();
+    this.getDepartments();
+  },
+  //获取部门信息
+  getDepartments: function () {
+    let that = this;
+    let sessionid = app.globalData.sessionid;
+    wx.request({
+      url: host + "miniprogram/Common/allDepartment",
+      data: {
+        sessionid: sessionid
+      },
+      success(res) {
+        let departments = res.data.data;
+        if (departments) {
+          that.setData({
+            departments: departments
+          })
+        }
+      } // success() END
+    }) // wx.request() END
+  },
+  bindDepartmentChange(e) {
+    this.setData({
+      dIndex: e.detail.value
+    });
   },
   bindDateChange: function (e) {
     this.setData({
@@ -114,7 +141,7 @@ Page({
       counter: t_text
     });
   },
-  // 打开自带地图选择位置并返回位置信息
+  // 打开自带地图选择起始位置并返回位置信息
   chooseStartAdd: function () {
     let that = this;
     wx.chooseLocation({
@@ -132,7 +159,7 @@ Page({
       }
     });
   },
-  // 打开自带地图选择位置并返回位置信息
+  // 打开自带地图选择目的位置并返回位置信息
   chooseDestinationAdd: function () {
     let that = this;
     wx.chooseLocation({
@@ -153,9 +180,11 @@ Page({
 
   //调用验证函数
   submitCar: function (e) {
-    console.log("form发生了submit事件，携带的数据为：", e.detail.value);
+    // console.log("form发生了submit事件，携带的数据为：", e.detail.value);
     const params = e.detail.value;
     let wxValidate = this.wxValidate;
+    let departments = this.data.departments;
+    let dIndex = this.data.dIndex;
     let phone = params.phone;
     let name = params.name;
     let go_time = params.date + " " + params.time;
@@ -176,6 +205,7 @@ Page({
         url: host + "miniprogram/Apply_car/applyCar",
         data: {
           sessionid: sessionid,
+          department: departments[dIndex].id,
           name: name,
           phone: phone,
           people_number: people_number,
@@ -195,7 +225,7 @@ Page({
             });
           } else {
             wx.showToast({
-              title: res.data.msg,
+              title: 请求失败,
               icon: "none"
             });
           }
@@ -207,5 +237,5 @@ Page({
         }
       });
     }
-  }
+  } // submitCar() END
 });
