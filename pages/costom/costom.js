@@ -39,6 +39,9 @@ Page({
       destination_place: {
         required: true
       },
+      // km: {
+      //   required: true
+      // },
       name: {
         required: true,
         rangelength: [2, 10]
@@ -47,11 +50,6 @@ Page({
         required: true,
         tel: true
       }
-      // people_number: {
-      //   required: true,
-      //   people_number: true,
-      //   range: [1, 4]
-      // }
     };
     const messages = {
       start_place: {
@@ -60,6 +58,9 @@ Page({
       destination_place: {
         required: "请填写目的地"
       },
+      // km: {
+      //   required: "请填写行程"
+      // },
       name: {
         required: "请填写姓名",
         minlength: "请输入正确的名称"
@@ -68,11 +69,6 @@ Page({
         required: "请填写手机号",
         tel: "请填写正确的手机号"
       }
-      // people_number: {
-      //   required:'请填写人数',
-      //   people_number:'请填写正确的人数',
-      //   range:'乘车人数必须在1~10之间'
-      // }
     };
     this.wxValidate = new WxValidate(rules, messages);
   },
@@ -194,6 +190,7 @@ Page({
     let start_place = params.start_place;
     let start_place_latitude = this.data.start_place_latitude;
     let start_place_longitude = this.data.start_place_longitude;
+    let km = params.km;
     //校验表单
     if (!wxValidate.checkForm(params)) {
       const error = wxValidate.errorList[0];
@@ -206,6 +203,7 @@ Page({
         data: {
           sessionid: sessionid,
           department: departments[dIndex].id,
+          km: km,
           name: name,
           phone: phone,
           people_number: people_number,

@@ -3,7 +3,7 @@ var host = app.globalData.host;
 Page({
   data: {
     tabs: ['未完成', '已完成'],
-    count:[0, 3, 0],
+    count:[1, 2, 3],
     ifload: true, //是否加载界面
     hadundata: true, //是否有数据
     hadfinishdata: true,
@@ -19,7 +19,6 @@ Page({
     unpage: 1,
     page: 1,
     nopage: 1,
-    tabs: ["未完成订单", "已完成订单", "未通过订单"],
     current: '0'
   },
   onLoad: function(options) {
@@ -38,7 +37,7 @@ Page({
           that.getunfinish(3);
           that.getunfinish(4);
           that.setData({
-            tabs: ["未完成订单", "已完成订单", "未通过订单"]
+            tabs: ["未完成", "已完成", "未通过"]
           })
         } else if (res.data.data.type == 2) {
           that.getunfinish(0);

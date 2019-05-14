@@ -1,1 +1,12 @@
-/* pages/driverUrl/add/add.wxss */
+.chooseLocation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 7rpx;
+}
+
+.btnImg {
+    width: 50rpx;
+    height: 50rpx;
+}

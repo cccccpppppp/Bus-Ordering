@@ -71,6 +71,7 @@ Page({
     let people_number = this.data.people_number_range[params.people_number];
     let reason = params.reason;
     let start_place = params.start_place;
+    let km = params.km;
     if (destination_place == "" || start_place=="")
     {
       console.log("空")
@@ -84,7 +85,8 @@ Page({
           start_place: start_place,
           destination_place: destination_place,
           go_time: go_time,
-          reason: reason
+          reason: reason,
+          km: km
         },
         method: "POST",
         success: res => {
