@@ -12,7 +12,7 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.3",
+	"libVersion": "2.7.0",
 	"appid": "wx9f8f7c6fdbb30400",
 	"projectname": "DCXT",
 	"debugOptions": {
