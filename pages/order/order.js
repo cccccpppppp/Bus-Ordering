@@ -3,7 +3,7 @@ var host = app.globalData.host;
 Page({
   data: {
     tabs: ['未完成', '已完成'],
-    count:[1, 2, 3],
+    count:[0,0,0],
     ifload: true, //是否加载界面
     hadundata: true, //是否有数据
     hadfinishdata: true,
@@ -43,6 +43,8 @@ Page({
           that.getunfinish(0);
           that.getunfinish(4);
           that.getunfinish(3);
+          that.getapplyCount();
+          that.get
           that.setData({
             type: "司机"
           })
@@ -90,6 +92,24 @@ Page({
           })
         }
       },
+    })
+  },
+
+  //获取订单数量
+  getapplyCount() {
+    var that = this;
+    //请求
+    wx.request({
+      url: host + 'miniprogram/Common/applyCount',
+      data: {
+        sessionid: that.data.sessionid,
+        status: 6//订单状态
+      },
+      success(res) {
+        that.setData({
+          count: [0,res.data.data,0]
+        })
+      }
     })
   },
   //获取已完成订单
