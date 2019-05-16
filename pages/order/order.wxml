@@ -6,7 +6,7 @@
 <swiper class="tab-swiper" current="{{current}}" duration='200' bindchange="switchSwiper" style="height: 100%">
   <!-- 未完成选项卡 -->
   <swiper-item>
-    <view class="unfinished">
+    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" class="unfinished">
       <i-spin custom wx:if="{{ifload}}">
         <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
         <view>加载中...</view>
@@ -61,6 +61,12 @@
                     订单已完成
                   </view>
                 </view>
+                <!-- 弹窗 -->
+                <modal id="modal" hidden="{{hiddenmodalput}}" title="公里数" confirm - text="提交" cancel - text="取消" bindcancel="textcancel" bindconfirm="textconfirm">
+                  <form form-type='submit' bindsubmit="textconfirm">
+                    <input bindinput='getkm' type='number' placeholder="请输入公路数" name='km' auto - focus />
+                  </form>
+                </modal>
               </view>
             </view>
           </view>
@@ -72,20 +78,19 @@
           </view>
           <!-- 没有更多 -->
           <view wx:if="{{!hadunmore}}">
-            <i-divider content="加载已经完成,没有其他数据" color="#2d8cf0" lineColor="#2d8cf0"></i-divider>
+            <i-divider content="加载已经完成,没有其他数据"></i-divider>
           </view>
         </view>
         <view wx:else>
           <view class="no-data">还没有未完成订单哦~</view>
         </view>
       </view>
-    </view>
+    </scroll-view>
   </swiper-item>
   <!-- 未完成选项卡 -->
-
   <!-- 已完成选项卡 -->
   <swiper-item>
-    <view class="finished">
+    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" class="finished">
       <i-spin custom wx:if="{{ifload}}">
         <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
         <view>加载中...</view>
@@ -137,20 +142,19 @@
           </view>
           <!-- 没有更多 -->
           <view wx:if="{{!hadunmore}}">
-            <i-divider content="加载已经完成,没有其他数据" color="#2d8cf0" lineColor="#2d8cf0"></i-divider>
+            <i-divider content="加载已经完成,没有其他数据"></i-divider>
           </view>
         </view>
         <view wx:else>
           <view class="no-data">还没有已完成的的订单哦~</view>
         </view>
       </view>
-    </view>
+    </scroll-view>
   </swiper-item>
   <!-- 已完成选项卡 -->
-
   <!-- 未通过选项卡 -->
   <swiper-item wx:if="{{tabs[2]}}">
-    <view class="cancled">
+    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" class="cancled">
       <i-spin custom wx:if="{{ifload}}">
         <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
         <view>加载中...</view>
@@ -202,14 +206,14 @@
           </view>
           <!-- 没有更多 -->
           <view wx:if="{{!hadunmore}}">
-            <i-divider content="加载已经完成,没有其他数据" color="#2d8cf0" lineColor="#2d8cf0"></i-divider>
+            <i-divider content="加载已经完成,没有其他数据"></i-divider>
           </view>
         </view>
         <view wx:else>
           <view class="no-data">还没有未通过的申请哦~</view>
         </view>
       </view>
-    </view>
+    </scroll-view>
   </swiper-item>
   <!-- 未通过选项卡 -->
 </swiper>

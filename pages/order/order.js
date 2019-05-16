@@ -19,8 +19,51 @@ Page({
     unpage: 1, //未完成页数
     page: 1, //已完成页数
     nopage: 1, //未通过页数
-    current: '0' //当前页面 
+    current: '0', //当前页面 
+    hiddenmodalput: true,//是否显示输入公里数弹窗
+    km:"",
+    thisorderid:0,//当前点击的订单id
   },
+
+  //点击按钮痰喘指定的hiddenmodalput弹出框 
+  modalinput: function (e) {
+    this.setData({
+      hiddenmodalput: !this.data.hiddenmodalput,
+      thisorderid: e.target.id
+    })
+  },
+  //取消按钮 
+  textcancel: function () {
+    this.setData({
+      hiddenmodalput: true
+    });
+  },
+  //确认 
+  textconfirm: function (e) {
+    var that = this;
+    if(that.data.km=="")
+    {
+      wx.showToast({
+        title: '请输入公里数！',
+        icon: 'none'
+      })
+    }
+    else{
+      this.setData({
+        hiddenmodalput: true
+      })
+      that.finish();
+    }
+
+  },
+
+  getkm:function(e)
+  {
+    this.setData({
+      km: e.detail.value
+    })
+  },
+
   onLoad: function(options) {
     this.data.sessionid = app.globalData.sessionid;
     var that = this;
@@ -220,7 +263,7 @@ Page({
   },
   //点击订单已完成
   finish(e) {
-    var id = e.target.id;
+    var id = this.data.thisorderid;
     var that = this;
     // unpage = 1;
     wx.request({
@@ -228,6 +271,7 @@ Page({
       data: {
         sessionid: that.data.sessionid,
         apply_id: id,
+        km:that.data.km
       },
       success(res)
       {
