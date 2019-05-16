@@ -25,7 +25,7 @@ Page({
     thisorderid:0,//当前点击的订单id
   },
 
-  //点击按钮痰喘指定的hiddenmodalput弹出框 
+  //点击按钮弹出指定的hiddenmodalput弹出框 
   modalinput: function (e) {
     this.setData({
       hiddenmodalput: !this.data.hiddenmodalput,
@@ -67,6 +67,14 @@ Page({
   onLoad: function(options) {
     this.data.sessionid = app.globalData.sessionid;
     var that = this;
+    //获取设备高度
+    wx.getSystemInfo({
+      success: function (res) {
+          that.setData({
+              clientHeight: res.windowHeight
+          });
+      }
+    });
     //获取用户类型
     wx.request({
       url: host + 'miniprogram/Common/info',
@@ -96,7 +104,7 @@ Page({
           ifload: false,
         })
       }
-    }) //获取用户类型
+    }); //获取用户类型
     this.getfinish();
     this.getnopass();
     this.getapplyCount();
