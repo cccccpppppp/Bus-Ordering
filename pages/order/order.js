@@ -16,10 +16,10 @@ Page({
     unfinish: [], //未完成订单
     finish: [], //已完成订单
     notpass: [], //未通过订单
-    unpage: 1,
-    page: 1,
-    nopage: 1,
-    current: '0'
+    unpage: 1, //未完成页数
+    page: 1, //已完成页数
+    nopage: 1, //未通过页数
+    current: '0' //当前页面 
   },
   onLoad: function(options) {
     this.data.sessionid = app.globalData.sessionid;
@@ -44,7 +44,6 @@ Page({
           that.getunfinish(4);
           that.getunfinish(3);
           that.getapplyCount();
-          that.get
           that.setData({
             type: "司机"
           })
@@ -75,7 +74,7 @@ Page({
         that.setData({
           unfinish: that.data.unfinish.concat(res.data.data),
         })
-        unpage++;
+        that.data.unpage = unpage + 1;
         if (that.data.unfinish.length == 0) {
           that.setData({
             hadundata: false
@@ -129,7 +128,7 @@ Page({
         that.setData({
           finish: that.data.finish.concat(res.data.data),
         })
-        page++;
+        that.data.page = page + 1;
         if (that.data.finish.length == 0) {
           that.setData({
             hadfinishdata: false
@@ -165,7 +164,7 @@ Page({
         that.setData({
           notpass: that.data.notpass.concat(res.data.data),
         })
-        nopage++;
+        that.data.nopage = nopage + 1;
         if (that.data.notpass.length == 0) {
           that.setData({
             hadnopassdata: false
