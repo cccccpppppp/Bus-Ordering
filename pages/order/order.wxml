@@ -57,19 +57,20 @@
             </navigator>
           </view>
           <view class="weui-form-preview__ft" wx:else>
-            <navigator url="../deorder/deorder?id={{item.apply_id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
-              详细信息
-            </navigator>
-            <view wx:if="{{item.type==1}}"></view>
-            <view wx:else>
-              <view id='{{item.apply_id}}' bindtap='cancel' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
-                取消订单
-              </view>
-              <view id='{{item.apply_id}}' bindtap='finish' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
-                订单已完成
-              </view>
+            <view id='{{item.apply_id}}' bindtap='cancel' class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">
+              取消订单
+            </view>
+            <view id='{{item.apply_id}}' bindtap='modalinput' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
+              订单已完成
             </view>
           </view>
+          <!-- 弹窗 -->
+          <modal id="modal" hidden="{{hiddenmodalput}}" title="公里数" confirm - text = "提交" cancel - text = "取消" bindcancel = "textcancel" bindconfirm = "textconfirm">
+            <form form-type='submit' bindsubmit="textconfirm" >
+              <input bindinput='getkm' type='number' placeholder="请输入公路数" name='km' auto - focus />
+            </form>
+          </modal>
+
           <!-- <view class="weui-loadmore">
                   <view class="weui-loading"></view>
                   <view class="weui-loadmore__tips">正在加载</view>
