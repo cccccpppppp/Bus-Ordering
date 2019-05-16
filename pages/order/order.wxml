@@ -1,253 +1,215 @@
 <i-tabs current="{{ current }}" bindchange="handleChange">
   <block wx:for="{{tabs}}" wx:key="*this" wx:for-index="tabsIndex">
-    <!-- <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
-      <view class="weui-navbar__title">{{item}}</view>
-    </view> -->
     <i-tab key="{{tabsIndex}}" title="{{item}}" count="{{count[tabsIndex]}}"></i-tab>
   </block>
 </i-tabs>
-<view class="unfinished" wx:if="{{current === '0'}}">
+<swiper class="tab-swiper" current="{{current}}" duration='200' bindchange="switchSwiper" style="height: 100%">
   <!-- 未完成选项卡 -->
-  <!-- <view wx:if="{{ifload}}">
-    <view class="weui-loadmore">
-      <view class="weui-loading"></view>
-      <view class="weui-loadmore__tips">正在加载</view>
-    </view>
-  </view> -->
-  <!-- <i-spin size="large" fix wx:if="{{1}}"></i-spin> -->
-  <i-spin custom wx:if="{{ifload}}">
-    <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
-    <view>加载中...</view>
-  </i-spin>
-  <view wx:else>
-    <view wx:if="{{hadundata}}">
-      <view wx:for="{{unfinish}}" wx:key="apply_id">
-        <view class="weui-form-preview">
-          <view class="weui-form-preview__hd">
-            <view class="weui-form-preview__item">
-              <view class="weui-form-preview__label">目的地</view>
-              <view class="weui-form-preview__value_in-hd">{{item.destination_place}}</view>
-            </view>
-          </view>
-          <view class="weui-form-preview__bd">
-            <view class="weui-form-preview__item">
-              <view class="weui-form-preview__label">出发地</view>
-              <view class="weui-form-preview__value">{{item.start_place}}</view>
-            </view>
-            <view wx:if="{{item.type==1}}" class="weui-form-preview__item">
-              <view class="weui-form-preview__label">申请司机</view>
-              <view class="weui-form-preview__value">{{item.drivers[0].name}}</view>
-            </view>
-            <view wx:else class="weui-form-preview__item">
-              <view class="weui-form-preview__label">乘车人</view>
-              <view class="weui-form-preview__value">{{item.name}}</view>
-            </view>
-            <view class="weui-form-preview__item">
-              <view class="weui-form-preview__label">申请人</view>
-              <view class="weui-form-preview__value">{{item.apply.name}}</view>
-            </view>
-            <view class="weui-form-preview__item">
-              <view class="weui-form-preview__label">发车时间</view>
-              <view class="weui-form-preview__value">{{item.go_time}}</view>
-            </view>
-          </view>
-          <view class="weui-form-preview__ft" wx:if="{{type!='司机'}}">
-            <navigator url="../deorder/deorder?id={{item.apply_id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
-              详细信息
-            </navigator>
-          </view>
-          <view class="weui-form-preview__ft" wx:else>
-            <navigator url="../deorder/deorder?id={{item.apply_id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
-              详细信息
-            </navigator>
-            <view wx:if="{{item.type==1}}"></view>
-            <view wx:else>
-              <view id='{{item.apply_id}}' bindtap='cancel' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
-                取消订单
+  <swiper-item>
+    <view class="unfinished">
+      <i-spin custom wx:if="{{ifload}}">
+        <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+        <view>加载中...</view>
+      </i-spin>
+      <view wx:else>
+        <view wx:if="{{hadundata}}">
+          <view wx:for="{{unfinish}}" wx:key="apply_id">
+            <view class="weui-form-preview">
+              <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">目的地</view>
+                  <view class="weui-form-preview__value_in-hd">{{item.destination_place}}</view>
+                </view>
               </view>
-              <view id='{{item.apply_id}}' bindtap='finish' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
-                订单已完成
+              <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">出发地</view>
+                  <view class="weui-form-preview__value">{{item.start_place}}</view>
+                </view>
+                <view wx:if="{{item.type==1}}" class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">申请司机</view>
+                  <view class="weui-form-preview__value">{{item.drivers[0].name}}</view>
+                </view>
+                <view wx:else class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">乘车人</view>
+                  <view class="weui-form-preview__value">{{item.name}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">申请人</view>
+                  <view class="weui-form-preview__value">{{item.apply.name}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">发车时间</view>
+                  <view class="weui-form-preview__value">{{item.go_time}}</view>
+                </view>
+              </view>
+              <view class="weui-form-preview__ft" wx:if="{{type!='司机'}}">
+                <navigator url="../deorder/deorder?id={{item.apply_id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
+                  详细信息
+                </navigator>
+              </view>
+              <view class="weui-form-preview__ft" wx:else>
+                <navigator url="../deorder/deorder?id={{item.apply_id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
+                  详细信息
+                </navigator>
+                <view wx:if="{{item.type==1}}"></view>
+                <view wx:else>
+                  <view id='{{item.apply_id}}' bindtap='cancel' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
+                    取消订单
+                  </view>
+                  <view id='{{item.apply_id}}' bindtap='finish' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
+                    订单已完成
+                  </view>
+                </view>
               </view>
             </view>
           </view>
-          <!-- <view class="weui-loadmore">
-                  <view class="weui-loading"></view>
-                  <view class="weui-loadmore__tips">正在加载</view>
-                </view> -->
+          <!-- 加载 -->
+          <view wx:if="{{ifload_more}}">
+            <i-spin custom>
+              <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+            </i-spin>
+          </view>
+          <!-- 没有更多 -->
+          <view wx:if="{{!hadunmore}}">
+            <i-divider content="加载已经完成,没有其他数据" color="#2d8cf0" lineColor="#2d8cf0"></i-divider>
+          </view>
+        </view>
+        <view wx:else>
+          <view class="no-data">还没有未完成订单哦~</view>
         </view>
       </view>
-      <!-- 加载 -->
-      <view wx:if="{{ifload_more}}">
-        <!-- <view class="weui-loadmore">
-          <view class="weui-loading"></view>
-          <view class="weui-loadmore__tips">正在加载更多</view>
-        </view> -->
-        <i-spin custom>
-          <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
-        </i-spin>
-      </view>
-      <!-- 没有更多 -->
-      <view wx:if="{{!hadunmore}}">
-        <!-- <view class="weui-loadmore weui-loadmore_line">
-          <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多了哦</view>
-        </view> -->
-        <i-divider content="加载已经完成,没有其他数据" color="#2d8cf0" lineColor="#2d8cf0"></i-divider>
-      </view>
     </view>
-    <view wx:else>
-      <view class="no-data">还没有未完成订单哦~</view>
-    </view>
-  </view>
-</view>
-<view class="finished" wx:if="{{current === '1'}}">
+  </swiper-item>
+  <!-- 未完成选项卡 -->
+
   <!-- 已完成选项卡 -->
-  <!-- <view wx:if="{{ifload}}">
-    <view class="weui-loadmore">
-      <view class="weui-loading"></view>
-      <view class="weui-loadmore__tips">正在加载</view>
-    </view>
-  </view> -->
-  <i-spin custom wx:if="{{ifload}}">
-    <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
-    <view>加载中...</view>
-  </i-spin>
-  <view wx:else>
-    <view wx:if="{{hadfinishdata}}">
-      <view wx:for="{{finish}}" wx:key="id">
-        <view class="weui-form-preview">
-          <view class="weui-form-preview__hd">
-            <view class="weui-form-preview__item">
-              <view class="weui-form-preview__label">目的地</view>
-              <view class="weui-form-preview__value_in-hd">{{item.destination_place}}</view>
+  <swiper-item>
+    <view class="finished">
+      <i-spin custom wx:if="{{ifload}}">
+        <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+        <view>加载中...</view>
+      </i-spin>
+      <view wx:else>
+        <view wx:if="{{hadfinishdata}}">
+          <view wx:for="{{finish}}" wx:key="id">
+            <view class="weui-form-preview">
+              <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">目的地</view>
+                  <view class="weui-form-preview__value_in-hd">{{item.destination_place}}</view>
+                </view>
+              </view>
+              <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">出发地</view>
+                  <view class="weui-form-preview__value">{{item.start_place}}</view>
+                </view>
+                <view wx:if="{{item.type==1}}" class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">申请司机</view>
+                  <view class="weui-form-preview__value">{{item.drivers[0].name}}</view>
+                </view>
+                <view wx:else class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">乘车人</view>
+                  <view class="weui-form-preview__value">{{item.name}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">申请人</view>
+                  <view class="weui-form-preview__value">{{item.apply.name}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">发车时间</view>
+                  <view class="weui-form-preview__value">{{item.go_time}}</view>
+                </view>
+              </view>
+              <view class="weui-form-preview__ft">
+                <navigator url="../deorder/deorder?id={{item.apply_id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
+                  详细信息
+                </navigator>
+              </view>
             </view>
           </view>
-          <view class="weui-form-preview__bd">
-            <view class="weui-form-preview__item">
-              <view class="weui-form-preview__label">出发地</view>
-              <view class="weui-form-preview__value">{{item.start_place}}</view>
-            </view>
-            <view wx:if="{{item.type==1}}" class="weui-form-preview__item">
-              <view class="weui-form-preview__label">申请司机</view>
-              <view class="weui-form-preview__value">{{item.drivers[0].name}}</view>
-            </view>
-            <view wx:else class="weui-form-preview__item">
-              <view class="weui-form-preview__label">乘车人</view>
-              <view class="weui-form-preview__value">{{item.name}}</view>
-            </view>
-            <view class="weui-form-preview__item">
-              <view class="weui-form-preview__label">申请人</view>
-              <view class="weui-form-preview__value">{{item.apply.name}}</view>
-            </view>
-            <view class="weui-form-preview__item">
-              <view class="weui-form-preview__label">发车时间</view>
-              <view class="weui-form-preview__value">{{item.go_time}}</view>
-            </view>
+          <!-- 加载 -->
+          <view wx:if="{{ifload_more}}">
+            <i-spin custom>
+              <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+            </i-spin>
           </view>
-          <view class="weui-form-preview__ft">
-            <navigator url="../deorder/deorder?id={{item.apply_id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
-              详细信息
-            </navigator>
+          <!-- 没有更多 -->
+          <view wx:if="{{!hadunmore}}">
+            <i-divider content="加载已经完成,没有其他数据" color="#2d8cf0" lineColor="#2d8cf0"></i-divider>
           </view>
         </view>
-      </view>
-      <!-- 加载 -->
-      <view wx:if="{{ifload_more}}">
-        <!-- <view class="weui-loadmore">
-          <view class="weui-loading"></view>
-          <view class="weui-loadmore__tips">正在加载更多</view>
-        </view> -->
-        <i-spin custom>
-          <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
-        </i-spin>
-      </view>
-      <!-- 没有更多 -->
-      <view wx:if="{{!hadunmore}}">
-        <!-- <view class="weui-loadmore weui-loadmore_line">
-          <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多了哦</view>
-        </view> -->
-        <i-divider content="加载已经完成,没有其他数据" color="#2d8cf0" lineColor="#2d8cf0"></i-divider>
-      </view>
-    </view>
-    <view wx:else>
-      <view class="no-data">还没有已完成的的订单哦~</view>
-    </view>
-  </view>
-</view>
-<view class="cancled" wx:if="{{current === '2'}}">
-  <!-- <view wx:if="{{ifload}}">
-    <view class="weui-loadmore">
-      <view class="weui-loading"></view>
-      <view class="weui-loadmore__tips">正在加载</view>
-    </view>
-  </view> -->
-  <i-spin custom wx:if="{{ifload}}">
-    <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
-    <view>加载中...</view>
-  </i-spin>
-  <view wx:else>
-    <view wx:if="{{hadnopassdata}}">
-      <view wx:for="{{notpass}}" wx:key="id">
-        <view class="weui-form-preview">
-          <view class="weui-form-preview__hd">
-            <view class="weui-form-preview__item">
-              <view class="weui-form-preview__label">目的地</view>
-              <view class="weui-form-preview__value_in-hd">{{item.destination_place}}</view>
-            </view>
-          </view>
-          <view class="weui-form-preview__bd">
-            <view class="weui-form-preview__item">
-              <view class="weui-form-preview__label">出发地</view>
-              <view class="weui-form-preview__value">{{item.start_place}}</view>
-            </view>
-            <view wx:if="{{item.type==1}}" class="weui-form-preview__item">
-              <view class="weui-form-preview__label">申请司机</view>
-              <view class="weui-form-preview__value">{{item.drivers[0].name}}</view>
-            </view>
-            <view wx:else class="weui-form-preview__item">
-              <view class="weui-form-preview__label">乘车人</view>
-              <view class="weui-form-preview__value">{{item.name}}</view>
-            </view>
-            <view class="weui-form-preview__item">
-              <view class="weui-form-preview__label">申请人</view>
-              <view class="weui-form-preview__value">{{item.apply.name}}</view>
-            </view>
-            <view class="weui-form-preview__item">
-              <view class="weui-form-preview__label">发车时间</view>
-              <view class="weui-form-preview__value">{{item.go_time}}</view>
-            </view>
-          </view>
-          <view class="weui-form-preview__ft">
-            <navigator url="../deorder/deorder?id={{item.apply_id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
-              详细信息
-            </navigator>
-          </view>
-          <!-- <view class="weui-loadmore">
-                  <view class="weui-loading"></view>
-                  <view class="weui-loadmore__tips">正在加载</view>
-                </view> -->
+        <view wx:else>
+          <view class="no-data">还没有已完成的的订单哦~</view>
         </view>
       </view>
-      <!-- 加载 -->
-      <view wx:if="{{ifload_more}}">
-        <!-- <view class="weui-loadmore">
-          <view class="weui-loading"></view>
-          <view class="weui-loadmore__tips">正在加载更多</view>
-        </view> -->
-        <i-spin custom>
-          <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
-        </i-spin>
-      </view>
-      <!-- 没有更多 -->
-      <view wx:if="{{!hadunmore}}">
-        <!-- <view class="weui-loadmore weui-loadmore_line">
-          <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多了哦</view>
-        </view> -->
-        <i-divider content="加载已经完成,没有其他数据" color="#2d8cf0" lineColor="#2d8cf0"></i-divider>
+    </view>
+  </swiper-item>
+  <!-- 已完成选项卡 -->
+
+  <!-- 未通过选项卡 -->
+  <swiper-item wx:if="{{tabs[2]}}">
+    <view class="cancled">
+      <i-spin custom wx:if="{{ifload}}">
+        <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+        <view>加载中...</view>
+      </i-spin>
+      <view wx:else>
+        <view wx:if="{{hadnopassdata}}">
+          <view wx:for="{{notpass}}" wx:key="id">
+            <view class="weui-form-preview">
+              <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">目的地</view>
+                  <view class="weui-form-preview__value_in-hd">{{item.destination_place}}</view>
+                </view>
+              </view>
+              <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">出发地</view>
+                  <view class="weui-form-preview__value">{{item.start_place}}</view>
+                </view>
+                <view wx:if="{{item.type==1}}" class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">申请司机</view>
+                  <view class="weui-form-preview__value">{{item.drivers[0].name}}</view>
+                </view>
+                <view wx:else class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">乘车人</view>
+                  <view class="weui-form-preview__value">{{item.name}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">申请人</view>
+                  <view class="weui-form-preview__value">{{item.apply.name}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                  <view class="weui-form-preview__label">发车时间</view>
+                  <view class="weui-form-preview__value">{{item.go_time}}</view>
+                </view>
+              </view>
+              <view class="weui-form-preview__ft">
+                <navigator url="../deorder/deorder?id={{item.apply_id}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">
+                  详细信息
+                </navigator>
+              </view>
+            </view>
+          </view>
+          <!-- 加载 -->
+          <view wx:if="{{ifload_more}}">
+            <i-spin custom>
+              <i-icon type="refresh" size="20" i-class="icon-load"></i-icon>
+            </i-spin>
+          </view>
+          <!-- 没有更多 -->
+          <view wx:if="{{!hadunmore}}">
+            <i-divider content="加载已经完成,没有其他数据" color="#2d8cf0" lineColor="#2d8cf0"></i-divider>
+          </view>
+        </view>
+        <view wx:else>
+          <view class="no-data">还没有未通过的申请哦~</view>
+        </view>
       </view>
     </view>
-    <view wx:else>
-      <view class="no-data">还没有未通过的申请哦~</view>
-    </view>
-  </view>
-</view>
-<!-- <view>{{current}}</view> -->
+  </swiper-item>
+  <!-- 未通过选项卡 -->
+</swiper>

@@ -56,6 +56,7 @@ Page({
     }) //获取用户类型
     this.getfinish();
     this.getnopass();
+    this.getapplyCount();
   },
   //获取未完成订单
   getunfinish(status) {
@@ -94,6 +95,12 @@ Page({
     })
   },
 
+  // swiper换页
+  switchSwiper(e) {
+    this.setData({
+      current: e.detail.current
+    })
+  },
   //获取订单数量
   getapplyCount() {
     var that = this;

@@ -24,39 +24,44 @@ Page({
           },
           method: "POST",
           success(res) {
-            let sessionid = res.data.data.sessionid
-            // wx.setStorageSync("sessionid", sessionid); // 将sessionid存储到本地
-            app.globalData.sessionid = sessionid;
-            //获取用户类型
-            wx.request({
-              url: host + 'miniprogram/Common/info',
-              data: {
-                sessionid: sessionid
-              },
-              success: res => {
-                let user_info = res.data.data;
-                wx.setStorageSync("user_info", user_info); // 将用户信息存储到本地
-                wx.redirectTo({
-                  url: './index',
-                });
-              },
-              fail() {
-                wx.showModal({
-                  title: '网络异常',
-                })
-              }
-
-            })
+            let sessionid = res.data.data.sessionid;
+            if (sessionid) {
+              // wx.setStorageSync("sessionid", sessionid); // 将sessionid存储到本地
+              app.globalData.sessionid = sessionid;
+              //获取用户类型
+              wx.request({
+                url: host + 'miniprogram/Common/info',
+                data: {
+                  sessionid: sessionid
+                },
+                success: res => {
+                  let user_info = res.data.data;
+                  wx.setStorageSync("user_info", user_info); // 将用户信息存储到本地
+                  wx.redirectTo({
+                    url: './index',
+                  });
+                },
+                fail() {
+                  wx.showModal({
+                    title: '网络异常',
+                  })
+                } // fail() END
+              }) // wx.request() END
+            } else {
+              wx.showModal({
+                title: '登陆异常',
+              })
+            }
           },
           fail() {
             wx.showModal({
-              title: '登陆异常'
+              title: 'wx.login() fail'
             })
           }
 
         })
       }
     })
-    
+
   }
 })
