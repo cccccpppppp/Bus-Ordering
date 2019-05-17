@@ -241,6 +241,25 @@ Page({
       },
     })
   },
+  f5()
+  {
+    var that = this;
+    that.setData({
+        ifload : true,
+        finish:[],
+        unfinish:[],
+        unpage:1,
+        page:1
+        })
+    that.getunfinish(0);
+    that.getunfinish(4);
+    that.getunfinish(3);
+    that.getfinish(3);
+    that.getapplyCount();
+    that.setData({
+      ifload: false,
+    })
+  },
   onReachBottom() {
     var that = this;
     let current = this.data.current;
@@ -293,7 +312,7 @@ Page({
           that.setData({
             unfinish : []
           })
-          that.getunfinish(4)
+          that.f5()
         }
         else{
           wx.showToast({
