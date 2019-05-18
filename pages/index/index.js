@@ -29,7 +29,7 @@ Page({
       {
         name: '历史订单',
         icon: '../../images/icons/order.png',
-        url: '../order/order'
+        url: '../test/test2'
       }
     ]
   },

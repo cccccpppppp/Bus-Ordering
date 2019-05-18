@@ -1,9 +1,17 @@
 <button bindtap='login'>登陆</button>
 <button bindtap='getDepartments'>获取所有部门列表</button>
 <button bindtap='getApplyCount'>获取订单总数</button>
-<picker bindchange="bindPickerChange" value="{{dIndex}}" range="{{departments}}" range-key='name'>
+<!-- <picker bindchange="bindPickerChange" value="{{dIndex}}" range="{{departments}}" range-key='name'>
   <view class="picker">
     当前选择：{{departments[dIndex].id}}
     value: {{dIndex}}
   </view>
-</picker>
+</picker> -->
+<button bindtap='getApplyCarList'>获取所有订单列表</button>
+<i-panel class="cell-panel-demo">
+  <i-cell-group>
+    <block wx:for="{{applyCarList}}" wx:key="apply_id">
+      <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"></i-cell>
+    </block>
+  </i-cell-group>
+</i-panel>

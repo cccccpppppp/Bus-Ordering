@@ -1,0 +1,46 @@
+<i-tabs current="{{ current }}" bindchange="handleChange">
+  <block wx:for="{{tabs}}" wx:key="*this" wx:for-index="tabsIndex">
+    <i-tab key="{{tabsIndex}}" title="{{item}}"></i-tab>
+  </block>
+</i-tabs>
+<swiper class="tab-swiper" current="{{current}}" duration='200' bindchange="switchSwiper" style="height: 100%">
+  <!-- 未完成选项卡 -->
+  <swiper-item>
+    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" class="unfinished">
+      <i-panel class="cell-panel-demo">
+        <i-cell-group>
+          <block wx:for="{{unfinished}}" wx:key="apply_id">
+            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"></i-cell>
+          </block>
+        </i-cell-group>
+      </i-panel>
+    </scroll-view>
+  </swiper-item>
+  <!-- 未完成选项卡 -->
+  <!-- 已完成选项卡 -->
+  <swiper-item>
+    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" class="finished">
+      <i-panel class="cell-panel-demo">
+        <i-cell-group>
+          <block wx:for="{{finished}}" wx:key="apply_id">
+            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"></i-cell>
+          </block>
+        </i-cell-group>
+      </i-panel>
+    </scroll-view>
+  </swiper-item>
+  <!-- 已完成选项卡 -->
+  <!-- 未通过选项卡 -->
+  <swiper-item wx:if="{{type !== 2}}">
+    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" class="unverified">
+      <i-panel class="cell-panel-demo">
+        <i-cell-group>
+          <block wx:for="{{unverified}}" wx:key="apply_id">
+            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"></i-cell>
+          </block>
+        </i-cell-group>
+      </i-panel>
+    </scroll-view>
+  </swiper-item>
+  <!-- 未通过选项卡 -->
+</swiper>

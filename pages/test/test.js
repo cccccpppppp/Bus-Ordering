@@ -90,6 +90,25 @@ Page({
       }
     })
   },
+  getApplyCarList: function () {
+    wx.request({
+      url: host + "miniprogram/Common/applyCarList",
+      data: {
+        sessionid: sessionid,
+        page: 1,
+        number: 6
+      },
+      success: (res) => {
+        let data = res.data.data
+        if (data){
+          this.setData({
+            applyCarList: data
+          });
+        }
+        
+      }
+    })
+  },
   bindPickerChange(e) {
     this.setData({
       dIndex: e.detail.value

@@ -17,7 +17,8 @@
     "pages/costom/loading",
     "pages/driverUrl/add/add",
     "pages/order/cancel/cancel",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/test/test2"
   ],
   "window": {
     "backgroundTextStyle": "light",
