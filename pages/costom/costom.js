@@ -2,7 +2,6 @@ const util = require("../../utils/util.js");
 import WxValidate from "../../utils/WxValidate";
 const { $Message } = require("../../iView/base/index");
 const app = getApp();
-let host = app.globalData.host;
 let now = new Date();
 let maxTime = new Date();
 maxTime.setDate(now.getDate() + 7); // 可提前预约7天

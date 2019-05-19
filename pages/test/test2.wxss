@@ -1,1 +1,3 @@
-/* pages/test/test2.wxss */
+scroll-view {
+  background-color: #FFFFFF
+}

@@ -1,16 +1,25 @@
+<!-- tabs -->
 <i-tabs current="{{ current }}" bindchange="handleChange">
   <block wx:for="{{tabs}}" wx:key="*this" wx:for-index="tabsIndex">
-    <i-tab key="{{tabsIndex}}" title="{{item}}"></i-tab>
+    <i-tab key="{{tabsIndex}}" title="{{item}}" count="{{count[tabsIndex]}}"></i-tab>
   </block>
 </i-tabs>
-<swiper class="tab-swiper" current="{{current}}" duration='200' bindchange="switchSwiper" style="height: 100%">
+<view style='display: flex'>
+  <picker mode="date" value="{{chosenDate}}" start="2016-01" end="{{nowDate}}" fields="month" bindchange='setDate'>
+    <i-button inline shape="circle" size="small">{{chosenDate}}</i-button>
+  </picker>
+  <i-button inline shape="circle" size="small" bind:click="setAll">{{all?"全部":"按月筛选"}}</i-button>
+  <!-- <view style='align-self: center; margin-left: auto; font-size:20'>数量：</view> -->
+</view>
+<swiper class="tab-swiper" current="{{current}}" duration='200' bindchange="switchSwiper" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
   <!-- 未完成选项卡 -->
   <swiper-item>
     <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" class="unfinished">
       <i-panel class="cell-panel-demo">
         <i-cell-group>
           <block wx:for="{{unfinished}}" wx:key="apply_id">
-            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"></i-cell>
+            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"
+            wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
           </block>
         </i-cell-group>
       </i-panel>
@@ -19,11 +28,12 @@
   <!-- 未完成选项卡 -->
   <!-- 已完成选项卡 -->
   <swiper-item>
-    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" class="finished">
+    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+ 'px': 'auto'}}" class="finished">
       <i-panel class="cell-panel-demo">
         <i-cell-group>
           <block wx:for="{{finished}}" wx:key="apply_id">
-            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"></i-cell>
+            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"
+            wx:if="{{ all?true:all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
           </block>
         </i-cell-group>
       </i-panel>
@@ -31,12 +41,13 @@
   </swiper-item>
   <!-- 已完成选项卡 -->
   <!-- 未通过选项卡 -->
-  <swiper-item wx:if="{{type !== 2}}">
-    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" class="unverified">
+  <swiper-item wx:if="{{type !==2 }}">
+    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+ 'px': 'auto'}}" class="unverified">
       <i-panel class="cell-panel-demo">
         <i-cell-group>
           <block wx:for="{{unverified}}" wx:key="apply_id">
-            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"></i-cell>
+            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"
+            wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
           </block>
         </i-cell-group>
       </i-panel>
@@ -44,3 +55,12 @@
   </swiper-item>
   <!-- 未通过选项卡 -->
 </swiper>
+<!-- 无数据 -->
+<i-load-more tip="暂无数据" loading="{{ loading }}"/>
+<!-- wxs模块 -->
+<wxs module="m1">
+  var matchDate = function(go_time) {
+    return go_time.slice(0, 7);
+  }
+  module.exports.matchDate = matchDate;
+</wxs>
