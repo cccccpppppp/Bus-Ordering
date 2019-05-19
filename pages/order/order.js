@@ -1,5 +1,6 @@
 const app = getApp();
 var host = app.globalData.host;
+const GetPeriod = require("../../utils/getperiod.js");
 Page({
   data: {
     tabs: ['未完成', '已完成'],
@@ -23,6 +24,9 @@ Page({
     hiddenmodalput: true,//是否显示输入公里数弹窗
     km:"",
     thisorderid:0,//当前点击的订单id
+    chosenDate: '2019-1',
+    nowDate: '2019-12',
+    all: true
   },
 
   //点击按钮弹出指定的hiddenmodalput弹出框 
@@ -65,7 +69,10 @@ Page({
   },
 
   onLoad: function(options) {
-    this.data.sessionid = app.globalData.sessionid;
+    this.time = new GetPeriod();
+    let nowDate = this.time.getNowDate().slice(0, 7);
+    this.setData({ nowDate: nowDate, chosenDate: nowDate });
+    this.data.sessionid = app.globalData.sessionid; 
     var that = this;
     //获取设备高度
     wx.getSystemInfo({
@@ -334,6 +341,7 @@ Page({
       url: 'cancel/cancel?id=' + id,
     })
   },
+  // tab切页
   handleChange({
     detail
   }) {
@@ -341,5 +349,12 @@ Page({
       current: detail.key
     });
   },
+  // 设置日期
+  setDate(e) {
+    this.setData({ chosenDate: e.detail.value });
+  },
+  // 是否显示全部
+  setAll(e) { this.setData({ all: !this.data.all }) }
+  
 
 })

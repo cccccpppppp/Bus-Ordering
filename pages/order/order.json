@@ -4,6 +4,7 @@
       "i-tabs": "../../iView/tabs/index",
       "i-tab": "../../iView/tab/index",
       "i-icon": "../../iView/icon/index",
-      "i-divider": "../../iView/divider/index"
+      "i-divider": "../../iView/divider/index",
+      "i-button": "../../iView/button/index"
   }
 }

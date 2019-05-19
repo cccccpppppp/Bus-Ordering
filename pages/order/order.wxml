@@ -3,6 +3,13 @@
     <i-tab key="{{tabsIndex}}" title="{{item}}" count="{{count[tabsIndex]}}"></i-tab>
   </block>
 </i-tabs>
+<view style='display: flex'>
+  <picker mode="date" value="{{chosenDate}}" start="2016-01" end="{{nowDate}}" fields="month" bindchange='setDate'>
+    <i-button inline shape="circle" size="small">{{chosenDate}}</i-button>
+  </picker>
+  <i-button inline shape="circle" size="small" bind:click="setAll">{{all?"全部":"按月筛选"}}</i-button>
+  <!-- <view style='align-self: center; margin-left: auto; font-size:20'>数量：</view> -->
+</view>
 <swiper class="tab-swiper" current="{{current}}" duration='200' bindchange="switchSwiper" style="height: 100%">
   <!-- 未完成选项卡 -->
   <swiper-item>
@@ -14,7 +21,7 @@
       <view wx:else>
         <view wx:if="{{hadundata}}">
           <view wx:for="{{unfinish}}" wx:key="apply_id">
-            <view class="weui-form-preview">
+            <view class="weui-form-preview" wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}">
               <view class="weui-form-preview__hd">
                 <view class="weui-form-preview__item">
                   <view class="weui-form-preview__label">目的地</view>
@@ -102,7 +109,7 @@
       <view wx:else>
         <view wx:if="{{hadfinishdata}}">
           <view wx:for="{{finish}}" wx:key="id">
-            <view class="weui-form-preview">
+            <view class="weui-form-preview" wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}">
               <view class="weui-form-preview__hd">
                 <view class="weui-form-preview__item">
                   <view class="weui-form-preview__label">目的地</view>
@@ -166,7 +173,7 @@
       <view wx:else>
         <view wx:if="{{hadnopassdata}}">
           <view wx:for="{{notpass}}" wx:key="id">
-            <view class="weui-form-preview">
+            <view class="weui-form-preview"  wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}">
               <view class="weui-form-preview__hd">
                 <view class="weui-form-preview__item">
                   <view class="weui-form-preview__label">目的地</view>
@@ -221,3 +228,10 @@
   </swiper-item>
   <!-- 未通过选项卡 -->
 </swiper>
+<!-- wxs模块 -->
+<wxs module="m1">
+  var matchDate = function(go_time) {
+    return go_time.slice(0, 7);
+  }
+  module.exports.matchDate = matchDate;
+</wxs>
