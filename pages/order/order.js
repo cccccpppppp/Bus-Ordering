@@ -267,6 +267,7 @@ Page({
       ifload: false,
     })
   },
+
   onReachBottom() {
     var that = this;
     let current = this.data.current;
@@ -274,7 +275,7 @@ Page({
       ifload_more: true
     })
 
-    if (current === '0') {
+    if (current == 0) {
       if (that.data.hadunmore) {
         if (that.data.type === "司机") {
           that.getunfinish(4);
@@ -282,7 +283,7 @@ Page({
           that.getunfinish(1);
         }
       }
-    } else if (current === '1') {
+    } else if (current == 1) {
       if (that.data.hadfinishmore) {
         that.getfinish();
       }
