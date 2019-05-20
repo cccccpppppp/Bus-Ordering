@@ -45,6 +45,15 @@
           <view class="weui-form-preview__value">{{resdata.phone}}</view>
         </view>
 
+        <view wx:if="{{resdata.department.name}}" class="weui-form-preview__item">
+          <view class="weui-form-preview__label">所属部门</view>
+          <view class="weui-form-preview__value">{{resdata.department.name}}</view>
+        </view>
+        <view wx:if="{{resdata.apply.phone}}" class="weui-form-preview__item">
+          <view class="weui-form-preview__label">乘车人联系方式</view>
+          <view class="weui-form-preview__value">{{resdata.phone}}</view>
+        </view>
+
         <view wx:for="{{resdata.drivers}}" wx:key="">
           <view class="weui-form-preview__item">
             <view class="weui-form-preview__label">司机</view>
