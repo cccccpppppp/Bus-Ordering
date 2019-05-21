@@ -15,7 +15,7 @@
       <view class="weui-form-preview__hd">
         <view class="weui-form-preview__item">
           <!-- <view class="weui-form-preview__label">行程</view> -->
-          <view class="weui-form-preview__value_in-hd">{{resdata.start_place}}➡{{resdata.destination_place}}</view>
+          <view class="weui-form-preview__value_in-hd" style='text-align:center'>{{resdata.start_place}}➡{{resdata.destination_place}}</view>
         </view>
       </view>
 
