@@ -33,7 +33,7 @@ Page({
         cancel_cause: that.data.input, //未通过原因
       },
       success(res) {
-        if (res.data.msg == 0) {
+        if (res.data.status == 0) {
           //提示成功
           wx.showToast({
             title: "已取消该订单",
@@ -41,7 +41,7 @@ Page({
             duration: 3000
           });
           setTimeout(function () {
-            wx.navigateBack({
+            wx.redi({
               delta: 1
             });
           }, 2000);
@@ -52,6 +52,11 @@ Page({
             icon: "none",
             duration: 3000
           });
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 1
+            });
+          }, 2000);
         }
       }
     });

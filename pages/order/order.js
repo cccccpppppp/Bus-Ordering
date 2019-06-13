@@ -112,6 +112,8 @@ Page({
         })
       }
     }); //获取用户类型
+  },
+  onShow: function() {
     this.getfinish();
     this.getnopass();
     this.getapplyCount();
