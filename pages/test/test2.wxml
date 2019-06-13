@@ -18,8 +18,10 @@
       <i-panel class="cell-panel-demo">
         <i-cell-group>
           <block wx:for="{{unfinished}}" wx:key="apply_id">
-            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"
-            wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+            <navigator url="../deorder/deorder?id={{item.apply_id}}">
+              <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"
+              wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+            </navigator>
           </block>
         </i-cell-group>
       </i-panel>
@@ -32,8 +34,10 @@
       <i-panel class="cell-panel-demo">
         <i-cell-group>
           <block wx:for="{{finished}}" wx:key="apply_id">
+          <navigator url="../deorder/deorder?id={{item.apply_id}}">
             <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"
             wx:if="{{ all?true:all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+          </navigator>
           </block>
         </i-cell-group>
       </i-panel>

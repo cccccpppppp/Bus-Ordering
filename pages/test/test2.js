@@ -35,22 +35,7 @@ Page({
     this.setData({ nowDate: nowDate, chosenDate: nowDate });
     this.unshownData.sessionid = app.globalData.sessionid;
     let that = this;
-    let type = wx.getStorageSync('user_info');
-    this.unshownData.type = type;
-    // 如果用户类型不是司机则获取未通过订单
-    if(type !== 2) {
-      this.getApplyCarList(1, 10, 2)
-        .then((data) => {
-          that.setData({ 
-            unverified: data,
-            tabs: ['未完成', '已完成', '未通过']
-          });
-          that.unshownData.unverifiedPage+=1;
-        })
-        .catch(that.showToast);
-    } else {
-      this.getapplyCount();
-    }
+    this.unshownData.type = wx.getStorageSync('user_info');
     //获取设备高度
     wx.getSystemInfo({
       success: function (res) {
@@ -59,19 +44,33 @@ Page({
         });
       }
     });
+  }, // onLoad() END
+  onShow() {
+    let that = this;
+    // 如果用户类型不是司机则获取未通过订单
+    if (this.unshownData.type !== 2) {
+      this.getApplyCarList(1, 10, 2)
+        .then((data) => {
+          that.setData({
+            unverified: data,
+            tabs: ['未完成', '已完成', '未通过']
+          });
+          that.unshownData.unverifiedPage = 2;
+        })
+        .catch(that.showToast);
+    } else {
+      this.getapplyCount();
+    }
     //获取未完成订单
-    this.getUnfinishedApplyCarList(0, 10);
-    this.unshownData.unfinishedPage+=1;
+    let unfinished = this.getUnfinishedApplyCarList(0, 10);
+    this.unshownData.unfinishedPage = 2;
     //获取已完成订单
     this.getApplyCarList(1, 10, 6)
       .then((data) => {
         that.setData({ finished: data });
-        that.unshownData.finishedPage+=1;
-        })
+        that.unshownData.finishedPage = 2;
+      })
       .catch(that.showToast);
-  }, // onLoad() END
-  onShow() {
-    
   },
   onReachBottom() {
     let that = this;
@@ -79,7 +78,17 @@ Page({
     let unfinishedPage = this.unshownData.unfinishedPage;
     this.setData({loading: true});
     if(current == 0) {
-      this.getUnfinishedApplyCarList(this.unshownData.unfinishedPage, 10);
+      // this.getUnfinishedApplyCarList(this.unshownData.unfinishedPage, 10);
+      let unfinished = [];
+      let p1 = this.getApplyCarList(this.unshownData.unfinishedPage, 10, 0);
+      let p2 = this.getApplyCarList(this.unshownData.unfinishedPage, 10, 1);
+      let p3 = this.getApplyCarList(this.unshownData.unfinishedPage, 10, 3);
+      let p4 = this.getApplyCarList(this.unshownData.unfinishedPage, 10, 4);
+      Promise.all([p1, p2, p3, p4]).then(values => {
+        unfinished = unfinished.concat(values[0]).concat(values[1]).concat(values[2]).concat(values[3]);
+        that.setData({ loading: false, unfinished: that.data.unfinished.concat(unfinished) });
+      }
+      );
       this.unshownData.unfinishedPage+=1;
     } else if(current == 1) {
       this.getApplyCarList(this.unshownData.finishedPage, 10, 6)
@@ -158,17 +167,19 @@ Page({
     })
     return p;
   },
-  //获取未完成订单列表（状态码：0，1, 3，4）
-  getUnfinishedApplyCarList(page, number) {
+  //获取未完成订单列表（状态码：0，1, 3，4，返回获取到的未完成订单对象
+  getUnfinishedApplyCarList: function(page, number) {
     let that = this;
-    this.getApplyCarList(page, number, 0)
-      .then((data) =>  that.setData({ unfinished: that.data.unfinished.concat(data) }));
-    this.getApplyCarList(page, number, 1)
-      .then((data) => that.setData({ unfinished: that.data.unfinished.concat(data) }));
-    this.getApplyCarList(page, number, 3)
-      .then((data) => that.setData({ unfinished: that.data.unfinished.concat(data) }));
-    this.getApplyCarList(page, number, 4)
-      .then((data) => that.setData({ unfinished: that.data.unfinished.concat(data), loading: false }));
+    let unfinished = [];
+    let p1 = this.getApplyCarList(page, number, 0);
+    let p2 = this.getApplyCarList(page, number, 1);
+    let p3 = this.getApplyCarList(page, number, 3);
+    let p4 = this.getApplyCarList(page, number, 4);
+    Promise.all([p1, p2, p3, p4]).then(values => {
+      unfinished = unfinished.concat(values[0]).concat(values[1]).concat(values[2]).concat(values[3]);
+      that.setData({ loading: false, unfinished: unfinished });
+      }
+    );
   },
   // showToast
   showToast(error) {
