@@ -29,7 +29,7 @@ Page({
       {
         name: '历史订单',
         icon: '../../images/icons/order.png',
-        url: '../order/order'
+        url: '../order/order1'
       }
     ]
   },
@@ -80,13 +80,18 @@ Page({
         method: 'GET',
         success: (result)=>{
           let applyList = result.data.data;
-          if (applyList.length !== 0) {
-            that.setData({
-              hasNewOrder: true
-            })
+          if (result.data.status === 0) {
+            if (applyList.length !== 0) {
+              that.setData({
+                hasNewOrder: true
+              })
+            } else {
+              that.setData({ hasNewOrder: false })
+            }
           } else {
-            that.setData({
-              hasNewOrder: false
+            wx.showToast({
+              title: '登陆异常',
+              icon: 'none'
             })
           }
         }

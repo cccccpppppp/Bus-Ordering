@@ -7,7 +7,9 @@
     "pages/adminUrl/refuse/refuse",
     "pages/adminUrl/agree/agree",
     "pages/order/order",
+    "pages/order/order1",
     "pages/deorder/deorder",
+    "pages/deorder/deorder1",
     "pages/driverUrl/driverUrl",
     "pages/myInfo/myInfo",
     "pages/costom/costom",
@@ -16,7 +18,7 @@
     "pages/costom/wait4Verifying/wait4Verifying",
     "pages/costom/loading",
     "pages/driverUrl/add/add",
-    "pages/order/cancel/cancel",
+    "pages/deorder/cancel/cancel",
     "pages/test/test"
   ],
   "window": {

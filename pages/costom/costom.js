@@ -190,7 +190,6 @@ Page({
     let start_place = params.start_place;
     let start_place_latitude = this.data.start_place_latitude;
     let start_place_longitude = this.data.start_place_longitude;
-    let km = params.km;
     //校验表单
     if (!wxValidate.checkForm(params)) {
       const error = wxValidate.errorList[0];
@@ -202,8 +201,7 @@ Page({
         url: host + "miniprogram/Apply_car/applyCar",
         data: {
           sessionid: sessionid,
-          department: departments[dIndex].id,
-          km: km,
+          department_id: departments[dIndex].id,
           name: name,
           phone: phone,
           people_number: people_number,

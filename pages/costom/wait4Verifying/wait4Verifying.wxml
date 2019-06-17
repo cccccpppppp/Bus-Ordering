@@ -16,5 +16,6 @@
         </picker>
         <button wx:if="{{msgIndex === 2 || msgIndex === 5 || msgIndex === 6}}" class="weui-btn" type="default" bindtap='getIt'>返回预定页面</button>
         <button wx:if="{{msgIndex === 6 && is_can_comment === 1}}" class="weui-btn" type="primary" bindtap='toRate'>评价本次行程</button>
+        <button wx:if="{{msgIndex === 0}}" class="weui-btn" type="false" bindtap='cancel'>取消订单</button>
       </view>
 </view>

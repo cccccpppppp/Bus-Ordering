@@ -36,13 +36,12 @@ Page({
   },
 
   // 取消订单
-  cancel: function() {
-    wx.showLoading({
-      title: '发送中',
+  cancel() {
+    let that = this;
+    let applyCarLately = wx.getStorageSync('applyCarLately');
+    wx.navigateTo({
+      url: '../../deorder/cancel/cancel?id=' + applyCarLately.apply_id
     })
-    // wx.request({
-    //   url: host + 'miniprogram/Common/cancel',
-    // })
   },
   //拨打司机电话
   callDriver: (e) => {

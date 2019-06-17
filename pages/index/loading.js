@@ -17,6 +17,7 @@ Page({
     //获取code并请求获得sessionid存入本地
     wx.login({
       success(res) {
+        console.log(res);
         wx.request({
           url: host + "miniprogram/Common/login",
           data: {
