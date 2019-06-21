@@ -24,7 +24,7 @@ Page({
             wx.redirectTo({
               url: './costom',
             });
-          } else if (applyCarLately.status === 5) {
+          } else if (applyCarLately.status === 5 || applyCarLately.status === 2) {
             wx.redirectTo({
               url: './costom',
             });

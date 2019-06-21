@@ -110,8 +110,10 @@ Page({
     }
   },
   onPullDownRefresh() {
+    wx.showNavigationBarLoading();
     this.onShow();
-    setTimeout(wx.stopPullDownRefresh,500);
+    wx.stopPullDownRefresh();
+    setTimeout(wx.hideNavigationBarLoading,1000);
   },
   //获取订单数量
   getapplyCount() {

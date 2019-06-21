@@ -26,6 +26,7 @@ Page({
     this.data.input = e.detail.value.input;
     wx.request({
       url: host + "miniprogram/Admin/check",
+      method: 'POST',
       data: {
         sessionid: that.data.sessionid,
         apply_id: that.data.id,
@@ -34,10 +35,10 @@ Page({
         is_can_comment: 0
       },
       success(res) {
-        if (res.data.msg == "成功") {
+        if (res.data.status == 0 || res.data.status == 1) {
           //提示成功
           wx.showToast({
-            title: "已拒绝该申请",
+            title: res.data.msg,
             icon: "success",
             duration: 3000
           });
@@ -54,6 +55,11 @@ Page({
             duration: 3000
           });
         }
+      },
+      fail() {
+        wx.showModal({
+          title: '网络错误'
+        })
       }
     });
   },

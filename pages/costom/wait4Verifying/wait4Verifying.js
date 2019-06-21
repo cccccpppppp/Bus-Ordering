@@ -1,6 +1,5 @@
 const app = getApp();
 const host = app.globalData.host;
-// let fail_cause = '拒绝理由:' + wx.getStorageSync('applyCarLately').fail_cause;
 Page({
   /**
    * 页面的初始数据

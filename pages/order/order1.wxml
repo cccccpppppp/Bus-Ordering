@@ -11,35 +11,36 @@
   <i-button inline shape="circle" size="small" bind:click="setAll">{{all?"全部":"按月筛选"}}</i-button>
   <!-- <view style='align-self: center; margin-left: auto; font-size:20'>数量：</view> -->
 </view>
-  <!-- 未完成选项卡 -->
-  <i-cell-group wx:if="{{current == 0}}" i-class="full-height">
-    <wux-prompt visible="{{ m1.getLength(unfinished) == 0 }}" title="空空如也" text="下拉刷新" />
-    <block wx:for="{{unfinished}}" wx:key="apply_id">
+<!-- 未完成选项卡 -->
+<i-cell-group wx:if="{{current == 0}}">
+  <!-- <wux-prompt visible="{{ m1.getLength(unfinished) == 0 }}" title="空空如也" text="下拉刷新" /> -->
+  <block wx:for="{{unfinished}}" wx:key="apply_id">
+    <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder1?content={{m1.toJson(item)}}"
+    wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+  </block>
+</i-cell-group>
+<!-- 未完成选项卡 -->
+<!-- 已完成选项卡 -->
+<i-cell-group wx:if="{{current == 1}}">
+  <block wx:for="{{finished}}" wx:key="apply_id">
+    <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"  is-link url="../deorder/deorder1?content={{m1.toJson(item)}}"
+    wx:if="{{ all?true:all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+  </block>
+</i-cell-group>
+<!-- 已完成选项卡 -->
+<!-- 未通过选项卡 -->
+<i-cell-group wx:if="{{current == 2 && unverified}}">
+  <block wx:for="{{unverified}}" wx:key="apply_id">
       <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder1?content={{m1.toJson(item)}}"
       wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
-    </block>
-  </i-cell-group>
-  <!-- 未完成选项卡 -->
-  <!-- 已完成选项卡 -->
-  <i-cell-group wx:if="{{current == 1}}" i-class="full-height">
-    <wux-prompt visible="{{ m1.getLength(finished) == 0 }}" title="空空如也" text="下拉刷新" />
-    <block wx:for="{{finished}}" wx:key="apply_id">
-      <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"  is-link url="../deorder/deorder1?content={{m1.toJson(item)}}"
-      wx:if="{{ all?true:all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
-    </block>
-  </i-cell-group>
-  <!-- 已完成选项卡 -->
-  <!-- 未通过选项卡 -->
-  <i-cell-group wx:if="{{current == 2 && unverified}}" i-class="full-height">
-    <wux-prompt visible="{{ m1.getLength(unverified) == 0 }}" title="空空如也" text="下拉刷新" />
-    <block wx:for="{{unverified}}" wx:key="apply_id">
-        <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder1?content={{m1.toJson(item)}}"
-        wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
-    </block>
-  </i-cell-group>
-  <!-- 未通过选项卡 -->
+  </block>
+</i-cell-group>
+<!-- 未通过选项卡 -->
 <!-- 无数据 -->
-<i-load-more tip="暂无数据" loading="{{ loading }}"/>
+<wux-prompt visible="{{ m1.getLength(unfinished) == 0 && current == 0 }}" title="空空如也" text="下拉刷新" />
+<wux-prompt visible="{{ m1.getLength(finished) == 0 && current == 1 }}" title="空空如也" text="下拉刷新" />
+<wux-prompt visible="{{ m1.getLength(unverified) == 0 && current == 2 }}" title="空空如也" text="下拉刷新" />
+<i-load-more tip="上拉加载" loading="{{ loading }}"/>
 <!-- wxs模块 -->
 <wxs module="m1">
   // 筛选时间用
