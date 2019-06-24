@@ -65,7 +65,7 @@ Page({
       this.getapplyCount();
     }
     //获取未完成订单
-    let unfinished = this.getUnfinishedApplyCarList(0, 10);
+    let unfinished = this.getUnfinishedApplyCarList(1, 10);
     this.unshownData.unfinishedPage = 2;
     //获取已完成订单
     this.getApplyCarList(1, 10, 6)
