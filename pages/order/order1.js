@@ -52,28 +52,41 @@ Page({
     this.getapplyCount();
     // 如果用户类型不是司机则获取未通过订单
     if (this.unshownData.type !== 2) {
-      this.getApplyCarList(1, 10, 2)
-        .then((data) => {
-          that.setData({
-            unverified: data,
-            tabs: ['未完成', '已完成', '未通过']
-          });
-          that.unshownData.unverifiedPage = 2;
-        })
-        .catch(that.showToast);
-    } else {
-      this.getapplyCount();
+      that.setData({
+        tabs: ['未完成', '已完成', '未通过']
+      });
     }
-    //获取未完成订单
-    let unfinished = this.getUnfinishedApplyCarList(1, 10);
-    this.unshownData.unfinishedPage = 2;
-    //获取已完成订单
-    this.getApplyCarList(1, 10, 6)
-      .then((data) => {
-        that.setData({ finished: data });
-        that.unshownData.finishedPage = 2;
+    // 获取订单
+    this.getApplyCarList(1, 10, [0,1,2,3,4,5,6])
+      .then( data => {
+        let unfinished = [];
+        let finished = [];
+        let unverified = [];
+        for (let item of data) {
+          if(item.status === 6) { finished.push(item) } 
+          else if (item.status === 2 || item.status === 5) { unverified.push(item) }
+          else { unfinished.push(item) }
+        }
+        this.setData({
+          unfinished: unfinished,
+          finished: finished,
+          unverified: unverified
+        });
+        this.unshownData.finishedPage = 2;
+        this.unshownData.unfinishedPage = 2;
+        this.unverified = 2;
       })
       .catch(that.showToast);
+    // //获取未完成订单
+    // let unfinished = this.getUnfinishedApplyCarList(1, 10);
+    // this.unshownData.unfinishedPage = 2;
+    // //获取已完成订单
+    // this.getApplyCarList(1, 10, 6)
+    //   .then((data) => {
+    //     that.setData({ finished: data });
+    //     that.unshownData.finishedPage = 2;
+    //   })
+    //   .catch(that.showToast);
   }, // onShow() End
   onReachBottom() {
     let that = this;
@@ -83,25 +96,22 @@ Page({
     if (current == 0) {
       // this.getUnfinishedApplyCarList(this.unshownData.unfinishedPage, 10);
       let unfinished = [];
-      let p1 = this.getApplyCarList(this.unshownData.unfinishedPage, 10, 0);
-      let p2 = this.getApplyCarList(this.unshownData.unfinishedPage, 10, 1);
-      let p3 = this.getApplyCarList(this.unshownData.unfinishedPage, 10, 3);
-      let p4 = this.getApplyCarList(this.unshownData.unfinishedPage, 10, 4);
-      Promise.all([p1, p2, p3, p4]).then(values => {
-        unfinished = unfinished.concat(values[0]).concat(values[1]).concat(values[2]).concat(values[3]);
-        that.setData({ loading: false, unfinished: that.data.unfinished.concat(unfinished) });
-      }
-      );
+      // 获取未完成订单信息
+      this.getApplyCarList(this.unshownData.unfinishedPage, 10, [0, 1, 3, 4])
+        .then(values => {
+          unfinished = unfinished.concat(values);
+          that.setData({ loading: false, unfinished: that.data.unfinished.concat(unfinished) });
+        }).catch(that.showToast);
       this.unshownData.unfinishedPage += 1;
     } else if (current == 1) {
-      this.getApplyCarList(this.unshownData.finishedPage, 10, 6)
+      this.getApplyCarList(this.unshownData.finishedPage, 10, [6])
         .then((data) => {
           that.setData({ finished: that.data.finished.concat(data), loading: false });
           that.unshownData.finishedPage += 1;
         })
         .catch(that.showToast);
     } else {
-      this.getApplyCarList(this.unshownData.unverifiedPage, 10, 2)
+      this.getApplyCarList(this.unshownData.unverifiedPage, 10, [2, 5])
         .then((data) => {
           that.setData({ unverified: that.data.unverified.concat(data), loading: false });
           that.unshownData.unverifiedPage += 1;
