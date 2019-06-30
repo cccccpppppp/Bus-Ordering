@@ -15,7 +15,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.7.0",
 	"appid": "wx9f8f7c6fdbb30400",
-	"projectname": "DCXT",
+	"projectname": "Bus-Ordering",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

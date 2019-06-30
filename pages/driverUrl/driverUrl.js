@@ -1,6 +1,5 @@
 const app = getApp();
 var host = app.globalData.host;
-var page = 1;
 Page({
 
   data: {
@@ -18,7 +17,6 @@ Page({
   },
 
   onShow: function (options) {
-    page = 1;
     var that = this;
     this.getdata();
   },
@@ -27,16 +25,13 @@ Page({
   getdata() {
     var that = this;
     wx.request({
-      url: host + 'miniprogram/Common/applyCarList',
+      url: host + 'miniprogram/driver/waiting',
       data: {
         sessionid: that.data.sessionid,
-        page: page,
-        number: 10,
-        status: 1
       },
       success(res) {
         that.setData({
-          order: that.data.order.concat(res.data.data),
+          order: res.data.data
         })
         console.log(that.data.order)
         page++;
@@ -45,16 +40,9 @@ Page({
             haddata: false
           })
         }
-        else if (res.data.data.length == 10) {
-          that.setData({
-            haddata: true,
-            hadmore: true
-          })
-        }
         else {
           that.setData({
             haddata: true,
-            hadmore: false
           })
         }
       },
