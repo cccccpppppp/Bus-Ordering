@@ -63,7 +63,6 @@ Page({
       },
       success(res)
       {
-        page = 1;
         that.setData({
           order : []
         })
