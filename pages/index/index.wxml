@@ -1,0 +1,37 @@
+<i-message id="message" />
+<!-- 加载 -->
+<view class="weui-loadmore" wx:if="{{reqStatus=='loading'}}">
+  <view class="weui-loading"></view>
+  <view class="weui-loadmore__tips">正在加载</view>
+</view>
+<!-- 加载 -->
+<!-- 错误重连 -->
+<view bindtap='reload' style='height: 100%' wx:if="{{ reqStatus=='fail' }}">
+  <wux-prompt title="加载失败" text="点击重新加载" />
+</view>
+<!-- 错误重连 -->
+<!-- 主界面 -->
+<block wx:if="{{reqStatus=='success'}}">
+  <!-- 公务用车 -->
+  <handle-type userType="0"></handle-type>
+  <!-- 公务用车 -->
+  <!-- 我的 -->
+  <!-- 我的 -->
+  <!-- tabBar -->
+  <!-- <view class="cu-bar tabbar bg-white shadow foot">
+    <view class="action" bindtap="NavChange" data-cur="gwyc">
+      <view class='cuIcon-cu-image'>
+        <image src="/images/icons/car{{PageCur=='gwyc'?'_cur':''}}.png"></image>
+      </view>
+      <view class="{{PageCur=='gwyc'?'text-green':'text-gray'}}">公务用车</view>
+    </view>
+    <view class="action" bindtap="NavChange" data-cur="mine">
+      <view class='cuIcon-cu-image'>
+        <image src="/images/icons/mine{{PageCur=='mine'?'_cur':''}}.png"></image>
+      </view>
+      <view class="{{PageCur=='mine'?'text-green':'text-gray'}}">我的</view>
+    </view>
+  </view> -->
+  <!-- tabBar -->
+</block>
+<!-- 主界面 -->

@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/driver/driver",
+    "pages/index/admin/admin",
+    "pages/index/user/user",
+    "pages/extra/extra"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "公务用车",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#888888",
+    "selectedColor": "#04BE02",
+    "borderStyle": "white",
+    "backgroundColor": "#f7f7f8",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "公务用车",
+        "iconPath": "images/icons/car.png",
+        "selectedIconPath": "images/icons/car_cur.png"
+      },
+      {
+        "pagePath": "pages/extra/extra",
+        "text": "我的",
+        "iconPath": "images/icons/mine.png",
+        "selectedIconPath": "images/icons/mine_cur.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 1000
+  },
+  "sitemapLocation": "sitemap.json"
+}

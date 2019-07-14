@@ -1,0 +1,12 @@
+@import "../../weui.wxss";
+.cu-tabbar-height {
+  min-height:100rpx;
+  height:calc(100rpx + env(safe-area-inset-bottom) / 2);
+}
+.scrollPage {
+  height:100vh;
+}
+.btnImg {
+    width: 50rpx;
+    height: 50rpx;
+}

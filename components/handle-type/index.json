@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "application": "../application/index",
+    "driver-check": "../driver-check/index",
+    "admin-check": "../admin-check/index"
+  }
+}
