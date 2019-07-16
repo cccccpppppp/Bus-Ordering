@@ -1,5 +1,6 @@
 <wux-spin nested spinning="{{ spinning }}" tip="Loading...">
-  <scroll-view scroll-y class="scrollPage">
+  <timeline wx:if="{{toTimeline}}" myOrder="{{applyCarLately}}"></timeline>
+  <scroll-view scroll-y class="scrollPage" wx:else>
     <form bindsubmit='submitCar'>
       <view class='contain'>
         <view class="weui-cells__title">出发</view>

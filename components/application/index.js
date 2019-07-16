@@ -24,7 +24,9 @@ Component({
    * 组件的初始数据
    */
   data: {
-    spinning: true,
+    applyCarLately: {},
+    toTimeline: false, // 跳转到timeline页面
+    spinning: true, // 加载中
     counter: 0,  // 文本域字数
     start_place: "", // 起始位置
     myInfo: {  // 我的信息
@@ -48,7 +50,22 @@ Component({
       post('miniprogram/Apply_car/applyCarLately')
       .then(data => {
         that.setData({spinning:false});
-        
+        let applyCarLately = data.data;
+        if (applyCarLately.status === 6) {
+          if (applyCarLately.is_can_comment) {
+            if (applyCarLately.comment === null) {
+              that.setData({
+                toTimeline: true,
+                applyCarLately: applyCarLately
+              })
+            }
+          }
+        } else {
+          that.setData({
+            toTimeline: true,
+            applyCarLately: applyCarLately
+          })
+        }
       })
       this.setData({
         myInfo: wx.getStorageSync("user_info"),
@@ -117,26 +134,9 @@ Component({
       .then(res => {
         let departments = res.data;
           if (departments) {
-            this.setData({
-              departments: departments
-            })
+            this.setData({departments: departments})
           }
       })
-      // let sessionid = app.globalData.sessionid;
-      // wx.request({
-      //   url: host + "miniprogram/Common/allDepartment",
-      //   data: {
-      //     sessionid: sessionid
-      //   },
-      //   success(res) {
-      //     let departments = res.data.data;
-      //     if (departments) {
-      //       that.setData({
-      //         departments: departments
-      //       })
-      //     }
-      //   } // success() END
-      // }) // wx.request() END
     },
     bindDepartmentChange(e) {
       this.setData({
@@ -204,7 +204,7 @@ Component({
 
     // 申请用车
     submitCar: function (e) {
-      // console.log("form发生了submit事件，携带的数据为：", e.detail.value);
+      let that = this;
       const params = e.detail.value;
       let wxValidate = this.wxValidate;
       let departments = this.data.departments;
@@ -218,48 +218,64 @@ Component({
       let start_place = params.start_place;
       let start_place_latitude = this.data.start_place_latitude;
       let start_place_longitude = this.data.start_place_longitude;
-      //校验表单
+      let form = {
+        department_id: departments[dIndex].id,
+        name: name,
+        phone: phone,
+        people_number: people_number,
+        start_place: start_place,
+        start_place_latitude: start_place_latitude,
+        start_place_longitude: start_place_longitude,
+        destination_place: destination_place,
+        go_time: go_time,
+        reason: reason
+      }
+      // 校验表单
       if (!wxValidate.checkForm(params)) {
         const error = wxValidate.errorList[0];
         this.showModal(error);
         return false;
       } else {
-        let sessionid = app.globalData.sessionid;
-        wx.request({
-          url: host + "miniprogram/Apply_car/applyCar",
-          data: {
-            sessionid: sessionid,
-            department_id: departments[dIndex].id,
-            name: name,
-            phone: phone,
-            people_number: people_number,
-            start_place: start_place,
-            start_place_latitude: start_place_latitude,
-            start_place_longitude: start_place_longitude,
-            destination_place: destination_place,
-            go_time: go_time,
-            reason: reason
-          },
-          method: "POST",
-          success: res => {
-            let status = res.data.status;
-            if (status == 0 || status == 1) {
-              wx.redirectTo({
-                url: "./loading"
-              });
-            } else {
-              wx.showToast({
-                title: 请求失败,
-                icon: "none"
-              });
-            }
-          },
-          fail() {
-            wx.showModal({
-              title: '登陆异常',
-            })
-          }
-        });
+        post("miniprogram/Apply_car/applyCar", form)
+          .then(res => {
+            that.setData({ toTimeline: true })
+          })
+        // let sessionid = app.globalData.sessionid;
+        // wx.request({
+        //   url: host + "miniprogram/Apply_car/applyCar",
+        //   data: {
+        //     sessionid: sessionid,
+        //     department_id: departments[dIndex].id,
+        //     name: name,
+        //     phone: phone,
+        //     people_number: people_number,
+        //     start_place: start_place,
+        //     start_place_latitude: start_place_latitude,
+        //     start_place_longitude: start_place_longitude,
+        //     destination_place: destination_place,
+        //     go_time: go_time,
+        //     reason: reason
+        //   },
+        //   method: "POST",
+        //   success: res => {
+        //     let status = res.data.status;
+        //     if (status == 0 || status == 1) {
+        //       wx.redirectTo({
+        //         url: "./loading"
+        //       });
+        //     } else {
+        //       wx.showToast({
+        //         title: 请求失败,
+        //         icon: "none"
+        //       });
+        //     }
+        //   },
+        //   fail() {
+        //     wx.showModal({
+        //       title: '登陆异常',
+        //     })
+        //   }
+        // });
       }
     } // submitCar() END
   }

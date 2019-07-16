@@ -33,7 +33,7 @@
     ]
   },
   "networkTimeout": {
-    "request": 1000
+    "request": 3000
   },
   "sitemapLocation": "sitemap.json"
 }
