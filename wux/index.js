@@ -31,6 +31,9 @@ const $wuxCalendar = (selector = '#wux-calendar', ctx) => getCtx(selector, ctx)
 const $startWuxRefresher = (selector = '#wux-refresher', ctx) => getCtx(selector, ctx).triggerRefresh()
 const $stopWuxRefresher = (selector = '#wux-refresher', ctx) => getCtx(selector, ctx).finishPullToRefresh()
 const $stopWuxLoader = (selector = '#wux-refresher', ctx, isEnd) => getCtx(selector, ctx).finishLoadmore(isEnd)
+const $wuxRefreshing = (selector = '#wux-refresher', ctx) => getCtx(selector, ctx).refreshing()
+const $wuxTail = (selector = '#wux-refresher', ctx) => getCtx(selector, ctx).tail()
+const $wuxHide = (selector = '#wux-refresher', ctx) => getCtx(selector, ctx).hide()
 
 export {
     $wuxActionSheet,
@@ -50,4 +53,8 @@ export {
     $stopWuxLoader,
     $wuxCountDown,
     $wuxCountUp,
+    $wuxRefreshing,
+    $wuxTail,
+    $wuxHide,
+
 }

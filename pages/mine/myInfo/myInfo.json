@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "i-card": "/iView/card/index"
+    },
+    "navigationBarTitleText": "我的信息"
+}

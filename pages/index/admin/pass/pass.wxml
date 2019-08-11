@@ -1,0 +1,45 @@
+<view wx:if="{{ifload}}">
+  <view class="weui-loadmore">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+</view>
+
+<view wx:else>
+  <view class="page__bd">
+
+    <!-- <view class="weui-btn-area">
+    <button type="default" bindtap="open">{{drive_name}}</button>
+  </view> -->
+
+    <view class="weui-cells__title">请选择一个司机</view>
+    <view class="weui-cells weui-cells_after-title">
+      <checkbox-group bindchange="checkboxChange">
+        <label class="weui-cell weui-check__label" wx:for="{{drive_data}}" wx:for-index='key' wx:key="{{key}}" id='{{key}}'>
+          <checkbox class="weui-check" value="{{key}}" checked="{{select_drive[id]}}" />
+          <view class="weui-cell__hd weui-check__hd_in-checkbox">
+            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+          </view>
+          <view class="weui-cell__bd">{{item.name}}</view>
+        </label>
+      </checkbox-group>
+    </view>
+
+  </view>
+
+  <view class="weui-cells__title">选择用户是否可以评论</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">允许用户评论该订单</view>
+      <view class="weui-cell__ft">
+        <switch checked bindchange="switch_check" />
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-btn-area">
+    <button class="weui-btn" type="primary" bindtap="post">确定</button>
+  </view>
+
+</view>

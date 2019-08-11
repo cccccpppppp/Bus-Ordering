@@ -1,7 +1,10 @@
 {
   "usingComponents": {
     "wux-prompt": "../../wux/prompt/index",
-    "handle-type": "../../components/handle-type/index",
-    "i-message": "../../iView/message/index"
+    "i-message": "../../iView/message/index",
+    "wux-refresher": "../../wux/refresher/index",
+    "application": "../../components/application/index",
+    "driver-check": "../../components/driver-check/index",
+    "admin-check": "../../components/admin-check/index"
   }
 }

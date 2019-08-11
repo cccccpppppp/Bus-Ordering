@@ -48,27 +48,27 @@ Component({
     attached: function () {
       let that = this;
       post('miniprogram/Apply_car/applyCarLately')
-      .then(data => {
-        that.setData({spinning:false});
-        let applyCarLately = data.data;
-        if (applyCarLately.status === 6) {
-          if (applyCarLately.is_can_comment) {
-            if (applyCarLately.comment === null) {
-              that.setData({
-                toTimeline: true,
-                applyCarLately: applyCarLately
-              })
+        .then(data => {
+          that.setData({spinning:false});
+          let applyCarLately = data.data;
+          if (applyCarLately.status === 6) {
+            if (applyCarLately.is_can_comment) {
+              if (applyCarLately.comment === null) {
+                that.setData({
+                  toTimeline: true,
+                  applyCarLately: applyCarLately
+                })
+              }
             }
+          } else if (applyCarLately.status !== 2) {
+            that.setData({
+              toTimeline: true,
+              applyCarLately: applyCarLately
+            })
           }
-        } else {
-          that.setData({
-            toTimeline: true,
-            applyCarLately: applyCarLately
-          })
-        }
-      })
+        })
       this.setData({
-        myInfo: wx.getStorageSync("user_info"),
+        myInfo: app.globalData.user_info,
         date: formatTimeNow.formatedDate,
         time: formatTimeNow.formatedTime,
         maxDate: formatMaxTime.formatedDate,
@@ -79,13 +79,7 @@ Component({
     }
   },
   wxValidate: {},
-  /**
-   * 组件的方法列表
-   */
   methods: {
-    /**
-   * 表单-验证字段
-   */
     initValidate: function () {
       const rules = {
         start_place: {
@@ -165,6 +159,9 @@ Component({
         counter: t_text
       });
     },
+    b2aListener(e) {
+      this.setData({ toTimeline: false })
+    },
     // 打开自带地图选择起始位置并返回位置信息
     chooseStartAdd: function () {
       let that = this;
@@ -234,48 +231,19 @@ Component({
       if (!wxValidate.checkForm(params)) {
         const error = wxValidate.errorList[0];
         this.showModal(error);
+        console.log('验证未通过');
         return false;
       } else {
         post("miniprogram/Apply_car/applyCar", form)
           .then(res => {
-            that.setData({ toTimeline: true })
+            post('miniprogram/Apply_car/applyCarLately')
+              .then(res => {
+                that.setData({
+                  toTimeline: true,
+                  applyCarLately: res.data
+                })
+              })
           })
-        // let sessionid = app.globalData.sessionid;
-        // wx.request({
-        //   url: host + "miniprogram/Apply_car/applyCar",
-        //   data: {
-        //     sessionid: sessionid,
-        //     department_id: departments[dIndex].id,
-        //     name: name,
-        //     phone: phone,
-        //     people_number: people_number,
-        //     start_place: start_place,
-        //     start_place_latitude: start_place_latitude,
-        //     start_place_longitude: start_place_longitude,
-        //     destination_place: destination_place,
-        //     go_time: go_time,
-        //     reason: reason
-        //   },
-        //   method: "POST",
-        //   success: res => {
-        //     let status = res.data.status;
-        //     if (status == 0 || status == 1) {
-        //       wx.redirectTo({
-        //         url: "./loading"
-        //       });
-        //     } else {
-        //       wx.showToast({
-        //         title: 请求失败,
-        //         icon: "none"
-        //       });
-        //     }
-        //   },
-        //   fail() {
-        //     wx.showModal({
-        //       title: '登陆异常',
-        //     })
-        //   }
-        // });
       }
     } // submitCar() END
   }

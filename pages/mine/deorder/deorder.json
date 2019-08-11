@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "详细信息",
+  "usingComponents": {
+    "i-card": "/iView/card/index",
+    "i-button": "/iView/button/index",
+    "wux-button": "/wux/button/index",
+    "wux-dialog": "/wux/dialog/index"
+  }
+}

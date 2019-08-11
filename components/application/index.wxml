@@ -1,5 +1,5 @@
 <wux-spin nested spinning="{{ spinning }}" tip="Loading...">
-  <timeline wx:if="{{toTimeline}}" myOrder="{{applyCarLately}}"></timeline>
+  <timeline wx:if="{{toTimeline}}" myOrder="{{applyCarLately}}" bind:back2application='b2aListener'></timeline>
   <scroll-view scroll-y class="scrollPage" wx:else>
     <form bindsubmit='submitCar'>
       <view class='contain'>

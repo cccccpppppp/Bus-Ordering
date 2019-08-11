@@ -16,7 +16,7 @@ Component({
    */
   data: {
     loading: false,
-    normalList: ['已提交', '已审核通过', '部分司机已确认', '所有司机已确认', '已完成'],
+    normalList: ['已提交', '已审核', '部分司机已确认', '所有司机已确认', '已完成', '已评价'],
     // statusList: ['已提交', '已审核通过', '未通过', '部分司机已确认', '所有司机已确认', '已取消', '已完成'],
     scroll: 3, // 订单状态值
     scrollObj: {  //订单状态对应的steps下标值
@@ -32,9 +32,20 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onRefresh() {
+    // 转到评价页面
+    toRate: function () {
+      wx.navigateTo({
+        url: "../../pages/index/rate/rate?id=" + this.data.myOrder.apply_id
+      });
+    },
+    // 转到订车页面
+    toApplication() {
+      this.triggerEvent('back2application');
+    },
+    // 请求最近一单信息
+    getApplyCarLately() {
       let that = this;
-      this.setData({ loading:true });
+      this.setData({ loading: true });
       post('miniprogram/Apply_car/applyCarLately')
         .then(data => {
           let applyCarLately = data.data;
@@ -64,7 +75,12 @@ Component({
   },
   lifitimes: {
     attached() {
-
+      
     },
+  },
+  pageLifetimes: {
+    show: function () {
+      this.getApplyCarLately();
+    }
   }
 })

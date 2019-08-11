@@ -1,2 +1,41 @@
-<!--components/admin-check/index.wxml-->
-<text>components/admin-check/index.wxml</text>
+<wux-prompt title="暂无新订单" text="下拉刷新"  visible="{{ checkList.length === 0 }}"/>
+<view class="weui-form-preview" wx:for="{{checkList}}" wx:key="{{apply_id}}">
+  <view wx:if="{{item.type==1}}" class="weui-form-preview__hd">
+    <view class="weui-form-preview__label">申请司机</view>
+    <view class="weui-form-preview__value_in-hd">{{item.drivers[0].name}}</view>
+  </view>
+  <view wx:else class="weui-form-preview__hd">
+    <view class="weui-form-preview__label">乘车人姓名</view>
+    <view class="weui-form-preview__value_in-hd">{{item.name}}</view>
+  </view>
+  <view class="weui-form-preview__bd">
+    <view class="weui-form-preview__item">
+      <view class="weui-form-preview__label">出发地</view>
+      <view class="weui-form-preview__value">{{item.start_place}}</view>
+    </view>
+    <view class="weui-form-preview__item">
+      <view class="weui-form-preview__label">目的地</view>
+      <view class="weui-form-preview__value">{{item.destination_place}}</view>
+    </view>
+    <view class="weui-form-preview__item">
+      <view class="weui-form-preview__label">申请人姓名</view>
+      <view class="weui-form-preview__value">{{item.apply.name}}</view>
+    </view>
+    <view class="weui-form-preview__item">
+      <view class="weui-form-preview__label">出发时间</view>
+      <view class="weui-form-preview__value">{{item.go_time}}</view>
+    </view>
+    <view class="weui-form-preview__item">
+      <view class="weui-form-preview__label">理由</view>
+      <view class="weui-form-preview__value">{{item.reason}}</view>
+    </view>
+  </view>
+  <view class="weui-form-preview__ft" wx:if="{{item.type == 1}}">
+    <navigator data-id='{{item.apply_id}}' class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" bindtap='refuse'>拒绝</navigator>
+    <navigator data-id='{{item.apply_id}}' class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='pass'>同意</navigator>
+  </view>
+  <view class="weui-form-preview__ft" wx:else>
+    <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" url="../../pages/index/admin/refuse/refuse?id={{item.apply_id}}">拒绝</navigator>
+    <navigator class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" url="../../pages/index/admin/pass/pass?id={{item.apply_id}}">同意</navigator>
+  </view>
+</view>

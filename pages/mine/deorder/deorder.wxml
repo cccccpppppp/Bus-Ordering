@@ -1,0 +1,49 @@
+<wux-dialog id="wux-dialog" />
+<wux-dialog id="wux-dialog--alert" />
+<view class="card">
+  <i-card title="行程" extra="{{status[content.status]}}">
+    <view slot="content">出发地：{{content.start_place}}</view>
+    <view slot="content">目的地：{{content.destination_place}}</view>
+    <view slot="content" wx:if="{{content.km}}">行驶距离：{{content.km}}km</view>
+    <view slot="footer">出发时间：{{content.go_time}}</view>
+    <view slot="footer" wx:if="{{content.finish_time}}">完成时间：{{content.finish_time}}</view>
+  </i-card>
+</view>
+<view class="card" wx:if="{{content.comment}}">
+  <i-card title="评价" extra="{{content.comment.mark/2}}星">
+    <view slot="content" wx:if="{{content.comment.is_familiar_route}}">·熟悉路况</view>
+    <view slot="content" wx:if="{{content.comment.is_punctuality}}">·准时</view>
+    <view slot="content" wx:if="{{content.comment.is_familiar_route}}">·车上有水</view>
+    <view slot="content" wx:if="{{!content.comment.is_have_peculiar_smell}}">·车上无异味</view>
+    <view slot="content" wx:if="{{content.comment.is_safe_driving}}">·安全驾驶</view>
+    <view slot="content" wx:if="{{content.comment.is_clean}}">·车上清洁干净</view>
+    <view slot="content" wx:if="{{content.comment.is_help_luggage}}">·帮忙拿行李</view>
+    <view slot="content" wx:if="{{content.comment.content}}">其他评价：{{content.comment.content}}</view>
+  </i-card>
+</view>
+<view class="card">
+  <i-card title="订单信息" extra="{{content.type?'司机添加':'用户申请'}}">
+    <view slot="content">申请用户：{{content.apply.name}}</view>
+    <view slot="content">乘车人：{{content.name}}</view>
+    <view slot="content">联系方式：{{content.apply.phone}}</view>
+    <view slot="content">所属部门：{{content.department.name}}</view>
+    <view slot="content" wx:if="{{content.type===0}}">申请事由：{{content.reason}}</view>
+    <view slot="content" wx:if="{{content.type===1}}">添加事由：{{content.reason}}</view>
+    <view slot="content" wx:if="{{content.fail_cause}}">拒绝原因：{{content.fail_cause}}</view>
+    <view slot="content" wx:if="{{content.admin}}">审核人：{{content.admin.name}}</view>
+    <view slot="content" wx:if="{{content.admin}}">联系方式：{{content.admin.phone}}</view>
+    <view slot="footer" wx:if="{{content.check_time}}">审核时间：{{content.check_time}}</view>
+  </i-card>
+</view>
+<view class="card" wx:if="{{content.drivers.length}}">
+  <i-card title="司机信息">
+    <block wx:for="{{content.drivers}}" wx:key="content.phone">
+      <view slot="content">姓名：{{item.name}}</view>
+      <view slot="content">联系方式：{{item.phone}}</view>
+    </block>
+  </i-card>
+</view>
+<view style='margin: 0 16px' wx:if="{{content.type === 0 && content.status !== 6 && content.status !== 2}}">
+  <wux-button block bind:click="cancel" type="assertive" wx:if="{{(content.status === 0 && type === 0) || type === 1}}">取消订单</wux-button>
+  <wux-button block type="positive" bind:click="prompt" wx:if="{{(content.status === 3 || content.status === 4) && type === 2}}">完成订单</wux-button>
+</view>

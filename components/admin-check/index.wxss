@@ -1,1 +1,3 @@
-/* components/admin-check/index.wxss */
+.weui-form-preview{
+  margin-bottom: 10rpx;
+}

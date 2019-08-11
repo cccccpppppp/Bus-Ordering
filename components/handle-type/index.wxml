@@ -1,3 +1,0 @@
-<application wx:if="{{ userType === 0 }}"></application>
-<admin-check wx:if="{{ userType === 1 }}"></admin-check>
-<driver-check wx:if="{{ userType === 2 }}"></driver-check>

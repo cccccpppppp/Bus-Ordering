@@ -1,4 +1,6 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "wux-prompt": "../../wux/prompt/index"
+  }
 }

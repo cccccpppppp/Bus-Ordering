@@ -1,0 +1,34 @@
+<view class='page'>
+  <form bindsubmit='submitRate'>
+    <view class="weui-cells__title">基本评价</view>
+    <view class="weui-cells weui-cells_after-title">
+      <checkbox-group bindchange="checkboxChange" name='basicRate'>
+        <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
+          <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+          <view class="weui-cell__hd weui-check__hd_in-checkbox">
+            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+          </view>
+          <view class="weui-cell__bd">{{item.name}}</view>
+        </label>
+      </checkbox-group>
+    </view>
+    <i-cell title="评星">
+      <i-rate class="rate" bind:change="starsOnChange" value="{{starIndex}}" size='32'>
+        {{starIndex}}星
+      </i-rate>
+    </i-cell>
+    <view class="weui-cells__title">额外说明</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入您的评价" style="height: 5em" bindinput="bindText" maxlength='200' name='extraRate' />
+          <view class="weui-textarea-counter">{{counter}}/200</view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" form-type='submit'>提交</button>
+    </view>
+  </form>
+</view>

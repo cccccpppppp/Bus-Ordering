@@ -4,7 +4,16 @@
     "pages/index/driver/driver",
     "pages/index/admin/admin",
     "pages/index/user/user",
-    "pages/extra/extra"
+    "pages/mine/mine",
+    "pages/index/rate/rate",
+    "pages/test",
+    "pages/index/admin/pass/pass",
+    "pages/index/admin/refuse/refuse",
+    "pages/mine/addOrder/addOrder",
+    "pages/mine/changeInfo/changeInfo",
+    "pages/mine/history/history",
+    "pages/mine/myInfo/myInfo",
+    "pages/mine/deorder/deorder"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -25,7 +34,13 @@
         "selectedIconPath": "images/icons/car_cur.png"
       },
       {
-        "pagePath": "pages/extra/extra",
+        "pagePath": "pages/mine/history/history",
+        "text": "历史订单",
+        "iconPath": "images/icons/history.png",
+        "selectedIconPath": "images/icons/history_cur.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
         "text": "我的",
         "iconPath": "images/icons/mine.png",
         "selectedIconPath": "images/icons/mine_cur.png"
