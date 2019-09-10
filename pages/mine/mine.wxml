@@ -10,12 +10,12 @@
     <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
   </view>
   <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
-    <view class="cu-item arrow">
+    <!-- <view class="cu-item arrow">
       <navigator class="content" url="/pages/mine/history/history" hover-class="none">
         <text class="cuIcon-formfill text-green"></text>
         <text class="text-grey">历史订单</text>
       </navigator>
-    </view>
+    </view> -->
     <view class="cu-item arrow">
       <navigator class="content" url="/pages/mine/myInfo/myInfo" hover-class="none">
         <image src="/images/logo.png" class="png" mode="aspectFit"></image>

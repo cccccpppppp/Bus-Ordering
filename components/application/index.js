@@ -51,6 +51,7 @@ Component({
         .then(data => {
           that.setData({spinning:false});
           let applyCarLately = data.data;
+          // 
           if (applyCarLately.status === 6) {
             if (applyCarLately.is_can_comment) {
               if (applyCarLately.comment === null) {
@@ -60,7 +61,7 @@ Component({
                 })
               }
             }
-          } else if (applyCarLately.status !== 2) {
+          } else if (applyCarLately.status !== 2 && applyCarLately.status !== 5) {
             that.setData({
               toTimeline: true,
               applyCarLately: applyCarLately

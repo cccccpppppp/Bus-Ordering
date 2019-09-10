@@ -1,21 +1,24 @@
 <!-- 图标 -->
-<view class="solids-bottom padding-xs flex align-center bg-white" wx:if="{{scroll==2 || scroll==5}}">
+<view class="solids-bottom padding-xs flex align-center bg-white" wx:if="{{myOrder.status===2 || myOrder.status===5}}">
   <view class="flex-sub text-center">
     <view class="text-xsl padding">
       <text class="cuIcon-roundclosefill text-red"></text>
     </view>
     <view class="text-xl padding">
-      <text class="text-black text-bold">{{statusList[scroll]}}!</text>
-      <text class="text-black text-bold" wx:if="{{scroll==2}}">拒绝理由：{{myOrder.cancel_cause}}</text>
+      <text class="text-black text-bold">{{statusList[myOrder.status]}}!</text>
+      <text class="text-black text-bold" wx:if="{{myOrder.status==2}}">拒绝理由：{{myOrder.cancel_cause}}</text>
     </view>
   </view>
 </view>
 <!-- 图标 -->
 
 <!-- 进度 -->
-<view class="bg-white padding">
+<view class="bg-white padding" wx:else>
   <view class="cu-steps">
-    <view class="cu-item {{index>scrollObj[myOrder.status]?'':'text-blue'}}" wx:for="{{normalList}}" wx:key>
+    <!-- <view  wx:if="{{myOrder.status === 6 && myOrder.is_can_comment==1 && comment === null}}" class="cu-item {{index>scrollObj[myOrder.status]?'':'text-blue'}}" wx:for="{{normalList}}" wx:key>
+      <text class="num" data-index="{{index + 1}}"></text> {{item}}
+    </view> -->
+    <view class="cu-item {{index>scrollObj[myOrder.status==6&&myOrder.is_can_comment==1 && comment === null?'done':myOrder.status]?'':'text-blue'}}" wx:for="{{normalList}}" wx:key>
       <text class="num" data-index="{{index + 1}}"></text> {{item}}
     </view>
   </view>
@@ -63,7 +66,7 @@
 <!-- 订单信息 -->
 
 <!-- 联系司机 -->
-<view class="cu-list menu sm-border card-menu margin-top" wx:if="{{myOrder.drivers.length !== 0}}">
+<view class="cu-list menu sm-border card-menu margin-top" wx:if="{{myOrder.drivers.length}}">
   <view class="cu-item text-lg padding">
     <text class="text-black">联系司机</text>
   </view>
@@ -99,9 +102,10 @@
   <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #0081ff" bindtap="getApplyCarLately">
     <text class="cuIcon-loading2 iconfont-spin" wx:if="{{loading}}"></text> 刷新</button>
   <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #e54d42" bindtap="cancel" wx:if="{{myOrder.status==0}}">取消订单</button>
-  <block wx:if="{{myOrder.status==6}}">
-    <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #0081ff" bindtap="toRate" wx:if="{{myOrder.is_can_comment==1 && comment == null}}">评价本次行程</button>
-    <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #e54d42" bindtap="toApplication" wx:if="{{ myOrder.is_can_comment==0 || myOrder.comment != null }}">返回预定页面</button>
+  <block wx:if="{{myOrder.status===6}}">
+    <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #0081ff" bindtap="toRate" wx:if="{{myOrder.is_can_comment===1 && comment === null}}">评价本次行程</button>
+    <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #e54d42" bindtap="toApplication" wx:if="{{ myOrder.is_can_comment===0 || myOrder.comment !== null }}">返回预定页面</button>
   </block>
+  <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #e54d42" bindtap="toApplication" wx:elif="{{ myOrder.status===5 }}">返回预定页面</button>
 </view>
 <!-- 按钮 -->
