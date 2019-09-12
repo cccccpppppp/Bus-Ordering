@@ -92,7 +92,7 @@ Page({
   }, // onLoad() END
   onShow() {
     let that = this;
-    $wuxRefreshing();
+    // $wuxRefreshing();
     // this.getapplyCount();
     myGet('miniprogram/Common/applyCount', {status: 6})
       .then(res => that.setData({ count: [0, res.data, 0] }))
@@ -115,7 +115,7 @@ Page({
         this.unshownData.finishedPage = 2;
         this.unshownData.unfinishedPage = 2;
         this.unshownData.unverifiedPage = 2;
-        $stopWuxRefresher();
+        // $stopWuxRefresher();
       })
       .catch(() => $stopWuxRefresher())
   }, // onShow() End
@@ -146,12 +146,6 @@ Page({
       month: month,
       monthArray: monthArray
     });
-  },
-  // swiper换页
-  switchSwiper(e) {
-    this.setData({
-      current: e.detail.current
-    })
   },
   // tabs切页
   handleChange({ detail }) {

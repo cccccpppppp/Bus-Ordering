@@ -13,7 +13,8 @@
     "pages/mine/changeInfo/changeInfo",
     "pages/mine/history/history",
     "pages/mine/myInfo/myInfo",
-    "pages/mine/deorder/deorder"
+    "pages/mine/deorder/deorder",
+    "pages/mine/his/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

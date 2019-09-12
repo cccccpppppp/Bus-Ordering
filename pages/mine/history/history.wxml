@@ -1,52 +1,70 @@
-<!-- tabs -->
-<i-tabs current="{{ current }}" bindchange="handleChange">
-  <block wx:for="{{tabs}}" wx:key="*this" wx:for-index="tabsIndex">
-    <i-tab key="{{tabsIndex}}" title="{{item}}" count="{{count[tabsIndex]}}"></i-tab>
-  </block>
-</i-tabs>
-<view style='display: flex'>
-  <picker mode="date" value="{{chosenDate}}" start="2018-01" end="{{nowDate}}" fields="month" bindchange='setDate'>
-    <i-button inline shape="circle" size="small">{{chosenDate}}</i-button>
-  </picker>
-  <i-button inline shape="circle" size="small" bind:click="setAll">{{all?"全部":"按月筛选"}}</i-button>
-  <!-- <view style='align-self: center; margin-left: auto; font-size:20'>数量：</view> -->
-</view>
-  <!-- 未完成选项卡 -->
-  <wux-refresher id="wux-refresher" bind:pulling="onPulling" bind:refresh="onRefresh" bind:loadmore="onLoadmore" scrollTop="{{scrollTop}}" wx:if="{{current == 0}}">
-    <i-cell-group>
-      <block wx:for="{{unfinished}}" wx:key="apply_id">
-        <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?content={{m1.toJson(item)}}"
-        wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+<wux-refresher id="wux-refresher" bind:pulling="onPulling" bind:refresh="onRefresh" bind:loadmore="onLoadmore" scrollTop="{{scrollTop}}">
+  <view class="page">
+    <view class="page__bd">
+      <!-- tabs -->
+      <i-tabs current="{{ current }}" bindchange="handleChange">
+        <block wx:for="{{tabs}}" wx:key="*this" wx:for-index="tabsIndex">
+          <i-tab key="{{tabsIndex}}" title="{{item}}" count="{{count[tabsIndex]}}"></i-tab>
+        </block>
+      </i-tabs>
+      <!-- tabs -->
+      <view style='display: flex'>
+        <picker mode="date" value="{{chosenDate}}" start="2018-01" end="{{nowDate}}" fields="month" bindchange='setDate'>
+          <i-button inline shape="circle" size="small">{{chosenDate}}</i-button>
+        </picker>
+        <i-button inline shape="circle" size="small" bind:click="setAll">{{all?"全部":"按月筛选"}}</i-button>
+        <!-- <view style='align-self: center; margin-left: auto; font-size:20'>数量：</view> -->
+      </view>
+      <!-- 未完成选项卡 -->
+      <block wx:if="{{current == 0}}">
+        <i-cell-group>
+          <block wx:for="{{unfinished}}" wx:key="apply_id">
+            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?content={{m1.toJson(item)}}" wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+          </block>
+        </i-cell-group>
+        <view class="text-center" wx:if="{{!unfinished.length}}">
+          <text class="text-black text-bold text-xl">暂无订单数据\n</text>
+          <text>请下拉刷新</text>
+        </view>
+        <!-- <view class="prompt-container">
+          <wux-prompt visible="{{ unfinished.length == 0 && current == 0 }}" title="空空如也" text="下拉刷新" />
+        </view> -->
       </block>
-    </i-cell-group>
-    <wux-prompt visible="{{ unfinished.length == 0 && current == 0 }}" title="空空如也" text="下拉刷新" />
-  </wux-refresher>
-  <!-- 未完成选项卡 -->
-  <!-- 已完成选项卡 -->
-  <wux-refresher id="wux-refresher" bind:pulling="onPulling" bind:refresh="onRefresh" bind:loadmore="onLoadmore" scrollTop="{{scrollTop}}" wx:if="{{current == 1}}">
-    <i-cell-group>
-      <block wx:for="{{finished}}" wx:key="apply_id">
-        <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}"  is-link url="../deorder/deorder?content={{m1.toJson(item)}}"
-        wx:if="{{ all?true:all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+      <!-- 未完成选项卡 -->
+      <!-- 已完成选项卡 -->
+      <block wx:if="{{current == 1}}">
+        <i-cell-group>
+          <block wx:for="{{finished}}" wx:key="apply_id">
+            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?content={{m1.toJson(item)}}" wx:if="{{ all?true:all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+          </block>
+        </i-cell-group>
+        <view class="text-center" wx:if="{{!finished.length}}">
+          <text class="text-black text-bold text-xl">暂无订单数据\n</text>
+          <text>请下拉刷新</text>
+        </view>
+        <!-- <wux-prompt visible="{{ finished.length == 0 && current == 1 }}" title="空空如也" text="下拉刷新" /> -->
       </block>
-    </i-cell-group>
-    <wux-prompt visible="{{ finished.length == 0 && current == 1 }}" title="空空如也" text="下拉刷新" />
-  </wux-refresher>
-  <!-- 已完成选项卡 -->
-  <!-- 未通过选项卡 -->
-  <wux-refresher id="wux-refresher" bind:pulling="onPulling" bind:refresh="onRefresh" bind:loadmore="onLoadmore" scrollTop="{{scrollTop}}" wx:if="{{current == 2 && unverified}}">
-    <i-cell-group>
-      <block wx:for="{{unverified}}" wx:key="apply_id">
-          <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?content={{m1.toJson(item)}}"
-          wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+      <!-- 已完成选项卡 -->
+      <!-- 未通过选项卡 -->
+      <block wx:if="{{current == 2 && unverified}}">
+        <i-cell-group>
+          <block wx:for="{{unverified}}" wx:key="apply_id">
+            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?content={{m1.toJson(item)}}" wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+          </block>
+        </i-cell-group>
+        <view class="text-center" wx:if="{{!unverified.length}}">
+          <text class="text-black text-bold text-xl">暂无订单数据\n</text>
+          <text>请下拉刷新</text>
+        </view>
+        <!-- <wux-prompt visible="{{ unverified.length == 0 && current == 2 }}" title="空空如也" text="下拉刷新" /> -->
       </block>
-    </i-cell-group>
-    <wux-prompt visible="{{ unverified.length == 0 && current == 2 }}" title="空空如也" text="下拉刷新" />
-  </wux-refresher>
-  <!-- 未通过选项卡 -->
+      <!-- 未通过选项卡 -->
+    </view>
+  </view>
+</wux-refresher>
 <!-- wxs模块 -->
 <wxs module="m1">
-  // 筛选时间用
+// 筛选时间用
   var matchDate = function(go_time) {
     return go_time.slice(0, 7);
   }
