@@ -3,6 +3,7 @@ const app = getApp();
 let host = app.globalData.host;
 const request = require("../../utils/request.js");
 let post = request.post;
+let myGet = request.myGet;
 Component({
   options: {
     addGlobalClass: true,
@@ -44,7 +45,7 @@ Component({
       let that = this;
       that.triggerEvent('stoploading', {}, {});
     },
-    // 同意司机
+    // 司机确认订单
     getIt(e) {
       let that = this;
       wx.showModal({
@@ -52,12 +53,12 @@ Component({
         content: '确认接受订单？',
         success(res) {
           if (res.confirm) {
-            let id = e.currentTarget.dataset.id;
+            let apply_id = e.currentTarget.dataset.id;
             let param = {
-              id: id,
+              apply_id: apply_id,
             }
             wx.showLoading();
-            post("miniprogram/Admin/check", param)
+            post("miniprogram/Driver/accept", param)
               .then(res => {
                 wx.hideLoading();
                 if (res.data.msg == "成功") {
@@ -67,7 +68,7 @@ Component({
                     icon: "success",
                     duration: 3000
                   });
-                  $wuxRefreshing();
+                  // that.triggerEvent('onLoadmore', {}, {});
                   that.getCheckList();
                 } else {
                   //提示失败原因
@@ -76,9 +77,15 @@ Component({
                     icon: "none",
                     duration: 3000
                   });
+                  // that.triggerEvent('onLoadmore', {}, {});
+                  that.getCheckList();
                 }
               })
-              .catch(() => wx.hideLoading())
+              .catch(() => {
+                wx.hideLoading()
+                // that.triggerEvent('onLoadmore', {}, {});
+                this.getCheckList();
+                })
           }
         }
       })

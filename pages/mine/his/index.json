@@ -1,6 +1,0 @@
-{
-    "navigationBarTitleText": "Prompt",
-    "usingComponents": {
-        "wux-prompt": "../../wux/prompt/index"
-    }
-}

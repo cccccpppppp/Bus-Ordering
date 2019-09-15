@@ -14,9 +14,14 @@ const post = (url, param = {}) => {
       url: host + url,
       method: 'POST',
       data: param,
-      success: res => {
-        if(res.statusCode === 200) {
-          resolve(res.data);
+      success(res) {
+        if (res.statusCode === 200) {
+          if (res.data.status === 0) {
+            resolve(res.data); // 如果状态码为200且data.status为0时promise对象状态为resolved
+          }
+          else {
+            reject(res.data); // 如果data.status不为0则promise对象状态为rejected
+          }
         }
         else {
           wx.showModal({
@@ -54,17 +59,28 @@ const myGet = (url, param = {}) => {
       url: host + url,
       method: 'GET',
       data: param,
-      success: res => {
+      success(res) {
         if (res.statusCode === 200) {
-          resolve(res.data);
-        }
-        else {
+          if (res.data.status === 0) {
+            resolve(res.data); // 如果状态码为200且data.status为0时promise对象状态为resolved
+          }
+          else {
+            // 显示错误信息
+            wx.showModal({
+              title: '请求错误',
+              content: '错误信息：' + res.data.msg,
+              showCancel: false
+            })
+            reject(res.data); // 如果data.status不为0则promise对象状态为rejected
+          }
+        } else { // 如果状态码不为200
+          //显示错误信息
           wx.showModal({
             title: '请求错误',
             content: '错误代码：' + res.statusCode,
             showCancel: false
           })
-          reject(res.statusCode);
+          reject(res.statusCode);  //状态为reject
         }
       },
       fail() {

@@ -49,10 +49,12 @@ Page({
   onRefresh() {
     if (this.selectComponent("#application")) {
       $stopWuxRefresher();
-      console.log('普通用户')
+      console.log('普通用户onRefresh')
     } else if (this.selectComponent("#driver-check")) {
       this.selectComponent("#driver-check").getCheckList();
+      console.log('司机onRefresh')
     } else if (this.selectComponent("#admin-check")) {
+      console.log('司机onRefresh')
       this.selectComponent("#admin-check").getCheckList();
     }
   },
@@ -60,10 +62,13 @@ Page({
   onLoadmore() {
     if (this.selectComponent("#application")) {
       this.onStopLoading();
+      console.log('普通用户onLoadmore')
     } else if (this.selectComponent("#driver-check")) {
       this.selectComponent("#driver-check").loadMore();
+      console.log('普通用户onLoadmore')
     } else if (this.selectComponent("#admin-check")) {
       this.selectComponent("#admin-check").loadMore();
+      console.log('普通用户onLoadmore')
     }
   },
   // 滚动监听函数
