@@ -18,7 +18,7 @@
     <!-- <view  wx:if="{{myOrder.status === 6 && myOrder.is_can_comment==1 && comment === null}}" class="cu-item {{index>scrollObj[myOrder.status]?'':'text-blue'}}" wx:for="{{normalList}}" wx:key>
       <text class="num" data-index="{{index + 1}}"></text> {{item}}
     </view> -->
-    <view class="cu-item {{index>scrollObj[myOrder.status==6&&myOrder.is_can_comment==1 && comment === null?'done':myOrder.status]?'':'text-blue'}}" wx:for="{{normalList}}" wx:key>
+    <view class="cu-item {{index>scrollObj[myOrder.status]?'':'text-blue'}}" wx:for="{{normalList}}" wx:key>
       <text class="num" data-index="{{index + 1}}"></text> {{item}}
     </view>
   </view>
@@ -102,10 +102,11 @@
   <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #0081ff" bindtap="getApplyCarLately">
     <text class="cuIcon-loading2 iconfont-spin" wx:if="{{loading}}"></text> 刷新</button>
   <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #e54d42" bindtap="cancel" wx:if="{{myOrder.status==0}}">取消订单</button>
-  <block wx:if="{{myOrder.status===6}}">
+  <!-- <block wx:if="{{myOrder.status===6}}">
     <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #0081ff" bindtap="toRate" wx:if="{{myOrder.is_can_comment===1 && myOrder.comment === null}}">评价本次行程</button>
     <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #e54d42" bindtap="toApplication" wx:if="{{ myOrder.is_can_comment===0 || myOrder.comment !== null }}">返回预定页面</button>
   </block>
-  <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #e54d42" bindtap="toApplication" wx:elif="{{ myOrder.status===5 }}">返回预定页面</button>
+  <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #e54d42" bindtap="toApplication" wx:elif="{{ myOrder.status===5 }}">返回预定页面</button> -->
+  <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #0081ff" bindtap="toApplication" wx:if="{{ myOrder.status===5 && myOrder.status===6 && myOrder===2 }}">返回预定页面</button>
 </view>
 <!-- 按钮 -->

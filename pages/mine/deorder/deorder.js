@@ -7,8 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    content: {},
-    status: ['未审核', '等待司机确认', '审核未通过', '部分司机已确认', '全部司机已确认', '司机取消订单', '已完成']
+    content: {},  // 订单信息
+    status: ['未审核', '等待司机确认', '审核未通过', '部分司机已确认', '全部司机已确认', '司机取消订单', '已完成'],  // 订单状态
+    type: 0,   // 用户类型
   },
 
   /**
@@ -28,6 +29,14 @@ Page({
       url: 'cancel/cancel?id=' + that.data.content.apply_id,
     })
   },
+  
+  // 评价订单
+  toComment() {
+    wx.navigateTo({
+      url: "../../pages/index/rate/rate?id=" + this.data.content.apply_id
+    });
+  },
+
   // 完成订单（司机）
   prompt() {
     let that = this;

@@ -51,23 +51,31 @@ Component({
         .then(data => {
           that.setData({spinning:false});
           let applyCarLately = data.data;
-          // 
-          if (applyCarLately.status === 6) {
-            if (applyCarLately.is_can_comment) {
-              if (applyCarLately.comment === null) {
-                that.setData({
-                  toTimeline: true,
-                  applyCarLately: applyCarLately
-                })
-              }
-            }
-          } else if (applyCarLately.status !== 2 && applyCarLately.status !== 5) {
+          // if (applyCarLately.status === 6) {
+          //   if (applyCarLately.is_can_comment) {
+          //     if (applyCarLately.comment === null) {
+          //       that.setData({
+          //         toTimeline: true,
+          //         applyCarLately: applyCarLately
+          //       })
+          //     }
+          //   }
+          // } else if (applyCarLately.status !== 2 && applyCarLately.status !== 5) {
+          //   that.setData({
+          //     toTimeline: true,
+          //     applyCarLately: applyCarLately
+          //   })
+          // }
+
+          // 如果订单状态值不为2,5,6则跳转到申请订单页面
+          if (applyCarLately.status !== 6 && applyCarLately.status !== 5 && applyCarLately.status !== 2) {
             that.setData({
-              toTimeline: true,
-              applyCarLately: applyCarLately
+            toTimeline: true,
+            applyCarLately: applyCarLately,
             })
           }
         })
+        .catch(() => that.setData({ spinning: false }))
       this.setData({
         myInfo: app.globalData.user_info,
         date: formatTimeNow.formatedDate,
@@ -133,33 +141,38 @@ Component({
           }
       })
     },
+    // 部门选取
     bindDepartmentChange(e) {
       this.setData({
         dIndex: e.detail.value
       });
     },
+    // 日期选取
     bindDateChange: function (e) {
       this.setData({
         date: e.detail.value
       });
     },
+    // 时间选取
     bindTimeChange: function (e) {
       this.setData({
         time: e.detail.value
       });
     },
+    // 人数选取
     bindPeopleNumChange: function (e) {
       this.setData({
         people_number_index: e.detail.value
       });
     },
-    //文本域计数器
+    // 文本域计数器
     bindText: function (e) {
       var t_text = e.detail.value.length;
       this.setData({
         counter: t_text
       });
     },
+    // 用户跳转到等待界面
     b2aListener(e) {
       this.setData({ toTimeline: false })
     },

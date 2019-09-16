@@ -5,7 +5,7 @@ const request = require("../../utils/request.js");
 let post = request.post;
 Component({
   options: {
-    addGlobalClass: true,
+    addGlobalClass: true,  // 引入全局样式库
   },
   
   lifetimes: {

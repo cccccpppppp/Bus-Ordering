@@ -5,13 +5,12 @@ const request = require("../../utils/request.js");
 let post = request.post;
 Page({
   data: {
-    PageCur: 'gwyc',
-    userType: 0,
-    scrollTop: 0,
-    reqStatus: 'loading'
+    userType: 0,  // 用户类型
+    scrollTop: 0,  // wux-refresher组件必要数据
+    reqStatus: 'loading'  // 请求状态值，有3种状态：loading, success, fail
   },
   onLoad: function (options) {
-    this.login();
+    this.login(); 
   },
   onShow: function() {
     
@@ -21,13 +20,13 @@ Page({
     $wuxRefreshing();
     let that = this;
     console.log('start wx.login()')
-    //获取code并请求获得sessionid存入本地
+    // 获取code并请求获得sessionid存入本地
     wx.login({
       success(res) {
         post("miniprogram/Common/login", { code: res.code })
           .then(data => app.globalData.sessionid = data.data.sessionid)
-          .then(data => {
-            return post('miniprogram/Common/info');
+          .then(() => {
+            return post('miniprogram/Common/info'); // 判断用户类型
             })
           .then(data => {
             $stopWuxRefresher();
@@ -45,7 +44,7 @@ Page({
   onPulling() {
     console.log('onPulling')
   },
-  //下拉刷新完成触发
+  //下拉刷新完成触发，用于子组件调用
   onRefresh() {
     if (this.selectComponent("#application")) {
       $stopWuxRefresher();
@@ -58,7 +57,7 @@ Page({
       this.selectComponent("#admin-check").getCheckList();
     }
   },
-  //上拉加载
+  //上拉加载，用于子组件调用
   onLoadmore() {
     if (this.selectComponent("#application")) {
       this.onStopLoading();
@@ -71,7 +70,7 @@ Page({
       console.log('普通用户onLoadmore')
     }
   },
-  // 滚动监听函数
+  // 滚动监听函数（wux-refresher组件必要函数）
   onPageScroll(e) {
     this.setData({
       scrollTop: e.scrollTop
@@ -87,11 +86,5 @@ Page({
   reload() {
     this.setData({ reqStatus: 'loading' })
     this.login();
-  },
-  // 自定义tabBar切换方法
-  NavChange(e) {
-    this.setData({
-      PageCur: e.currentTarget.dataset.cur
-    })
   },
 })

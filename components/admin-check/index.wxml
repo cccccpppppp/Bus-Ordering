@@ -1,4 +1,11 @@
-<wux-prompt title="暂无新订单" text="下拉刷新"  visible="{{ checkList.length === 0 }}"/>
+<!-- 暂无订单数据 -->
+<view class="text-center" wx:if="{{!checkList.length}}">
+  <text class="text-black text-bold text-xl">暂无订单数据\n</text>
+  <text>请下拉刷新</text>
+</view>
+<!-- 暂无订单数据 -->
+
+<!-- 订单预览 -->
 <view class="weui-form-preview" wx:for="{{checkList}}" wx:key="{{apply_id}}">
   <view wx:if="{{item.type==1}}" class="weui-form-preview__hd">
     <view class="weui-form-preview__label">申请司机</view>
@@ -39,3 +46,4 @@
     <navigator class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" url="../../pages/index/admin/pass/pass?id={{item.apply_id}}">同意</navigator>
   </view>
 </view>
+<!-- 订单预览 -->
