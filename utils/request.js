@@ -154,9 +154,10 @@ const post = (url, param = {}) => {
 * @param {object} param - 请求参数，默认参数为空对象，如果app.globalData.sessionid不为null则添加sessionid参数.
 */
 const myGet = (url, param = {}) => {
-  if (app.globalData.sessionid) {
-    param.sessionid = app.globalData.sessionid;
-  }
+  // if (app.globalData.sessionid) {
+  //   param.sessionid = app.globalData.sessionid;
+  // }
+  param.sessionid = app.globalData.sessionid || wx.getStorageSync('sessionid'); // 将内存或内部存储的sessionid加入param对象
   let p = new Promise(function (resolve, reject) {
     wx.request({
       url: host + url,

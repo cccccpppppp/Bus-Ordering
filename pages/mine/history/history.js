@@ -85,7 +85,6 @@ Page({
     this.time = new GetPeriod();
     let nowDate = this.time.getNowDate().slice(0, 7);
     this.setData({ nowDate: nowDate, chosenDate: nowDate });
-    this.unshownData.sessionid = app.globalData.sessionid;
     let that = this;
     this.unshownData.type = app.globalData.user_info;
   }, // onLoad() END
@@ -122,7 +121,7 @@ Page({
   getapplyCount() {
     let that = this;
     //请求已完成的订单数量
-    myGet('miniprogram/Common/applyCount', app.globalData.sessionid)
+    myGet('miniprogram/Common/applyCount', {status: 6})
       .then((res) => {
         that.setData({ count: [0, res.data.data, 0] })
       })
