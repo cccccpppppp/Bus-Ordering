@@ -10,35 +10,27 @@ Page({
     reqStatus: 'loading'  // 请求状态值，有3种状态：loading, success, fail
   },
   onLoad: function (options) {
-    this.login(); 
+    this.login();
   },
-  onShow: function() {
-    
+  onShow: function () {
+
   },
   // 登陆
   login() {
     $wuxRefreshing();
     let that = this;
     console.log('start wx.login()')
-    // 获取code并请求获得sessionid存入本地
-    wx.login({
-      success(res) {
-        post("miniprogram/Common/login", { code: res.code })
-          .then(data => app.globalData.sessionid = data.data.sessionid)
-          .then(() => {
-            return post('miniprogram/Common/info'); // 判断用户类型
-            })
-          .then(data => {
-            $stopWuxRefresher();
-            app.globalData.user_info = data.data;
-            that.setData({ reqStatus: 'success', userType: data.data.type });
-          })
-          .catch(e => {
-            $stopWuxRefresher();
-            that.setData({ reqStatus: 'fail' })
-            })
-      }
-    })
+    // 获取code并请求获得sessionid存入本
+    post('miniprogram/Common/info') // 判断用户类型
+      .then(data => {
+        $stopWuxRefresher();
+        app.globalData.user_info = data.data;
+        that.setData({ reqStatus: 'success', userType: data.data.type });
+      })
+      .catch(e => {
+        $stopWuxRefresher();
+        that.login();
+      })
   },
   //下拉刷新结束触发
   onPulling() {

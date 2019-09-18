@@ -23,7 +23,6 @@ Page({
    * 不参与页面渲染的数据
    */
   unshownData: {
-    sessionid: 0,
     unfinishedPage: 1,
     finishedPage: 1,
     unverifiedPage: 1,
@@ -123,16 +122,20 @@ Page({
   getapplyCount() {
     let that = this;
     //请求已完成的订单数量
-    wx.request({
-      url: host + 'miniprogram/Common/applyCount',
-      data: {
-        sessionid: that.unshownData.sessionid,
-        status: 6//订单状态
-      },
-      success(res) {
+    myGet('miniprogram/Common/applyCount', app.globalData.sessionid)
+      .then((res) => {
         that.setData({ count: [0, res.data.data, 0] })
-      }
-    })
+      })
+    // wx.request({
+    //   url: host + 'miniprogram/Common/applyCount',
+    //   data: {
+    //     sessionid: that.unshownData.sessionid,
+    //     status: 6//订单状态
+    //   },
+    //   success(res) {
+    //     that.setData({ count: [0, res.data.data, 0] })
+    //   }
+    // })
   },
   // 获取当前年、月
   getYearMonth() {

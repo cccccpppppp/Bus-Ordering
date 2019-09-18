@@ -8,7 +8,7 @@
   <!-- 加载 -->
   <!-- 错误重连 -->
   <view bindtap='reload' style='height: 100%' wx:if="{{ reqStatus=='fail' }}">
-    <wux-prompt title="加载失败" text="点击重新加载" />
+    <text>加载失败，点击重新加载</text>
   </view>
   <!-- 错误重连 -->
   <!-- 主界面 -->
