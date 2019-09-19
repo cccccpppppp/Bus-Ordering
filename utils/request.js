@@ -20,7 +20,7 @@ const login = () => {
                   data: sessionid,
                 })
                 app.globalData.sessionid = sessionid;
-                app.globalData.user_info = res.data.data;
+                // app.globalData.user_info = res.data.data;
                 resolve();
               }
               else {

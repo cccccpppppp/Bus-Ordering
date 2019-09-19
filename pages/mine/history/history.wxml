@@ -16,7 +16,7 @@
         <!-- <view style='align-self: center; margin-left: auto; font-size:20'>数量：</view> -->
       </view>
       <!-- 未完成选项卡 -->
-      <block wx:if="{{current == 0}}">
+      <view hidden="{{current != 0}}">
         <i-cell-group>
           <block wx:for="{{unfinished}}" wx:key="apply_id">
             <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?content={{m1.toJson(item)}}" wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
@@ -26,13 +26,13 @@
           <text class="text-black text-bold text-xl">暂无订单数据\n</text>
           <text>请下拉刷新</text>
         </view>
+      </view>
         <!-- <view class="prompt-container">
           <wux-prompt visible="{{ unfinished.length == 0 && current == 0 }}" title="空空如也" text="下拉刷新" />
         </view> -->
-      </block>
       <!-- 未完成选项卡 -->
       <!-- 已完成选项卡 -->
-      <block wx:if="{{current == 1}}">
+      <view hidden="{{current != 1}}">
         <i-cell-group>
           <block wx:for="{{finished}}" wx:key="apply_id">
             <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?content={{m1.toJson(item)}}" wx:if="{{ all?true:all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
@@ -43,10 +43,10 @@
           <text>请下拉刷新</text>
         </view>
         <!-- <wux-prompt visible="{{ finished.length == 0 && current == 1 }}" title="空空如也" text="下拉刷新" /> -->
-      </block>
+      </view>
       <!-- 已完成选项卡 -->
       <!-- 未通过选项卡 -->
-      <block wx:if="{{current == 2 && unverified}}">
+      <view hidden="{{current != 2}}">
         <i-cell-group>
           <block wx:for="{{unverified}}" wx:key="apply_id">
             <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?content={{m1.toJson(item)}}" wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
@@ -57,7 +57,7 @@
           <text>请下拉刷新</text>
         </view>
         <!-- <wux-prompt visible="{{ unverified.length == 0 && current == 2 }}" title="空空如也" text="下拉刷新" /> -->
-      </block>
+      </view>
       <!-- 未通过选项卡 -->
     </view>
   </view>

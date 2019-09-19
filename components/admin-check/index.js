@@ -17,7 +17,7 @@ Component({
 
   pageLifetimes: {
     show: function () {
-      $wuxRefreshing();
+      // $wuxRefreshing();
       this.getCheckList();
     }
   },
@@ -32,7 +32,7 @@ Component({
       let that = this;
       let param = {
         page: 1,
-        number: 10,
+        number: this.data.page * 10,
         status: 0
       }
       post('miniprogram/Common/applyCarList', param)
@@ -40,7 +40,6 @@ Component({
           $stopWuxRefresher();
           that.setData({
             checkList: res.data,
-            page: 1
           })
         })
         .catch(() => {

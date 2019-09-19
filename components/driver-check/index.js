@@ -16,13 +16,13 @@ Component({
   },
   pageLifetimes: {
     show: function () {
-      $wuxRefreshing();
+      // $wuxRefreshing();
       this.getCheckList();
     }
   },
   data: {
     checkList: {},
-    page: 1
+    // page: 1
   },
   methods: {
     // 获取待审核订单列表
@@ -33,7 +33,7 @@ Component({
           $stopWuxRefresher();
           that.setData({
             checkList: res.data,
-            page: 1
+            // page: 1
           })
         })
         .catch(() => {
