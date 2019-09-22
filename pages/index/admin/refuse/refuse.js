@@ -1,6 +1,7 @@
 const app = getApp();
 var host = app.globalData.host;
-
+const request = require("../../../../utils/request.js");
+let post = request.post;
 Page({
   /**
    * 页面的初始数据
@@ -24,44 +25,63 @@ Page({
   back(e) {
     var that = this;
     this.data.input = e.detail.value.input;
-    wx.request({
-      url: host + "miniprogram/Admin/check",
-      method: 'POST',
-      data: {
-        sessionid: that.data.sessionid,
-        apply_id: that.data.id,
-        status: 2, // 审核未通过
-        fail_cause: that.data.input, //未通过原因
-        is_can_comment: 0
-      },
-      success(res) {
-        if (res.data.status == 0 || res.data.status == 1) {
-          //提示成功
-          wx.showToast({
-            title: res.data.msg,
-            icon: "success",
-            duration: 3000
+    let param = {
+      apply_id: that.data.id,
+      status: 2, // 审核未通过
+      fail_cause: that.data.input, //未通过原因
+      is_can_comment: 0
+    }
+    post("miniprogram/Admin/check", param)
+      .then(() => {
+        wx.showToast({
+          title: res.data.msg,
+          icon: "success",
+          duration: 3000
+        });
+        setTimeout(function() {
+          wx.navigateBack({
+            delta: 1
           });
-          setTimeout(function() {
-            wx.navigateBack({
-              delta: 1
-            });
-          }, 2000);
-        } else {
-          //提示失败原因
-          wx.showToast({
-            title: res.data.msg,
-            icon: "none",
-            duration: 3000
-          });
-        }
-      },
-      fail() {
-        wx.showModal({
-          title: '网络错误'
-        })
-      }
-    });
+        }, 2000);
+      })
+    // wx.request({
+    //   url: host + "miniprogram/Admin/check",
+    //   method: 'POST',
+    //   data: {
+    //     sessionid: that.data.sessionid,
+    //     apply_id: that.data.id,
+    //     status: 2, // 审核未通过
+    //     fail_cause: that.data.input, //未通过原因
+    //     is_can_comment: 0
+    //   },
+    //   success(res) {
+    //     if (res.data.status == 0 || res.data.status == 1) {
+    //       //提示成功
+    //       wx.showToast({
+    //         title: res.data.msg,
+    //         icon: "success",
+    //         duration: 3000
+    //       });
+    //       setTimeout(function() {
+    //         wx.navigateBack({
+    //           delta: 1
+    //         });
+    //       }, 2000);
+    //     } else {
+    //       //提示失败原因
+    //       wx.showToast({
+    //         title: res.data.msg,
+    //         icon: "none",
+    //         duration: 3000
+    //       });
+    //     }
+    //   },
+    //   fail() {
+    //     wx.showModal({
+    //       title: '网络错误'
+    //     })
+    //   }
+    // });
   },
   //文本域计数器
   bindText: function(e) {

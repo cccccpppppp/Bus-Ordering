@@ -3,6 +3,8 @@ import WxValidate from "../../../utils/WxValidate";
 const { $Message } = require("../../../iView/base/index");
 const app = getApp();
 let host = app.globalData.host;
+const request = require("../../../utils/request.js");
+let post = request.post;
 let now = new Date();
 let maxTime = new Date();
 maxTime.setDate(now.getDate() + 7);       // 可提前预约7天
@@ -75,44 +77,63 @@ Page({
       console.log("空")
     }
     else {
-      wx.request({
-        url: host + "miniprogram/Driver/add",
-        data: {
-          sessionid: that.data.sessionid,
-          people_number: people_number,
-          start_place: start_place,
-          destination_place: destination_place,
-          go_time: go_time,
-          reason: reason,
-          km: km
-        },
-        method: "POST",
-        success: res => {
-          let status = res.data.status;
-          if (status == 0 || status == 1) {
-            wx.showToast({
-              title: res.data.msg,
-              icon: "success"
-            });
-            setTimeout(function () {
-              wx.navigateBack({
-                delta: 1
-              })
-            }, 3000);
-          } else {
-            wx.showToast({
-              title: res.data.msg,
-              icon: "none"
-            });
-          }
-        },
-        fail() {
-          wx.showModal({
-            title: '登陆异常',
-            content: ''
-          })
-        }
-      });
+      post("miniprogram/Driver/add", {
+        people_number: people_number,
+        start_place: start_place,
+        destination_place: destination_place,
+        go_time: go_time,
+        reason: reason,
+        km: km
+      })
+        .then(res => {
+          wx.showToast({
+            title: res.data.msg,
+            icon: "success"
+          });
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 3000);
+        })
+      // wx.request({
+      //   url: host + "miniprogram/Driver/add",
+      //   data: {
+      //     sessionid: that.data.sessionid,
+      //     people_number: people_number,
+      //     start_place: start_place,
+      //     destination_place: destination_place,
+      //     go_time: go_time,
+      //     reason: reason,
+      //     km: km
+      //   },
+      //   method: "POST",
+      //   success: res => {
+      //     let status = res.data.status;
+      //     if (status == 0 || status == 1) {
+      //       wx.showToast({
+      //         title: res.data.msg,
+      //         icon: "success"
+      //       });
+      //       setTimeout(function () {
+      //         wx.navigateBack({
+      //           delta: 1
+      //         })
+      //       }, 3000);
+      //     } else {
+      //       wx.showToast({
+      //         title: res.data.msg,
+      //         icon: "none"
+      //       });
+      //     }
+      //   },
+      //   fail() {
+      //     wx.showModal({
+      //       title: '登陆异常',
+      //       content: ''
+      //     })
+      //   }
+      // });
     }
   },
 

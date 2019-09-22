@@ -1,5 +1,7 @@
 const app = getApp();
 var host = app.globalData.host;
+const request = require("../../../../utils/request.js");
+let myGet = request.myGet;
 var itemList = [];
 Page({
 
@@ -18,19 +20,14 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
-    this.data.sessionid = app.globalData.sessionid;
     this.setData({
       ifload:true,
       id: options.id,
     })
     itemList = [];
-    wx.request({
-      url: host + 'miniprogram/Admin/getDriverInfoList',
-      data: {
-        sessionid: that.data.sessionid,
-      },
-      success(res) {
-        var select = [];
+    myGet('miniprogram/Admin/getDriverInfoList')
+      .then(res => {
+        let select = [];
         select = res.data.data
         for (var i in select)
         {
@@ -40,8 +37,25 @@ Page({
           drive_data : select,
           ifload:false,
         })
-      }
-    })
+      })
+    // wx.request({
+    //   url: host + 'miniprogram/Admin/getDriverInfoList',
+    //   data: {
+    //     sessionid: that.data.sessionid,
+    //   },
+    //   success(res) {
+    //     var select = [];
+    //     select = res.data.data
+    //     for (var i in select)
+    //     {
+    //       select[i].checked = false
+    //     }
+    //     that.setData({
+    //       drive_data : select,
+    //       ifload:false,
+    //     })
+    //   }
+    // })
   },
 
   //-------------选择司机事件--------------//
@@ -95,53 +109,72 @@ Page({
         duration: 2000
       })
     } else {
-      wx.request({
-        url: host + 'miniprogram/Admin/check',
-        data: {
-          sessionid: that.data.sessionid,
-          apply_id: that.data.id,
-          status: 1,//审核通过
-          driverPhonList: drivelist,
-          is_can_comment: that.data.is_can_comment
-        },
-        method : "GET",
-        success(res) {
-          console.log(res.data.status)
-          if (res.data.status == 0)
-          {
-            wx.showToast({
-              title: '已同意该订单',
-              icon: 'success',
-              duration: 2000
+      let param = {
+        apply_id: that.data.id,
+        status: 1,//审核通过
+        driverPhonList: drivelist,
+        is_can_comment: that.data.is_can_comment
+      }
+      myGet('miniprogram/Admin/check', param)
+        .then(() => {
+          wx.showToast({
+            title: '已同意该订单',
+            icon: 'success',
+            duration: 2000
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 1
             })
-            setTimeout(function () {
-              wx.navigateBack({
-                delta: 1
-              })
-            }, 2000);
-          }
-          else if(res.data.status == 1)
-          {
-            wx.showToast({
-              title: res.data.msg,
-              icon : "none",
-              duration : 5000
-            })
-            setTimeout(function(){
-              wx.navigateBack({
-                delta: 1 
-              })
-            },2000);
-          }
-          else{
-            wx.showToast({
-              title: res.data.msg,
-              icon: 'none',
-              duration: 5000
-            })
-          }
-        }
-      })
+          }, 2000);
+        })
+      // wx.request({
+      //   url: host + 'miniprogram/Admin/check',
+      //   data: {
+      //     sessionid: that.data.sessionid,
+      //     apply_id: that.data.id,
+      //     status: 1,//审核通过
+      //     driverPhonList: drivelist,
+      //     is_can_comment: that.data.is_can_comment
+      //   },
+      //   method : "GET",
+      //   success(res) {
+      //     console.log(res.data.status)
+      //     if (res.data.status == 0)
+      //     {
+      //       wx.showToast({
+      //         title: '已同意该订单',
+      //         icon: 'success',
+      //         duration: 2000
+      //       })
+      //       setTimeout(function () {
+      //         wx.navigateBack({
+      //           delta: 1
+      //         })
+      //       }, 2000);
+      //     }
+      //     else if(res.data.status == 1)
+      //     {
+      //       wx.showToast({
+      //         title: res.data.msg,
+      //         icon : "none",
+      //         duration : 5000
+      //       })
+      //       setTimeout(function(){
+      //         wx.navigateBack({
+      //           delta: 1 
+      //         })
+      //       },2000);
+      //     }
+      //     else{
+      //       wx.showToast({
+      //         title: res.data.msg,
+      //         icon: 'none',
+      //         duration: 5000
+      //       })
+      //     }
+      //   }
+      // })
     }
   }
 
