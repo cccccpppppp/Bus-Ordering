@@ -1,5 +1,6 @@
 const request = require("../../utils/request.js");
 let post = request.post;
+const app = getApp();
 Component({
   options: {
     addGlobalClass: true,

@@ -20,4 +20,4 @@
   </block>
   <!-- 主界面 -->
 </wux-refresher>
-<application id="application" wx:if="{{ userType === 0 }}"></application>
+<application id="application" wx:if="{{ userType === 0 && reqStatus==='success'}}"></application>
