@@ -1,6 +1,8 @@
 import { $wuxDialog } from '../../../wux/index';
 const app = getApp();
 let host = app.globalData.host;
+const request = require("../../../utils/request.js");
+let post = request.post;
 Page({
 
   /**
@@ -59,15 +61,14 @@ Page({
         maxlength: 4,
         onConfirm(e, km) {
           const id = that.data.content.apply_id;
+          let param = {
+            sessionid: app.globalData.sessionid,
+            apply_id: id,
+            km: km
+          }
           wx.showLoading();
-          wx.request({
-            url: host + 'miniprogram/Driver/finish',
-            data: {
-              sessionid: app.globalData.sessionid,
-              apply_id: id,
-              km: km
-            },
-            success: (res) => {
+          post('miniprogram/Driver/finish', param)
+            .then((res) => {
               wx.hideLoading();
               if (res.data.status == 0) {
                 alert('订单已完成！');
@@ -75,12 +76,29 @@ Page({
               } else {
                 alert(res.data.msg);
               }
-            },
-            fail: () => {
-              alert('网络错误');
-              wx.hideLoading();
-            },
-          });
+            })
+            .catch(wx.hideLoading)
+          // wx.request({
+          //   url: host + 'miniprogram/Driver/finish',
+          //   data: {
+          //     sessionid: app.globalData.sessionid,
+          //     apply_id: id,
+          //     km: km
+          //   },
+          //   success: (res) => {
+          //     wx.hideLoading();
+          //     if (res.data.status == 0) {
+          //       alert('订单已完成！');
+          //       wx.navigateBack({ delta: 1 });
+          //     } else {
+          //       alert(res.data.msg);
+          //     }
+          //   },
+          //   fail: () => {
+          //     alert('网络错误');
+          //     wx.hideLoading();
+          //   },
+          // });
         },
     })
 },
