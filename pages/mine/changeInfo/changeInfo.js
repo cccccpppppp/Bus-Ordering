@@ -7,11 +7,13 @@ Page({
   data: {
     myInfo: {
       name: '',
-      phone: ''
+      phone: '',
+      sessionid: null
     }
   },
   modifyInfo: function (e) {
     let that = this;
+    let sessionid = app.globalData.sessionid || wx.getStorageSync('sessionid');
     let name = e.detail.value.name;
     let phone = e.detail.value.phone;
     wx.showModal({
@@ -25,7 +27,7 @@ Page({
             url: host + "miniprogram/Common/setInfo",
             method: "POST",
             data: {
-              sessionid: that.data.sessionid,
+              sessionid: sessionid,
               name: name,
               phone: phone
             },
@@ -38,13 +40,13 @@ Page({
                     wx.request({
                       url: host + "miniprogram/Common/info",
                       data: {
-                        sessionid: that.data.sessionid
+                        sessionid: sessionid
                       },
                       success: res => {
                         let pages = getCurrentPages(); //获取页面栈
                         let prevPage = pages[pages.length - 2]; //上一个页面
                         app.globalData.user_info = res.data.data; // 将用户信息存储到本地
-                        prevPage.changeData(res.data.data.type);
+                        // prevPage.changeData(res.data.data.type);
                         setTimeout(function () {
                           wx.navigateBack();
                         }, 500);
@@ -75,7 +77,6 @@ Page({
   onLoad: function (options) {
     this.setData({
       myInfo: app.globalData.user_info,
-      sessionid: app.globalData.sessionid
     })
   },
 });
