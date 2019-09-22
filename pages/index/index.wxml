@@ -1,4 +1,4 @@
-<wux-refresher id="wux-refresher" bind:refresh="onRefresh" bind:loadmore="onLoadmore" scrollTop="{{scrollTop}}" >
+<wux-refresher id="wux-refresher" bind:refresh="onRefresh" bind:loadmore="onLoadmore" scrollTop="{{scrollTop}}">
   <i-message id="message" />
   <!-- 加载 -->
   <!-- <view class="weui-loadmore" wx:if="{{reqStatus=='loading'}}">
@@ -14,10 +14,10 @@
   <!-- 主界面 -->
   <block wx:if="{{reqStatus=='success'}}">
     <!-- 公务用车 -->
-    <application id="application" wx:if="{{ userType === 0 }}"></application>
     <admin-check id="admin-check" wx:if="{{ userType === 1 }}" bind:stoploading="onStopLoading"></admin-check>
     <driver-check id="driver-check" wx:if="{{ userType === 2 }}" bind:stoploading="onStopLoading"></driver-check>
     <!-- 公务用车 -->
   </block>
   <!-- 主界面 -->
 </wux-refresher>
+<application id="application" wx:if="{{ userType === 0 }}"></application>

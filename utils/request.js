@@ -77,40 +77,28 @@ const post = (url, param = {}) => {
           if (res.data.status === 0) {
             resolve(res.data); // 如果状态码为200且data.status为0时promise对象状态为resolved
           }
+          else if (res.data.status === 1) {
+            wx.showToast({
+              title: res.data.msg,
+            })
+            resolve(res.data);
+          }
           else if (res.data.msg.indexOf("登录") !== -1) {  // 如果返回信息中包含字符"登录"则重新登录
-            // 弹出未登录提示框，用户点击确认后重连
-            // wx.showModal({
-            //   title: '请求错误',
-            //   content: '错误信息：' + res.data.msg,
-            //   showCancel: false,
-            //   success() {
-            //     wx.showLoading();
-            //     // 登录
-            //     login()
-            //       .then(() => {
-            //         wx.hideLoading();
-            //         reject();
-            //       })
-            //       .catch(() => wx.hideLoading())
-            //   }
-            // })
-
             // 显示正在登陆
             wx.showLoading({
               title: '登陆中...',
               mask: true
             })
+
             // 登录
             login()
               .then(() => {
-                // wx.hideLoading();
                 wx.showToast({
                   icon: 'success'
                 })
                 reject();
               })
               .catch(() => {
-                // wx.hideLoading();
                 wx.showToast({
                   icon: 'fail'
                 })
@@ -167,6 +155,12 @@ const myGet = (url, param = {}) => {
         if (res.statusCode === 200) {
           if (res.data.status === 0) {
             resolve(res.data); // 如果状态码为200且data.status为0时promise对象状态为resolved
+          }
+          else if (res.data.status === 1) {
+            wx.showToast({
+              title: res.data.msg,
+            })
+            resolve(res.data);
           }
           else if (res.data.msg.indexOf("登录") !== -1) {  // 如果返回信息中包含字符"登录"则重新登录
             // 显示正在登陆
