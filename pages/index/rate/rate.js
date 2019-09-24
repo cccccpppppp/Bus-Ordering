@@ -128,24 +128,16 @@ Page({
     post('miniprogram/Apply_car/comment', param)
       .then(res => {
         wx.hideLoading();
-        if (res.status == 0) {
-          wx.showModal({
-            content: '评价成功',
-            showCancel: false,
-            success: function (res) {
-              if (res.confirm) {
-                wx.redirectTo({
-                  url: '/pages/index/index'
-                });
-              }
-            }
-          })
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none'
-          });
-        }
+        wx.showModal({
+          content: '评价成功',
+          showCancel: false,
+          success: function (res) {
+            console.log('用户点击确定')
+            wx.navigateBack({
+              delta: 2
+            })
+          }
+        })
       })
       .catch(() => {
         wx.hideLoading();

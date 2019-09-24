@@ -6,7 +6,7 @@
 <!-- 暂无订单数据 -->
 
 <!-- 订单预览 -->
-<view class="weui-form-preview" wx:for="{{checkList}}" wx:key="apply_id">
+<view class="margin-bottom weui-form-preview" wx:for="{{checkList}}" wx:key="apply_id">
   <view wx:if="{{item.type==1}}" class="weui-form-preview__hd">
     <view class="weui-form-preview__label">申请司机</view>
     <view class="weui-form-preview__value_in-hd">{{item.drivers[0].name}}</view>
@@ -24,7 +24,7 @@
       <view class="weui-form-preview__label">目的地</view>
       <view class="weui-form-preview__value">{{item.destination_place}}</view>
     </view>
-    <view class="weui-form-preview__item">
+    <view wx:if="{{item.type==0}}" class="weui-form-preview__item">
       <view class="weui-form-preview__label">申请人姓名</view>
       <view class="weui-form-preview__value">{{item.apply.name}}</view>
     </view>

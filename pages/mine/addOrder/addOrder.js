@@ -87,7 +87,7 @@ Page({
       })
         .then(res => {
           wx.showToast({
-            title: res.data.msg,
+            title: res.msg,
             icon: "success"
           });
           setTimeout(function () {

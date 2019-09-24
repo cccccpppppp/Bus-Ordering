@@ -129,7 +129,7 @@ Page({
           unverifiedPage: 2,
         })
       })
-      .catch(e => console.log(e.message))
+      // .catch(e => console.log(e.message))
     // this.data.type = app.globalData.user_info;
   }, // onLoad() END
   onShow() {

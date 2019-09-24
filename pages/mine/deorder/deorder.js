@@ -35,7 +35,7 @@ Page({
   // 评价订单
   toComment() {
     wx.navigateTo({
-      url: "../../pages/index/rate/rate?id=" + this.data.content.apply_id
+      url: "../../../pages/index/rate/rate?id=" + this.data.content.apply_id
     });
   },
 
@@ -70,12 +70,8 @@ Page({
           post('miniprogram/Driver/finish', param)
             .then((res) => {
               wx.hideLoading();
-              if (res.data.status == 0) {
-                alert('订单已完成！');
-                wx.navigateBack({ delta: 1 });
-              } else {
-                alert(res.data.msg);
-              }
+              alert('订单已完成！');
+              wx.navigateBack({ delta: 1 });
             })
             .catch(wx.hideLoading)
           // wx.request({

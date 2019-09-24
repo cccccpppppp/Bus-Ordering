@@ -6,7 +6,6 @@
     "pages/index/user/user",
     "pages/mine/mine",
     "pages/index/rate/rate",
-    "pages/test",
     "pages/index/admin/pass/pass",
     "pages/index/admin/refuse/refuse",
     "pages/mine/addOrder/addOrder",

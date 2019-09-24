@@ -11,22 +11,22 @@
 </view>
 <view class="card" wx:if="{{content.comment}}">
   <i-card title="评价" extra="{{content.comment.mark/2}}星">
-    <view slot="content" wx:if="{{content.comment.is_familiar_route}}">·熟悉路况</view>
-    <view slot="content" wx:if="{{content.comment.is_punctuality}}">·准时</view>
-    <view slot="content" wx:if="{{content.comment.is_familiar_route}}">·车上有水</view>
-    <view slot="content" wx:if="{{!content.comment.is_have_peculiar_smell}}">·车上无异味</view>
-    <view slot="content" wx:if="{{content.comment.is_safe_driving}}">·安全驾驶</view>
-    <view slot="content" wx:if="{{content.comment.is_clean}}">·车上清洁干净</view>
-    <view slot="content" wx:if="{{content.comment.is_help_luggage}}">·帮忙拿行李</view>
+    <view slot="content" wx:if="{{content.comment.is_familiar_route}}">熟悉路况</view>
+    <view slot="content" wx:if="{{content.comment.is_punctuality}}">准时</view>
+    <view slot="content" wx:if="{{content.comment.is_familiar_route}}">车上有水</view>
+    <view slot="content" wx:if="{{!content.comment.is_have_peculiar_smell}}">车上无异味</view>
+    <view slot="content" wx:if="{{content.comment.is_safe_driving}}">安全驾驶</view>
+    <view slot="content" wx:if="{{content.comment.is_clean}}">车上清洁干净</view>
+    <view slot="content" wx:if="{{content.comment.is_help_luggage}}">帮忙拿行李</view>
     <view slot="content" wx:if="{{content.comment.content}}">其他评价：{{content.comment.content}}</view>
   </i-card>
 </view>
 <view class="card">
   <i-card title="订单信息" extra="{{content.type?'司机添加':'用户申请'}}">
-    <view slot="content">申请用户：{{content.apply.name}}</view>
-    <view slot="content">乘车人：{{content.name}}</view>
-    <view slot="content">联系方式：{{content.apply.phone}}</view>
-    <view slot="content">所属部门：{{content.department.name}}</view>
+    <view slot="content" wx:if="{{content.type === 0}}">申请用户：{{content.apply.name}}</view>
+    <view slot="content" wx:if="{{content.type === 0}}">乘车人：{{content.name}}</view>
+    <view slot="content" wx:if="{{content.type === 0}}">联系方式：{{content.apply.phone}}</view>
+    <view slot="content" wx:if="{{content.type === 0}}">所属部门：{{content.department.name}}</view>
     <view slot="content" wx:if="{{content.type===0}}">申请事由：{{content.reason}}</view>
     <view slot="content" wx:if="{{content.type===1}}">添加事由：{{content.reason}}</view>
     <view slot="content" wx:if="{{content.fail_cause}}">拒绝原因：{{content.fail_cause}}</view>
@@ -51,6 +51,6 @@
 <view style='margin: 0 16px' wx:if="{{content.type === 0}}">
     <wux-button block bind:click="cancel" type="assertive" wx:if="{{(content.status === 0 && type === 0)}}">取消订单</wux-button>
     <wux-button block type="positive" bind:click="prompt" wx:if="{{(content.status === 3 || content.status === 4) && type === 2}}">完成订单</wux-button>
-    <wux-button block bind:click="toComment" type="prompt" wx:if="{{(content.status === 6 && type === 0 && content.is_can_comment && content.comment)}}">评价</wux-button>
+    <wux-button block bind:click="toComment" type="positive" wx:if="{{(content.status === 6 && type === 0 && content.is_can_comment && content.comment === null)}}">评价</wux-button>
 </view>
 <!-- 按钮 -->

@@ -32,9 +32,9 @@ Page({
       is_can_comment: 0
     }
     post("miniprogram/Admin/check", param)
-      .then(() => {
+      .then((res) => {
         wx.showToast({
-          title: res.data.msg,
+          title: res.msg,
           icon: "success",
           duration: 3000
         });

@@ -42,9 +42,7 @@ Component({
             checkList: res.data,
           })
         })
-        .catch(() => {
-          $stopWuxRefresher();
-        })
+        .catch($stopWuxRefresher)
     },
 
     // 上拉加载更多，供父组件调用
@@ -68,9 +66,7 @@ Component({
             })
           }
         })
-        .catch(() => {
-          $stopWuxLoader();
-        })
+        .catch($stopWuxLoader)
     },
     // 同意司机
     pass(e) {
@@ -82,32 +78,22 @@ Component({
           if (res.confirm) {
             let id = e.currentTarget.dataset.id;
             let param = {
-              id: id,
+              apply_id: id,
               status: 6
             }
             wx.showLoading();
             post("miniprogram/Admin/check", param)
               .then(res => {
                 wx.hideLoading();
-                if (res.data.msg == "成功") {
-                  //提示成功
-                  wx.showToast({
-                    title: "已同意该申请",
-                    icon: "success",
-                    duration: 3000
-                  });
-                  $wuxRefreshing();
-                  that.getCheckList();
-                } else {
-                  //提示失败原因
-                  wx.showToast({
-                    title: res.data.msg,
-                    icon: "none",
-                    duration: 3000
-                  });
-                }
+                wx.showToast({
+                  title: "已同意该申请",
+                  icon: "success",
+                  duration: 3000
+                });
+                $wuxRefreshing();
+                that.getCheckList();
               })
-              .catch(() => wx.hideLoading())
+              .catch(wx.hideLoading)
           }
         }
       })
@@ -122,30 +108,20 @@ Component({
           if (res.confirm) {
             let id = e.currentTarget.dataset.id;
             let param = {
-              id: id,
+              apply_id: id,
               status: 2
             }
             wx.showLoading();
             post("miniprogram/Admin/check", param)
               .then(res => {
                 wx.hideLoading();
-                if (res.data.msg == "成功") {
-                  //提示成功
                   wx.showToast({
                     title: "已拒绝该申请",
                     icon: "success",
                     duration: 3000
                   });
-                  $wuxRefreshing();
-                  that.getCheckList();
-                } else {
-                  //提示失败原因
-                  wx.showToast({
-                    title: res.data.msg,
-                    icon: "none",
-                    duration: 3000
-                  });
-                }
+                $wuxRefreshing();
+                that.getCheckList();
               })
               .catch(() => wx.hideLoading())
           }

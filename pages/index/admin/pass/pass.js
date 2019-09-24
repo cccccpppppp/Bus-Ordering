@@ -28,7 +28,8 @@ Page({
     myGet('miniprogram/Admin/getDriverInfoList')
       .then(res => {
         let select = [];
-        select = res.data.data
+        select = res.data;
+        console.log('司机列表: ' + select)
         for (var i in select)
         {
           select[i].checked = false
