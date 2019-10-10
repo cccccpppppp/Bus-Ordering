@@ -79,6 +79,7 @@ const post = (url, param = {}) => {
           }
           else if (res.data.status === 1) {
             wx.showToast({
+              icon: 'none',
               title: res.data.msg,
             })
             resolve(res.data);
@@ -159,6 +160,7 @@ const myGet = (url, param = {}) => {
           }
           else if (res.data.status === 1) {
             wx.showToast({
+              icon: 'none',
               title: res.data.msg,
             })
             resolve(res.data);

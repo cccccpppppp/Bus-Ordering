@@ -21,16 +21,23 @@ Page({
       content: '确认取消本次订单？',
       success(res) {
         if(res.confirm) {
-          wx.showLoading();
+          wx.showLoading({ mask: true });
           post("miniprogram/Common/cancel", param)
-            .then(e => {
+            .then(res => {
+              if(res.status === 0){
+                wx.hideLoading();
                 wx.showToast({
                   icon: 'success',
-                  title: '成功',
+                  title: res.data.msg,
                 })
-                wx.navigateBack();
-              })
-            .catch(e => wx.hideLoading())
+              } else if(res.status === 1) {
+                setTimeout(wx.navigateBack, 1500);
+              }
+            })
+            .catch(e => {
+              wx.hideLoading()
+              setTimeout(wx.navigateBack, 1500);
+            })
         }
       }
     })
