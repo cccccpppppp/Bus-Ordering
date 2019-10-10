@@ -4,32 +4,36 @@ let host = app.globalData.host;
 const request = require("../../../utils/request.js");
 let post = request.post;
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    id: null,
     content: {},  // 订单信息
     status: ['未审核', '等待司机确认', '审核未通过', '部分司机已确认', '全部司机已确认', '已取消', '已完成'],  // 订单状态
     type: 0,   // 用户类型
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  onShow() {
+    wx.showLoading();
+    post('miniprogram/Common/applyCarById', {id: this.data.id})
+    .then(res => {
+      wx.hideLoading();
+      this.setData({ content: res.data })
+    })
+  },
   onLoad: function (options) {
     let type = app.globalData.user_info.type;  // 用户类型
     this.setData({ 
-      content: JSON.parse( options.content ),
+      id: options.id,
       type: type
     });
   },
   // 取消订单（通用）
   cancel() {
     let that = this;
-    let param = { apply_id: this.data.content.apply_id }
-    post("miniprogram/Common/cancel", param)
-    .then(e => wx.navigateBack())
+    // let param = { apply_id: this.data.content.apply_id }
+    // post("miniprogram/Common/cancel", param)
+    // .then(e => wx.navigateBack())
+    wx.navigateTo({
+      url: '../../cancel/cancel?apply_id=' + that.data.content.apply_id,
+    })
   },
   
   // 评价订单（普通用户）

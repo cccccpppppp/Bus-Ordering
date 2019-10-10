@@ -1,10 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/index/driver/driver",
     "pages/index/admin/admin",
-    "pages/index/user/user",
     "pages/mine/mine",
+    "pages/cancel/cancel",
     "pages/index/rate/rate",
     "pages/index/admin/pass/pass",
     "pages/index/admin/refuse/refuse",

@@ -45,10 +45,13 @@ Component({
     },
     // 取消订单（通用）
     cancel() {
-      let that = this;
-      let param = { apply_id: this.data.myOrder.apply_id }
-      post("miniprogram/Common/cancel", param)
-        .then( e => {that.getApplyCarLately()})
+      // let that = this;
+      // let param = { apply_id: this.data.myOrder.apply_id }
+      // post("miniprogram/Common/cancel", param)
+      //   .then( e => {that.getApplyCarLately()})
+      wx.navigateTo({
+        url: '../../pages/cancel/cancel?apply_id=' + this.data.myOrder.apply_id,
+      })
     },
     // 请求最近一单信息
     getApplyCarLately() {

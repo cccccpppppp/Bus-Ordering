@@ -19,7 +19,7 @@
       <view hidden="{{current != 0}}">
         <i-cell-group>
           <block wx:for="{{unfinished}}" wx:key="apply_id">
-            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?content={{m1.toJson(item)}}" wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?id={{item.apply_id}}" wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
           </block>
         </i-cell-group>
         <view class="text-center" wx:if="{{!unfinished.length}}">
@@ -35,7 +35,7 @@
       <view hidden="{{current != 1}}">
         <i-cell-group>
           <block wx:for="{{finished}}" wx:key="apply_id">
-            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?content={{m1.toJson(item)}}" wx:if="{{ all?true:all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?id={{item.apply_id}}" wx:if="{{ all?true:all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
           </block>
         </i-cell-group>
         <view class="text-center" wx:if="{{!finished.length}}">
@@ -49,7 +49,7 @@
       <view hidden="{{current != 2}}">
         <i-cell-group>
           <block wx:for="{{unverified}}" wx:key="apply_id">
-            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?content={{m1.toJson(item)}}" wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
+            <i-cell title="{{item.start_place + '-' + item.destination_place}}" label="{{item.go_time}}" value="{{item.name}}" is-link url="../deorder/deorder?id={{item.apply_id}}" wx:if="{{ all?true:m1.matchDate(item.go_time) == chosenDate }}"></i-cell>
           </block>
         </i-cell-group>
         <view class="text-center" wx:if="{{!unverified.length}}">
