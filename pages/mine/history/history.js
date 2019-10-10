@@ -8,7 +8,7 @@ Page({
   data: {
     firstOnShow: true, // 判断是否为第一次加载
     scrollTop: 0,
-    tabs: ['未完成', '已完成'],  // tabs栏名
+    tabs: ['未完成', '已完成', '未通过'],  // tabs栏名
     count: [0, 0, 0],   // tabs栏显示的数字
     current: '0',    // 当前页面
     unfinished: [],  // 未完成订单数据
@@ -91,11 +91,11 @@ Page({
 
     let that = this;
     // 如果用户类型不是司机则获取未通过订单
-    if (app.globalData.user_info.type !== 2) {
-      that.setData({
-        tabs: ['未完成', '已完成', '未通过']
-      });
-    }
+    // if (app.globalData.user_info.type !== 2) {
+    //   that.setData({
+    //     tabs: ['未完成', '已完成', '未通过']
+    //   });
+    // }
 
     // 请求未完成、已完成、未通过的订单1页
     myGet("miniprogram/Common/firstApplyCarList", { num: 10 })
@@ -120,18 +120,30 @@ Page({
 
     // 请求目前为止浏览过的页码的订单（刷新页面），第一次onShow不执行
     if(!this.data.firstOnShow) {
-      let current = this.data.current;  // 当前页面数值: 0, 1 or 2
-      let pageList = ["unfinishedPage", "finishedPage", "unverifiedPage"];  // current对应的页数
-      let statusList = [[0, 1, 3, 4], [6], [2, 5]];  // current对应的状态数组
-      let currentNameList = ['unfinished', 'finished', 'unverified'];  // current对应的页名
-      console.log(that.data[pageList[current]])
-      this.requestOrder(1, (that.data[pageList[current]] - 1) * 10, statusList[current])
+      let that = this;
+      // let current = this.data.current;  // 当前页面数值: 0, 1 or 2
+      // let pageList = ["unfinishedPage", "finishedPage", "unverifiedPage"];  // current对应的页数
+      // let statusList = [[0, 1, 3, 4], [6], [2, 5]];  // current对应的状态数组
+      // let currentNameList = ['unfinished', 'finished', 'unverified'];  // current对应的页名
+      // console.log(that.data[pageList[current]])
+      // this.requestOrder(1, (that.data[pageList[current]] - 1) * 10, statusList[current])
+      //   .then(res => {
+      //     that.setData({
+      //       [currentNameList[current]]: res.data,  // 将得到的订单数据覆盖当前的数据
+      //     });
+      //   })
+      //   .catch(e => console.log(e.message))
+      let p1 = this.requestOrder(1, (that.data.unfinishedPage - 1) * 10, [0, 1, 3, 4]);
+      let p2 = this.requestOrder(1, (that.data.finishedPage - 1) * 10, [6]);
+      let p3 = this.requestOrder(1, (that.data.unverifiedPage - 1) * 10, [2, 5]);
+      Promise.all([p1, p2, p3])
         .then(res => {
           that.setData({
-            [currentNameList[current]]: res.data,  // 将得到的订单数据覆盖当前的数据
-          });
+            unfinished: res[0].data,
+            finished: res[1].data,
+            unverified: res[2].data,
+          })
         })
-        .catch(e => console.log(e.message))
     }
     if(this.data.firstOnShow) {
       this.setData({ firstOnShow: false})
