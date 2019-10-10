@@ -1,12 +1,13 @@
 <wux-dialog id="wux-dialog" />
 <wux-dialog id="wux-dialog--alert" />
 <view class="card">
-  <i-card title="行程" extra="{{status[content.status]}}">
+  <i-card title="行程" extra="{{status[content.status] + ' by ' + content.cancel.name}}">
     <view slot="content">出发地：{{content.start_place}}</view>
     <view slot="content">目的地：{{content.destination_place}}</view>
     <view slot="content" wx:if="{{content.km}}">行驶距离：{{content.km}}km</view>
     <view slot="footer">出发时间：{{content.go_time}}</view>
     <view slot="footer" wx:if="{{content.finish_time}}">完成时间：{{content.finish_time}}</view>
+    <view slot="footer" wx:if="content.cancel.update_time">取消时间：{{content.cancel.update_time}}</view>
   </i-card>
 </view>
 <view class="card" wx:if="{{content.comment}}">

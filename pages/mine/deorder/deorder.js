@@ -10,7 +10,7 @@ Page({
    */
   data: {
     content: {},  // 订单信息
-    status: ['未审核', '等待司机确认', '审核未通过', '部分司机已确认', '全部司机已确认', '司机取消订单', '已完成'],  // 订单状态
+    status: ['未审核', '等待司机确认', '审核未通过', '部分司机已确认', '全部司机已确认', '已取消', '已完成'],  // 订单状态
     type: 0,   // 用户类型
   },
 
@@ -27,12 +27,12 @@ Page({
   // 取消订单（通用）
   cancel() {
     let that = this;
-    wx.navigateTo({
-      url: 'cancel/cancel?id=' + that.data.content.apply_id,
-    })
+    let param = { apply_id: this.data.content.apply_id }
+    post("miniprogram/Common/cancel", param)
+    .then(e => wx.navigateBack())
   },
   
-  // 评价订单
+  // 评价订单（普通用户）
   toComment() {
     wx.navigateTo({
       url: "../../../pages/index/rate/rate?id=" + this.data.content.apply_id

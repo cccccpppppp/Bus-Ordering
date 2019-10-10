@@ -25,12 +25,6 @@ Page({
   /**
    * 不参与页面渲染的数据
    */
-  // unshownData: {
-  //   unfinishedPage: 1,
-  //   finishedPage: 1,
-  //   unverifiedPage: 1,
-  //   type: 0
-  // },
   onPageScroll(e) {
     this.setData({
       scrollTop: e.scrollTop
@@ -52,20 +46,6 @@ Page({
   onRefresh() {
     console.log('onRefresh')
     let that = this;
-    // let current = this.data.current;  // 当前页面数值: 0, 1 or 2
-    // let pageList = ["unfinishedPage", "finishedPage", "unverifiedPage"];  // current对应的
-    // let statusList = [[0, 1, 3, 4], [6], [2, 5]];  // current对应的状态数组
-    // let currentNameList = ['unfinished', 'finished', 'unverified'];  // current对应的页名
-    // this.requestOrder(1, 10, statusList[current])
-    //  .then(res => {
-    //    that.setData({
-    //      [currentNameList[current]]: res.data,
-    //      [pageList[current]]: 2,  // 当前页面的页数设为2
-    //      });
-    //   //  that.unshownData[currentList[current]] = 2;
-    //    $stopWuxRefresher();
-    //  })
-    //  .catch(() => $stopWuxRefresher())
     let current = this.data.current;  // 当前页面数值: 0, 1 or 2
     let pageList = ["unfinishedPage", "finishedPage", "unverifiedPage"];  // current对应的页数
     let statusList = [[0, 1, 3, 4], [6], [2, 5]];  // current对应的状态数组

@@ -43,6 +43,13 @@ Component({
     toApplication() {
       this.triggerEvent('back2application');
     },
+    // 取消订单（通用）
+    cancel() {
+      let that = this;
+      let param = { apply_id: this.data.myOrder.apply_id }
+      post("miniprogram/Common/cancel", param)
+        .then( e => {that.getApplyCarLately()})
+    },
     // 请求最近一单信息
     getApplyCarLately() {
       let that = this;

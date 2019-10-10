@@ -107,6 +107,6 @@
     <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #e54d42" bindtap="toApplication" wx:if="{{ myOrder.is_can_comment===0 || myOrder.comment !== null }}">返回预定页面</button>
   </block>
   <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #e54d42" bindtap="toApplication" wx:elif="{{ myOrder.status===5 }}">返回预定页面</button> -->
-  <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #0081ff" bindtap="toApplication" wx:if="{{ myOrder.status===5 || myOrder.status===6 || myOrder===2 }}">返回预定页面</button>
+  <button class="cu-btn block bg-blue margin-tb-sm lg" style="background-color: #0081ff" bindtap="toApplication" wx:if="{{ myOrder.status===5 || myOrder.status===6 || myOrder.status===2 }}">返回预定页面</button>
 </view>
 <!-- 按钮 -->

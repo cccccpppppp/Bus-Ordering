@@ -94,7 +94,8 @@ const post = (url, param = {}) => {
             login()
               .then(() => {
                 wx.showToast({
-                  icon: 'success'
+                  icon: 'success',
+                  content: ''
                 })
                 reject();
               })
@@ -173,7 +174,8 @@ const myGet = (url, param = {}) => {
               .then(() => {
                 // wx.hideLoading();
                 wx.showToast({
-                  icon: 'success'
+                  icon: 'success',
+                  content: ''
                 })
                 reject();
               })

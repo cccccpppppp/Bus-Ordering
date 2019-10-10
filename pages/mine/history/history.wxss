@@ -1,6 +1,7 @@
-.page {
+/* .page {
   height: 100vh
-}
+} */
 .text-center {
-  text-align: center
+  text-align: center;
+  height: calc(100vh - 102px)
 }
