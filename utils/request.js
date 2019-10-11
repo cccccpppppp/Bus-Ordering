@@ -44,10 +44,14 @@ const login = () => {
           },
           fail() {
             // 一般请求failed都是因为超时
-            wx.showModal({
-              title: '请求超时',
-              content: 'request failed',
-              showCancel: false
+            // wx.showModal({
+            //   title: '请求超时',
+            //   content: 'request failed',
+            //   showCancel: false
+            // })
+            wx.showToast({
+              title: 'request failed',
+              icon: 'none',
             })
             reject();
           }
@@ -126,10 +130,14 @@ const post = (url, param = {}) => {
         }
       },
       fail() {
-        wx.showModal({
-          title: '请求错误',
-          content: 'request failed',
-          showCancel: false
+        // wx.showModal({
+        //   title: '请求错误',
+        //   content: 'request failed',
+        //   showCancel: false
+        // })
+        wx.showToast({
+          title: 'request failed',
+          icon: 'none',
         })
         reject('请求超时');
       }
@@ -208,10 +216,14 @@ const myGet = (url, param = {}) => {
         }
       },
       fail() {
-        wx.showModal({
-          title: '请求错误',
-          content: 'request failed',
-          showCancel: false
+        // wx.showModal({
+        //   title: '请求错误',
+        //   content: 'request failed',
+        //   showCancel: false
+        // })
+        wx.showToast({
+          title: 'request failed',
+          icon: 'none',
         })
         reject('请求超时');
       }

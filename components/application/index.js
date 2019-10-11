@@ -51,22 +51,6 @@ Component({
         .then(data => {
           that.setData({spinning:false});
           let applyCarLately = data.data;
-          // if (applyCarLately.status === 6) {
-          //   if (applyCarLately.is_can_comment) {
-          //     if (applyCarLately.comment === null) {
-          //       that.setData({
-          //         toTimeline: true,
-          //         applyCarLately: applyCarLately
-          //       })
-          //     }
-          //   }
-          // } else if (applyCarLately.status !== 2 && applyCarLately.status !== 5) {
-          //   that.setData({
-          //     toTimeline: true,
-          //     applyCarLately: applyCarLately
-          //   })
-          // }
-
           // 如果订单状态值不为2,5,6则跳转到申请订单页面
           if (applyCarLately.status !== 6 && applyCarLately.status !== 5 && applyCarLately.status !== 2) {
             that.setData({
@@ -115,11 +99,11 @@ Component({
         },
         name: {
           required: "请填写姓名",
-          minlength: "请输入正确的名称"
+          minlength: "所填写姓名必须在2-10个汉字之间"
         },
         phone: {
           required: "请填写手机号",
-          tel: "请填写正确的手机号"
+          tel: "请填写正确的手机号码"
         }
       };
       this.wxValidate = new WxValidate(rules, messages);
@@ -216,8 +200,8 @@ Component({
     // 申请用车
     submitCar: function (e) {
       let that = this;
-      const params = e.detail.value;
       let wxValidate = this.wxValidate;
+      const params = e.detail.value;
       let departments = this.data.departments;
       let dIndex = this.data.dIndex;
       let phone = params.phone;
@@ -248,16 +232,30 @@ Component({
         console.log('验证未通过');
         return false;
       } else {
-        post("miniprogram/Apply_car/applyCar", form)
-          .then(res => {
-            post('miniprogram/Apply_car/applyCarLately')
-              .then(res => {
-                that.setData({
-                  toTimeline: true,
-                  applyCarLately: res.data
+        wx.showModal({
+          title: '确认信息',
+          content: '请确认申请信息无误',
+          success(res) {
+            if(res.confirm) {
+              wx.showLoading({
+                title: '加载中',
+                mask: true,
+              });
+              post("miniprogram/Apply_car/applyCar", form)
+                .then(res => {
+                  post('miniprogram/Apply_car/applyCarLately')
+                    .then(res => {
+                      wx.hideLoading();
+                      that.setData({
+                        toTimeline: true,
+                        applyCarLately: res.data
+                      })
+                    })
+                    .catch(() => wx.hideLoading())
                 })
-              })
-          })
+            }
+          }
+        })
       }
     } // submitCar() END
   }

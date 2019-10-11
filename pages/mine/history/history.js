@@ -117,7 +117,7 @@ Page({
     let that = this;
     myGet('miniprogram/Common/applyCount', {status: 6})
       .then(res => that.setData({ count: [0, res.data, 0] }))
-
+      .catch(console.log)
     // 请求目前为止浏览过的页码的订单（刷新页面），第一次onShow不执行
     if(!this.data.firstOnShow) {
       let that = this;

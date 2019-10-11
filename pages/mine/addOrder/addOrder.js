@@ -77,63 +77,39 @@ Page({
       console.log("空")
     }
     else {
-      post("miniprogram/Driver/add", {
-        people_number: people_number,
-        start_place: start_place,
-        destination_place: destination_place,
-        go_time: go_time,
-        reason: reason,
-        km: km
-      })
-        .then(res => {
-          wx.showToast({
-            title: res.msg,
-            icon: "success"
-          });
-          setTimeout(function () {
-            wx.navigateBack({
-              delta: 1
+      wx.showModal({
+        title: '确认信息',
+        content: '请确认申请信息无误',
+        success(res) {
+          if (res.confirm) {
+            wx.showLoading({
+              title: '加载中',
+              mask: true,
+            });
+            post("miniprogram/Driver/add", {
+              people_number: people_number,
+              start_place: start_place,
+              destination_place: destination_place,
+              go_time: go_time,
+              reason: reason,
+              km: km
             })
-          }, 3000);
-        })
-      // wx.request({
-      //   url: host + "miniprogram/Driver/add",
-      //   data: {
-      //     sessionid: that.data.sessionid,
-      //     people_number: people_number,
-      //     start_place: start_place,
-      //     destination_place: destination_place,
-      //     go_time: go_time,
-      //     reason: reason,
-      //     km: km
-      //   },
-      //   method: "POST",
-      //   success: res => {
-      //     let status = res.data.status;
-      //     if (status == 0 || status == 1) {
-      //       wx.showToast({
-      //         title: res.data.msg,
-      //         icon: "success"
-      //       });
-      //       setTimeout(function () {
-      //         wx.navigateBack({
-      //           delta: 1
-      //         })
-      //       }, 3000);
-      //     } else {
-      //       wx.showToast({
-      //         title: res.data.msg,
-      //         icon: "none"
-      //       });
-      //     }
-      //   },
-      //   fail() {
-      //     wx.showModal({
-      //       title: '登陆异常',
-      //       content: ''
-      //     })
-      //   }
-      // });
+              .then(res => {
+                wx.showToast({
+                  title: res.msg,
+                  icon: "success",
+                  mask: true
+                });
+                setTimeout(function () {
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }, 1500);
+              })
+              .catch(() => wx.hideLoading())
+          }
+        }
+      })
     }
   },
 
