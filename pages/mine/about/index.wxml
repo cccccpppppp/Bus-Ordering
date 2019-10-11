@@ -1,0 +1,9 @@
+<view class='margin-xl bg-white padding-xl radius shadow-lg'>
+  <view class='text-center margin-bottom text-lg  text-grey'>关于公务用车小程序</view>
+  <view class='text-content'>
+    <view>Hi~欢迎使用公务用车小程序！</view>
+    <view class='margin-top-sm'>本项目使用了WeUI, iView, Wux Weapp和ColorUI等组件库和样式库进行开发，小程序项目开源</view>
+    <view class='margin-top-sm'><a>https://github.com/cccccpppppp/Bus-Ordering</a></view>
+    <view class='margin-top-sm'>更多功能敬请期待！</view>
+  </view>
+</view>
