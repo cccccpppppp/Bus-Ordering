@@ -7,7 +7,7 @@
     <view class="margin-top-sm">
       <text>By:310</text>
     </view>
-    <image src="/colorui/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+    <image src="/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
   </view>
   <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
     <view class="cu-item arrow">
